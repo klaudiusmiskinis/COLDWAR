@@ -2,7 +2,7 @@
 
 Bienvenido al repositorio de Marc Gavin, Miquel Gatius y Klaudijus Miskinis
 
-En este proyecto se desarrolla la aplicación/juego conocido como COLDWAR.
+En este proyecto se desarrolla el juego conocido como COLDWAR.
 
 ### REQUISITOS DEL JUEGO
 
