@@ -70,7 +70,7 @@ En **SALIR** tendremos la simple opción de cerrar el juego.
 
 **¡IMPORTANTE!**
 El enunciado nos avisa de que estos métodos que se nos piden son los *básicos*.
-Se debe implementar como mínimo 10 tipos diferentes de planetas (tenemos 6 ya predefinidos):
+Se debe implementar como mínimo 10 tipos diferentes de planetas (tenemos 6 ya predefinidos).
 
 ## PLANETAS
 
