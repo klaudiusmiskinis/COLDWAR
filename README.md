@@ -111,3 +111,54 @@ Gigante gaseoso:
 - Probabilidad de esquivar del 50% (se esquiva cada uno de los misiles de forma
 independiente, por ejemplo, si le atacan con 50 misiles, puede ser que le impacten
 37).
+
+## Paises
+
+1. Lituania 
+- 240 puntos de vida
+- 50 misiles por ronda
+- Los ataques que pare con los misiles de defensa, hay un 30% de probabilidad que devuelvas los misiles a tus atacantes.
+( a cada uno de los misiles de forma independiente)
+2. Rusia 
+- 240 puntos de vida
+- 45 misiles por ronda
+- Ataca el dobla a USA
+- Ataca la mitad a Lituania
+3. USA
+- 180 puntos de vida
+- 70 misiles por ronda
+- Ataca el dobla a Rusia
+- Ataca la mitad a Vietnam
+4. España
+- 180 puntos de vida
+- 50 misiles por ronda
+- Cada ronda tiene un 10% de probabilidad de añadir conseguir 40 puntos de vida extra
+5. Vietnam (Planeta enano)
+- 130 puntos de vida
+- 60 misiles por ronda
+- Probabilidad de esquivar del 50% (se esquiva cada uno de los misiles de forma
+independiente, por ejemplo, si le atacan con 50 misiles, puede ser que le impacten
+37).
+6. Alemania (gigante gaseoso)
+- 400 puntos de vida
+- Empieza solo con 10 misiles, va aumentando 2 más cada ronda que pasa
+7. Francia 
+- 250 puntos de vida
+- 60 misiles por ronda
+- Si sus puntos de vida son reducidos a 50 tiene un 50% de probabilidad de rendirse y quedarse fuera de combate.
+8. Suecia
+- 300 puntos de vida
+- 35 misiles por ronda
+- los misiles dedicados a defensa tienen el mismo precio que los de ataque : 1
+9. Kazajistán
+- 200 puntos de vida
+- 40 misiles por ronda
+- Ataca el doble a Lituania
+- Ataca la mitad a Rusia
+10. UK (planeta normal)
+- 200 puntos de vida
+- 50 misiles por ronda
+
+
+
+
