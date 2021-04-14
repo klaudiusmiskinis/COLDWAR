@@ -83,12 +83,12 @@ Se debe implementar como mínimo 10 tipos diferentes de planetas (tenemos 6 ya p
 2. Rusia 
 - 240 puntos de vida
 - 45 misiles por ronda
-- Ataca el dobla a USA
+- Ataca el doble a USA
 - Ataca la mitad a Lituania
 3. USA
 - 180 puntos de vida
 - 70 misiles por ronda
-- Ataca el dobla a Rusia
+- Ataca el doble a Rusia
 - Ataca la mitad a Vietnam
 4. España
 - 180 puntos de vida
