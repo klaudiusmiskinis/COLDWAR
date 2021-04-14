@@ -55,7 +55,7 @@ En **SALIR** tendremos la simple opción de cerrar el juego.
   Se nos piden los siguientes requerimientos relacionados con el codigo y la manera de tomar este proyecto. 
   Estos requerimientos son:
   
-   **Class Planeta**
+   **Class Pais**
    
    *Atributos:*
    - vidas
@@ -66,11 +66,11 @@ En **SALIR** tendremos la simple opción de cerrar el juego.
 *Métodos:* 
    - Constructor que inicialice los atributos.
    - Métodos getter y setter correspondientes a cada uno de los atributos declarados como privados.
-   - Combate: Se puede realizar de diferentes formas, una de las opciones es recoger como parámetros el número de misiles con los que el planeta es atacado y el objeto del planeta atacante.
+   - Combate: Se puede realizar de diferentes formas, una de las opciones es recoger como parámetros el número de misiles con los que el pais es atacado y el objeto del pais atacante.
 
 **¡IMPORTANTE!**
 El enunciado nos avisa de que estos métodos que se nos piden son los *básicos*.
-Se debe implementar como mínimo 10 tipos diferentes de planetas (tenemos 6 ya predefinidos).
+Se debe implementar como mínimo 10 tipos diferentes de paises (tenemos 6 ya predefinidos).
 
 
 ## Paises
@@ -110,7 +110,7 @@ independiente, por ejemplo, si le atacan con 50 misiles, puede ser que le impact
 8. Suecia
 - 300 puntos de vida
 - 35 misiles por ronda
-- los misiles dedicados a defensa tienen el mismo precio que los de ataque : 1
+- Los misiles dedicados a defensa tienen el mismo precio que los de ataque : 1
 9. Kazajistán
 - 200 puntos de vida
 - 40 misiles por ronda
