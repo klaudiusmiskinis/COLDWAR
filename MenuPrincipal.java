@@ -13,7 +13,6 @@ public class MenuPrincipal extends JPanel implements ActionListener{
 	JButton boton3;
 	JButton boton4;
 	JButton boton5;
-	JButton boton6;
 
 	public MenuPrincipal() {
 		setBorder(null);
@@ -29,24 +28,19 @@ public class MenuPrincipal extends JPanel implements ActionListener{
 		boton4.setBounds(320, 480, 180, 50);
 		boton5= new JButton(" -Salir-");
 		boton5.setBounds(685, 717, 75, 30);
-		boton6 = new JButton("Autores");
-		boton6.setBounds(10, 11, 75, 30);
 		
 		boton1.addActionListener(this);
 		boton2.addActionListener(this);
 		boton3.addActionListener(this);
 		boton4.addActionListener(this);
 		boton5.addActionListener(this);
-		boton6.addActionListener(this); 
 		setLayout(null);
 		
-
 		add(boton1);
 		add(boton2);
 		add(boton3);
 		add(boton4);
 		add(boton5);
-		add(boton6);
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setBounds(0,0,800,800);
@@ -65,7 +59,10 @@ public class MenuPrincipal extends JPanel implements ActionListener{
 			marco.setVisible(true);
 		}
 		if (e.getSource() == boton2) {
-			System.out.println("Reglas");
+			JFrame marco=(JFrame) SwingUtilities.getWindowAncestor(this);
+			marco.remove(this);
+			marco.getContentPane().add(new PanelReglas());
+			marco.setVisible(true);
 		}
 
 		if (e.getSource() == boton3) {
