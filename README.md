@@ -72,45 +72,6 @@ En **SALIR** tendremos la simple opción de cerrar el juego.
 El enunciado nos avisa de que estos métodos que se nos piden son los *básicos*.
 Se debe implementar como mínimo 10 tipos diferentes de planetas (tenemos 6 ya predefinidos).
 
-## PLANETAS
-
-Explicación de los planetas:
-
-Los planetas serán de distintos tipos.
-Cada equipo seleccionará al principio (después de introducir su nombre) un tipo de planeta. 
-En función del tipo de planeta seleccionado tendrá una serie de vulnerabilidades y puntos fuertes.
-
-Planeta normal
-- 200 puntos de vida
-- 50 misiles por ronda
-
-Planeta rojo:
-- 200 puntos de vida
-- 50 misiles por ronda
-- Ataca el doble al verde (x2)
-- Ataca la mitad al azul (/2)
-
-Planeta azul:
-- 200 puntos de vida
-- 50 misiles por ronda
-- Ataca el doble al rojo (x2)
-- Ataca la mitad al verde (/2)
-
-Planeta verde:
-- 200 puntos de vida
-- 50 misiles por ronda
-- Ataca el doble al azul (x2)
-- Ataca la mitad al rojo (/2)
-
-
-Gigante gaseoso:
-- 400 puntos de vida
-- Empieza solo con 10 misiles, va aumentando 2 más cada ronda que pasa
-- Planeta enano:
-- 100 puntos de vida
-- Probabilidad de esquivar del 50% (se esquiva cada uno de los misiles de forma
-independiente, por ejemplo, si le atacan con 50 misiles, puede ser que le impacten
-37).
 
 ## Paises
 
