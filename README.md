@@ -4,6 +4,16 @@ Bienvenido al repositorio de Marc Gavin, Miquel Gatius y Klaudijus Miskinis
 
 En este proyecto se desarrolla el juego *COLDWAR*.
 
+## HERRAMINETAS UTILIZADAS
+
+`Eclipse IDE for Java Developers`
+`WindowBuilder 1.9.5`
+`Photoshop CC 2018`
+
+¿Por qué utilizamos estas herramientas?
+
+El uso de estas herramientas nos permite tener una organización de trabajo adecuada y todos los colaboradores de este proyecto conocemos Eclipse como la herramienta nativa a la hora de programar en JAVA. Cabe añadir que WindowBuilder, la herramienta para diseño de GUI, va a conjunto con Eclipse. 
+
 ## REQUISITOS DEL JUEGO
 
 Este proyecto tiene su parte libre y su parte con requerimientos.
