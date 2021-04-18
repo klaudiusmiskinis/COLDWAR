@@ -131,7 +131,7 @@ independiente, por ejemplo, si le atacan con 50 misiles, puede ser que le impact
 6. **Alemania** (gigante gaseoso)
 - 400 puntos de vida
 - Empieza solo con 10 misiles, va aumentando 2 más cada ronda que pasa
-7. Francia 
+7. **Francia** 
 - 250 puntos de vida
 - 60 misiles por ronda
 - Si sus puntos de vida son reducidos a 50 tiene un 50% de probabilidad de rendirse y quedarse fuera de combate.
