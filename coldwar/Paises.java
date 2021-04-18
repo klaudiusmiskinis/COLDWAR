@@ -19,22 +19,27 @@ public class Paises {
 		this.setNombre(" ");
 		this.setTipo(" ");
 		this.setMisiles(0);
+		this.setSumaDefensa(0);
 
 
 	}
 
 	//CONSTRUCTOR CON PARAMETROS
-	public Paises(String nombre,int vida,int misiles,String tipo,int sumaAtaque) {
+	public Paises(String nombre,int vida,int misiles,String tipo,int sumaAtaque,int sumaDefensa) {
 
 		this.setMisiles(misiles);
 		this.setNombre(nombre);
 		this.setTipo(tipo);
 		this.setVida(vida);
 		this.setSumaAtaque(sumaAtaque);
+		this.setSumaDefensa(sumaDefensa);
 
 	}
 	//	METODOS
 
+	
+	
+	//ASIGNAMOS LA VIDA I LOS MISILES SEGUN EL TIPO DE PAIS
 	public void asignacionRecursos(Paises pais,String nombre,String tipo){
 
 		if(tipo.equals("UK")) {
@@ -84,7 +89,7 @@ public class Paises {
 
 	}
 
-
+//					OBTENEMOS LA SUMA DEL ATAQUE SEGUN LAS VARIABLES DE CADA TIPO DE JUGADOR
 
 	public void variables(Paises paisQueAtaca, Paises paisAtacado,int misilesAtaque,int misilesDefensa) {
 
@@ -102,11 +107,11 @@ public class Paises {
 			}
 			paisAtacado.setSumaAtaque(misilesAtaque+paisAtacado.getSumaAtaque());
 		}
-		
+
 		if(paisQueAtaca.getTipo().equals("Suecia")) {
 			paisAtacado.setSumaAtaque(misilesAtaque+paisAtacado.getSumaAtaque());
 		}
-		
+
 		if(paisQueAtaca.getTipo().equals("Francia")) {
 			if(paisQueAtaca.vida<=50) {
 				int franciaCaca=ran.nextInt(2);
@@ -116,17 +121,17 @@ public class Paises {
 			}
 			paisAtacado.setSumaAtaque(misilesAtaque+paisAtacado.getSumaAtaque());
 		}
-		
+
 		if(paisQueAtaca.getTipo().equals("Alemania")) {
 			paisQueAtaca.misiles=paisQueAtaca.misiles+2;
 			paisAtacado.setSumaAtaque(misilesAtaque+paisAtacado.getSumaAtaque());
 		}
-		
+
 		if(paisQueAtaca.getTipo().equals("Vietnam")) {
-		
+
 			paisAtacado.setSumaAtaque(misilesAtaque+paisAtacado.getSumaAtaque());
 		}
-		
+
 		if(paisQueAtaca.getTipo().equals("España")) {
 			int suerte=ran.nextInt(10);
 			if(suerte==1) {
@@ -134,7 +139,7 @@ public class Paises {
 			}
 			paisAtacado.setSumaAtaque(misilesAtaque+paisAtacado.getSumaAtaque());
 		}
-		
+
 		if(paisQueAtaca.getTipo().equals("USA")) {
 			if(paisAtacado.getTipo().equals("Rusia")) {
 				misilesAtaque=misilesAtaque*2;
@@ -144,7 +149,7 @@ public class Paises {
 			}
 			paisAtacado.setSumaAtaque(misilesAtaque+paisAtacado.getSumaAtaque());
 		}
-		
+
 		if(paisQueAtaca.getTipo().equals("Rusia")) {
 			if(paisAtacado.getTipo().equals("USA")) {
 				misilesAtaque=misilesAtaque*2;
@@ -154,28 +159,37 @@ public class Paises {
 			}
 			paisAtacado.setSumaAtaque(misilesAtaque+paisAtacado.getSumaAtaque());
 		}
-		
+
 		if(paisQueAtaca.getTipo().equals("Lituania")) {
-	
+
 			paisAtacado.setSumaAtaque(misilesAtaque+paisAtacado.getSumaAtaque());
 		}
-		
-		
+
+
 	}
 
-
-	public void rondaPelea(Paises paisOfensiva,Paises paisAtacado,int misilesAtaque,int misilesDefensa) {
+	//PRUBA NO VALIDA
+	public void rondaPelea(Paises paisOfensiva,Paises paisAtacado,int misilesAtaque) {
 
 		if(paisOfensiva.getTipo().equals("UK")) {
 			;
 		}
 	}
 
+		//REALIZAMOS LA RESTA DE LA VIDA DEL JUGADOR SEGUN EL ATAQUE RECIBIDO I LA DEFENSA APLICADA
+	public void actualizarDatos(Paises pais) {
 
-	public void actualizarDatos() {
+		if((pais.getSumaAtaque()-pais.getSumaDefensa())<0) {
+
+		}
 
 
+		if((pais.getSumaAtaque()-pais.getSumaDefensa())>0) {
+			pais.setVida(pais.getVida()-(pais.getSumaAtaque()-pais.getSumaDefensa()));
+		}
 
+
+		pais.setVida((pais.getVida()-sumaAtaque));
 	}
 
 
@@ -227,7 +241,13 @@ public class Paises {
 		this.sumaAtaque = sumaAtaque;
 	}
 
+	public int getSumaDefensa() {
+		return sumaDefensa;
+	}
 
+	public void setSumaDefensa(int sumaDefensa) {
+		this.sumaAtaque = sumaDefensa;
+	}
 
 
 
