@@ -17,7 +17,7 @@ public class PanelJuego extends JPanel implements ActionListener{
 		add(botonAtras);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\DAW1\\eclipse-workspace\\coldwar\\src\\coldwar\\assets\\fondo.png"));
+		lblNewLabel.setIcon(new ImageIcon(PanelJuego.class.getResource("/coldwar/assets/degradado.png")));
 		lblNewLabel.setBounds(0,0,800,800);
 		add(lblNewLabel);
 		

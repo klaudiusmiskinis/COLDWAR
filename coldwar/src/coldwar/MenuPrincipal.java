@@ -43,7 +43,7 @@ public class MenuPrincipal extends JPanel implements ActionListener{
 		add(boton5);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\DAW1\\eclipse-workspace\\coldwar\\src\\coldwar\\assets\\fondo.png"));
+		lblNewLabel.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/coldwar/assets/fondo.png")));
 		lblNewLabel.setBounds(0,0,800,800);
 		add(lblNewLabel);
 		

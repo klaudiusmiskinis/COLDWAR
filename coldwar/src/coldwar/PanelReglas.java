@@ -32,11 +32,11 @@ public class PanelReglas extends JPanel implements ActionListener{
 		add(botonAdelante);
 		
 		JLabel LabelReglas = new JLabel();
-		LabelReglas.setIcon(new ImageIcon("C:\\Users\\DAW1\\eclipse-workspace\\coldwar\\src\\coldwar\\assets\\Reglas.png"));
+		LabelReglas.setIcon(new ImageIcon("C:\\Users\\Miquel\\eclipse-workspace\\Coldwar\\src\\coldwar\\assets\\textos\\Reglas.png"));
 		LabelReglas.setBounds(106, 107, 532, 101);
 		add(LabelReglas);
 		JLabel LabelFondo = new JLabel();
-		LabelFondo.setIcon(new ImageIcon("C:\\Users\\DAW1\\eclipse-workspace\\coldwar\\src\\coldwar\\assets\\degradado.png"));
+		LabelFondo.setIcon(new ImageIcon(PanelReglas.class.getResource("/coldwar/assets/degradado.png")));
 		LabelFondo.setBounds(0,0,800,800);
 		add(LabelFondo);
 		
