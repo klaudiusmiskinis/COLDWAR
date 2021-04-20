@@ -5,7 +5,7 @@ import java.util.Random;
 public class Paises {
 	//ATRIBUTOS
 
-	Random ran=new Random();
+	static Random ran=new Random();
 	private String nombre;
 	private int vida;
 	private int misiles;
@@ -138,31 +138,68 @@ public class Paises {
 
 
 	}
+	
+	
 */
+	
+	public static void variablesDefensa(Paises paisQueAtaca,Paises paisAtacado,int misilesAtaque,int misilesDefensa) {
+		int cuentaMisiles=0;
+		if(paisAtacado.getTipo().equals("Vietnam")) {
+			for(int i =0;i<misilesAtaque;i++){
+			int retorna=ran.nextInt(2);
+			if(retorna==1) {
+				cuentaMisiles++;
+			}
+			}
+			
+			paisAtacado.setSumaAtaque(cuentaMisiles);
+		}
+		
+		if(paisAtacado.getTipo().equals("Lituania")) {
+			for(int i =0;i<misilesAtaque;i++){
+			int retorna=ran.nextInt(3);
+			if(retorna==1) {
+				cuentaMisiles++;
+			}
+			}
+			paisAtacado.setSumaAtaque(misilesAtaque-cuentaMisiles);
+			paisQueAtaca.setSumaAtaque(cuentaMisiles);
+		}
+	}
+	
 //					OBTENEMOS LA SUMA DEL ATAQUE SEGUN LAS VARIABLES DE CADA TIPO DE JUGADOR
 
 	public void variables(Paises paisQueAtaca, Paises paisAtacado,int misilesAtaque,int misilesDefensa) {
-
-		if(paisQueAtaca.getTipo().equals("UK")) {
-			paisAtacado.setSumaAtaque(misilesAtaque+paisAtacado.getSumaAtaque());
-
+		
+		if(paisAtacado.getTipo().equals("Vietnam")||paisAtacado.getTipo().equals("Lituania")) {
+			variablesDefensa(paisQueAtaca,paisAtacado,misilesAtaque,misilesDefensa);
+			
 		}
 
-		if(paisQueAtaca.getTipo().equals("Kazajistan")) {
+		else if(paisQueAtaca.getTipo().equals("UK")) {
+			paisAtacado.setSumaAtaque(misilesAtaque+paisAtacado.getSumaAtaque());
+
+			
+			
+		}
+
+		else if(paisQueAtaca.getTipo().equals("Kazajistan")) {
 			if(paisAtacado.getTipo().equals("Lituania")) {
 				misilesAtaque=misilesAtaque*2;
+				
+				
 			}
-			if(paisAtacado.getTipo().equals("Rusia")) {
+			else if(paisAtacado.getTipo().equals("Rusia")) {
 				misilesAtaque=misilesAtaque/2;
 			}
 			paisAtacado.setSumaAtaque(misilesAtaque+paisAtacado.getSumaAtaque());
 		}
 
-		if(paisQueAtaca.getTipo().equals("Suecia")) {
+		else if(paisQueAtaca.getTipo().equals("Suecia")) {
 			paisAtacado.setSumaAtaque(misilesAtaque+paisAtacado.getSumaAtaque());
 		}
 
-		if(paisQueAtaca.getTipo().equals("Francia")) {
+		else if(paisQueAtaca.getTipo().equals("Francia")) {
 			if(paisQueAtaca.vida<=50) {
 				int franciaCaca=ran.nextInt(2);
 				if(franciaCaca==1) {
@@ -172,25 +209,27 @@ public class Paises {
 			paisAtacado.setSumaAtaque(misilesAtaque+paisAtacado.getSumaAtaque());
 		}
 
-		if(paisQueAtaca.getTipo().equals("Alemania")) {
+		else if(paisQueAtaca.getTipo().equals("Alemania")) {
 			paisQueAtaca.misiles=paisQueAtaca.misiles+2;
 			paisAtacado.setSumaAtaque(misilesAtaque+paisAtacado.getSumaAtaque());
 		}
 
-		if(paisQueAtaca.getTipo().equals("Vietnam")) {
+		else if(paisQueAtaca.getTipo().equals("Vietnam")) {
 
 			paisAtacado.setSumaAtaque(misilesAtaque+paisAtacado.getSumaAtaque());
 		}
 
-		if(paisQueAtaca.getTipo().equals("España")) {
+		else if(paisQueAtaca.getTipo().equals("España")) {
+			boolean alertaEsp=false;
 			int suerte=ran.nextInt(10);
 			if(suerte==1) {
 				paisQueAtaca.vida=paisQueAtaca.vida+40;
+				alertaEsp=true;
 			}
 			paisAtacado.setSumaAtaque(misilesAtaque+paisAtacado.getSumaAtaque());
 		}
 
-		if(paisQueAtaca.getTipo().equals("USA")) {
+		else if(paisQueAtaca.getTipo().equals("USA")) {
 			if(paisAtacado.getTipo().equals("Rusia")) {
 				misilesAtaque=misilesAtaque*2;
 			}
@@ -200,7 +239,7 @@ public class Paises {
 			paisAtacado.setSumaAtaque(misilesAtaque+paisAtacado.getSumaAtaque());
 		}
 
-		if(paisQueAtaca.getTipo().equals("Rusia")) {
+		else if(paisQueAtaca.getTipo().equals("Rusia")) {
 			if(paisAtacado.getTipo().equals("USA")) {
 				misilesAtaque=misilesAtaque*2;
 			}
@@ -210,13 +249,15 @@ public class Paises {
 			paisAtacado.setSumaAtaque(misilesAtaque+paisAtacado.getSumaAtaque());
 		}
 
-		if(paisQueAtaca.getTipo().equals("Lituania")) {
+		else if(paisQueAtaca.getTipo().equals("Lituania")) {
 
 			paisAtacado.setSumaAtaque(misilesAtaque+paisAtacado.getSumaAtaque());
 		}
 
 
 	}
+	
+
 
 	//PRUBA NO VALIDA
 	public void rondaPelea(Paises paisOfensiva,Paises paisAtacado,int misilesAtaque) {
