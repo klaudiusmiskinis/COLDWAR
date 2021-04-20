@@ -10,15 +10,5 @@ public class Main {
 		
 		
 	}
-/*
-	public void ataque (Paises pais, int ataque) {
-		pais.vida = pais.vida - ataque;
-		
-		
-		if ( pais.tipo == "USA" && this.tipo == "RUSIA") {
-			ataque = ataque*2;
-		}		
-	}
-			*/
 		
 }

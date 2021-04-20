@@ -16,7 +16,7 @@ public class MenuPrincipal extends JPanel implements ActionListener{
 
 	public MenuPrincipal() {
 		setBorder(null);
-		setBounds(0,0,800,800);
+		setBounds(0,0,1080,768);
 		boton1= new JButton(" -Jugar-");
 		boton1.setForeground(Color.BLACK);
 		boton1.setBounds(320, 300, 180, 50);
@@ -36,6 +36,11 @@ public class MenuPrincipal extends JPanel implements ActionListener{
 		boton5.addActionListener(this);
 		setLayout(null);
 		
+		JLabel lblNewLabel_1 = new JLabel("New label");
+		lblNewLabel_1.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/coldwar/assets/textos/Coldwar_texto.png")));
+		lblNewLabel_1.setBounds(270, 152, 260, 66);
+		add(lblNewLabel_1);
+		
 		add(boton1);
 		add(boton2);
 		add(boton3);
@@ -43,8 +48,8 @@ public class MenuPrincipal extends JPanel implements ActionListener{
 		add(boton5);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/coldwar/assets/fondo.png")));
-		lblNewLabel.setBounds(0,0,800,800);
+		lblNewLabel.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/coldwar/assets/textos/Fondo_Menu.png")));
+		lblNewLabel.setBounds(0,0,1080,768);
 		add(lblNewLabel);
 		
 		
