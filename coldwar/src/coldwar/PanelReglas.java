@@ -2,6 +2,7 @@ package coldwar;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.*;
 import java.awt.Font;
@@ -43,7 +44,7 @@ public class PanelReglas extends JPanel implements ActionListener{
 		add(LabelReglas);
 		JLabel LabelFondo = new JLabel();
 		LabelFondo.setIcon(new ImageIcon(PanelReglas.class.getResource("/coldwar/assets/textos/FondoNegro_Menu.png")));
-		LabelFondo.setBounds(0,0,800,800);
+		LabelFondo.setBounds(0,0,1080,768);
 		add(LabelFondo);
 		
 	}
@@ -52,7 +53,12 @@ public class PanelReglas extends JPanel implements ActionListener{
 		if (e.getSource() == botonAtras) {
 			JFrame marco=(JFrame) SwingUtilities.getWindowAncestor(this);
 			marco.remove(this);
-			marco.getContentPane().add(new MenuPrincipal());
+			try {
+				marco.getContentPane().add(new MenuPrincipal());
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			marco.setVisible(true);
 		}
 		if (e.getSource() == botonAdelante) {
