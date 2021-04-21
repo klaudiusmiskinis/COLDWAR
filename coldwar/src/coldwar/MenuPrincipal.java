@@ -20,63 +20,68 @@ public class MenuPrincipal extends JPanel implements ActionListener{
 	public MenuPrincipal() throws IOException {
 		setBorder(null);
 		setBounds(0,0,1080,768);
-		
+
 		boton1= new JButton("");
-		
-	    boton1.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/coldwar/assets/textos/JUGAR_boton.png")));
-	    boton1.setOpaque(false);
-	    boton1.setContentAreaFilled(false);
+
+		boton1.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/coldwar/assets/textos/JUGAR_boton.png")));
+		boton1.setOpaque(false);
+		boton1.setContentAreaFilled(false);
 		boton1.setBounds(334, 198, 412, 50);
 		boton1.setFocusable(false);
-		
+		boton1.setBorderPainted(false);
+
 		boton2= new JButton("");
 		boton2.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/coldwar/assets/textos/REGLAS_boton.png")));
-	    boton2.setOpaque(false);
-	    boton2.setContentAreaFilled(false);
+		boton2.setOpaque(false);
+		boton2.setContentAreaFilled(false);
 		boton2.setBounds(334, 285, 412, 50);
-		
+		boton2.setBorderPainted(false);
+
 		boton3= new JButton("");
 		boton3.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/coldwar/assets/textos/INFORMACI\u00D3N_boton.png")));
-	    boton3.setOpaque(false);
-	    boton3.setContentAreaFilled(false);
+		boton3.setOpaque(false);
+		boton3.setContentAreaFilled(false);
 		boton3.setBounds(334, 369, 412, 50);
-		
+		boton3.setBorderPainted(false);
+
 		boton4= new JButton("Cargar");
 		boton4.setForeground(Color.WHITE);
-	    boton4.setContentAreaFilled(false);
+		boton4.setContentAreaFilled(false);
 		boton4.setBounds(446, 512, 214, 50);
-		
+		boton4.setBorderPainted(false);
+
 		boton5= new JButton("");
 		boton5.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/coldwar/assets/textos/SALIR_boton.png")));
-	    boton5.setOpaque(false);
-	    boton5.setContentAreaFilled(false);
+		boton5.setOpaque(false);
+		boton5.setContentAreaFilled(false);
 		boton5.setBounds(334, 451, 412, 50);
-		
-		
+		boton5.setBorderPainted(false);
+
+
 		boton1.addActionListener(this);
 		boton2.addActionListener(this);
 		boton3.addActionListener(this);
 		boton4.addActionListener(this);
 		boton5.addActionListener(this);
 		setLayout(null);
-		
+
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/coldwar/assets/textos/Coldwar_texto.png")));
 		lblNewLabel_1.setBounds(277, 24, 525, 117);
 		add(lblNewLabel_1);
-		
+
 		add(boton1);
 		add(boton2);
 		add(boton3);
 		add(boton4);
 		add(boton5);
-		
+
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/coldwar/assets/fondos/Fondo_Menu.png")));
 		lblNewLabel.setBackground(Color.WHITE);
 		lblNewLabel.setBounds(0,0,1080,768);
 		add(lblNewLabel);
-		
+
 	}
 
 	@Override

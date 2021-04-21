@@ -32,6 +32,7 @@ public class PanelReglas1 extends JPanel implements ActionListener{
 		botonAtras.setIcon(new ImageIcon("E:\\DAW1\\Desktop\\Nuevo dise\u00F1o\\ATRAS_boton.png"));
 		botonAtras.setOpaque(false);
 		botonAtras.setContentAreaFilled(false);
+		botonAtras.setBorderPainted(false);
 		setLayout(null);
 		add(botonAtras);
 		
@@ -124,7 +125,7 @@ public class PanelReglas1 extends JPanel implements ActionListener{
 		add(btnUK);
 		
 		lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("E:\\DAW1\\Desktop\\Nuevo dise\u00F1o\\FondoBanderas1040.png"));
+		lblNewLabel.setIcon(new ImageIcon(PanelReglas1.class.getResource("/coldwar/assets/fondos/FondoBanderas.png")));
 		lblNewLabel.setBounds(20, 195, 1050, 221);
 		add(lblNewLabel);
 		// Fondo
@@ -147,6 +148,7 @@ public class PanelReglas1 extends JPanel implements ActionListener{
 		if (e.getSource() == btnlituania) {
 			JTextPane txtpnLituania = new JTextPane();
 			txtpnLituania.setBounds(20, 410, 740, 200);
+			txtpnLituania.setOpaque(true);
 			txtpnLituania.setText("Lituania:\r\n240 puntos de vida\r\n50 misiles por ronda\r\nLos ataques que pare con los misiles de defensa, hay un 30% de probabilidad que devuelvas los misiles a tus atacantes. ( a cada uno de los misiles de forma independiente)");
 			add(txtpnLituania);
 		}

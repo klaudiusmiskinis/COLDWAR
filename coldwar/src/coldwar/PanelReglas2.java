@@ -11,11 +11,15 @@ public class PanelReglas2 extends JPanel implements ActionListener{
 	public PanelReglas2() {
 		setToolTipText("");
 		setBorder(null);
+		setBounds(0,0,1080, 768);
 		
-		botonAtras = new JButton ("Atras");
-		botonAtras.setBounds(250, 705, 89, 23);
+		botonAtras = new JButton ("");
+		botonAtras.setBounds(21, 22, 57, 59);
 		botonAtras.addActionListener(this);
 		setLayout(null);
+		botonAtras.setIcon(new ImageIcon(PanelReglas2.class.getResource("/coldwar/assets/iconos/ATRAS_boton.png")));
+		botonAtras.setContentAreaFilled(false);
+		botonAtras.setBorderPainted(false);
 		add(botonAtras);
 		
 		JTextPane txtpnAlemania = new JTextPane();
@@ -24,28 +28,28 @@ public class PanelReglas2 extends JPanel implements ActionListener{
 		add(txtpnAlemania);
 		
 		JTextPane txtpnFrancia = new JTextPane();
-		txtpnFrancia.setText("Francia:\r\n250 puntos de vida\r\n60 misiles por ronda\r\nSi sus puntos de vida son reducidos a 50 tiene un 50% de probabilidad de rendirse y quedarse fuera de combate.");
 		txtpnFrancia.setBounds(21, 215, 665, 83);
+		txtpnFrancia.setText("Francia:\r\n250 puntos de vida\r\n60 misiles por ronda\r\nSi sus puntos de vida son reducidos a 50 tiene un 50% de probabilidad de rendirse y quedarse fuera de combate.");
 		add(txtpnFrancia);
 		
 		JTextPane txtpnSuecia = new JTextPane();
-		txtpnSuecia.setText("Suecia:\r\n300 puntos de vida\r\n35 misiles por ronda\r\nlos misiles dedicados a defensa tienen el mismo precio que los de ataque : 1");
 		txtpnSuecia.setBounds(21, 325, 665, 83);
+		txtpnSuecia.setText("Suecia:\r\n300 puntos de vida\r\n35 misiles por ronda\r\nlos misiles dedicados a defensa tienen el mismo precio que los de ataque : 1");
 		add(txtpnSuecia);
 		
 		JTextPane txtpnKazajistan = new JTextPane();
-		txtpnKazajistan.setText("Kazajistan:\r\n200 puntos de vida\r\n40 misiles por ronda\r\nAtaca el doble a Lituania\r\nAtaca la mitad a Rusia");
 		txtpnKazajistan.setBounds(21, 435, 665, 83);
+		txtpnKazajistan.setText("Kazajistan:\r\n200 puntos de vida\r\n40 misiles por ronda\r\nAtaca el doble a Lituania\r\nAtaca la mitad a Rusia");
 		add(txtpnKazajistan);
 		
 		JTextPane txtpnUK = new JTextPane();
-		txtpnUK.setText("UK:\r\n200 puntos de vida\r\n50 misiles por ronda");
 		txtpnUK.setBounds(21, 545, 665, 83);
+		txtpnUK.setText("UK:\r\n200 puntos de vida\r\n50 misiles por ronda");
 		add(txtpnUK);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\DAW1\\eclipse-workspace\\coldwar\\src\\coldwar\\assets\\degradado.png"));
-		lblNewLabel.setBounds(0,0,800,800);
+		lblNewLabel.setBounds(10, 11, 1080, 768);
+		lblNewLabel.setIcon(new ImageIcon(PanelReglas2.class.getResource("/coldwar/assets/fondos/FondoNegro_Menu.png")));
 		add(lblNewLabel);
 		
 	}

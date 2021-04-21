@@ -9,21 +9,22 @@ import java.awt.Font;
 import java.awt.Color;
 
 public class PanelReglas extends JPanel implements ActionListener{
-	
+
 	JButton botonAtras;
 	JButton botonAdelante;
 	public PanelReglas() {
 		setToolTipText("");
 		setBorder(null);
 		setBounds(0,0,1080,768);
-		
+
 		botonAtras = new JButton ("");
 		botonAtras.setIcon(new ImageIcon(PanelReglas.class.getResource("/coldwar/assets/iconos/ATRAS_boton.png")));
 		botonAtras.setOpaque(false);
 		botonAtras.setContentAreaFilled(false);
 		botonAtras.setBounds(449, 669, 52, 59);
 		botonAtras.addActionListener(this);
-		
+		botonAtras.setBorderPainted(false);
+
 		botonAdelante = new JButton ("");
 		botonAdelante.setIcon(new ImageIcon(PanelReglas.class.getResource("/coldwar/assets/iconos/ADELANTE_boton.png")));
 		botonAdelante.setOpaque(false);
@@ -31,12 +32,12 @@ public class PanelReglas extends JPanel implements ActionListener{
 		botonAdelante.setBounds(581, 669, 57, 59);
 		botonAdelante.addActionListener(this);
 		setLayout(null);
-		
+
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(PanelReglas.class.getResource("/coldwar/assets/textos/REGLAS_texto.png")));
 		lblNewLabel.setBounds(373, 72, 334, 111);
 		add(lblNewLabel);
-		
+
 		JTextPane txtpnReglas = new JTextPane();
 		txtpnReglas.setForeground(Color.BLACK);
 		txtpnReglas.setOpaque(false);
@@ -45,12 +46,7 @@ public class PanelReglas extends JPanel implements ActionListener{
 		add(txtpnReglas);
 		add(botonAtras);
 		add(botonAdelante);
-		
-		JLabel LabelReglas = new JLabel();
-		LabelReglas.setIcon(new ImageIcon(PanelReglas.class.getResource("/coldwar/assets/fondos/PanelCuadro.png")));
-		LabelReglas.setBounds(106, 107, 532, 101);
-		add(LabelReglas);
-		
+
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setIcon(new ImageIcon(PanelReglas.class.getResource("/coldwar/assets/fondos/PanelCuadro.png")));
 		lblNewLabel_1.setBounds(189, 236, 701, 242);
@@ -59,7 +55,7 @@ public class PanelReglas extends JPanel implements ActionListener{
 		LabelFondo.setIcon(new ImageIcon(PanelReglas.class.getResource("/coldwar/assets/textos/FondoNegro_Menu.png")));
 		LabelFondo.setBounds(0,0,1080,768);
 		add(LabelFondo);
-		
+
 	}
 
 	public void actionPerformed(ActionEvent e) {
