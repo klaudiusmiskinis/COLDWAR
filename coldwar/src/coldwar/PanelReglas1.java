@@ -23,6 +23,7 @@ public class PanelReglas1 extends JPanel implements ActionListener{
 	public PanelReglas1() {
 		setToolTipText("");
 		setBorder(null);
+		setBounds(0,0,1080,768);
 		
 		botonAtras = new JButton ("Atras");
 		botonAtras.setBounds(250, 705, 89, 23);
