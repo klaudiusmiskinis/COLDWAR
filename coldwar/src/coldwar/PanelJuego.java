@@ -9,7 +9,9 @@ import javax.swing.*;
 public class PanelJuego extends JPanel implements ActionListener{
 	
 	JButton botonAtras;
+	JButton btnanadir;
 	public PanelJuego() {
+		setBounds(0,0,1080,768);
 		setLayout(null);
 		
 		botonAtras = new JButton ("Atras");
@@ -17,11 +19,18 @@ public class PanelJuego extends JPanel implements ActionListener{
 		botonAtras.addActionListener(this);
 		add(botonAtras);
 		
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(PanelJuego.class.getResource("/coldwar/assets/degradado.png")));
-		lblNewLabel.setBounds(0,0,800,800);
-		add(lblNewLabel);
+		btnanadir = new JButton("");
+		btnanadir.setIcon(new ImageIcon(PanelJuego.class.getResource("/coldwar/assets/textos/MAS_boton.png")));
+		btnanadir.setBounds(182, 308, 50, 50);
+		btnanadir.setContentAreaFilled(false);
+		btnanadir.setBorderPainted(false);
+		botonAtras.addActionListener(this);
+		add(btnanadir);
 		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon(PanelJuego.class.getResource("/coldwar/assets/textos/FondoNegro_Menu.png")));
+		lblNewLabel.setBounds(0,0,1080,768);
+		add(lblNewLabel);
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -35,8 +44,9 @@ public class PanelJuego extends JPanel implements ActionListener{
 				e1.printStackTrace();
 			}
 			marco.setVisible(true);
-
+		}
+		if (e.getSource() == btnanadir) {
+			Pais pais1 = new Pais();
 		}
 	}
-
 }

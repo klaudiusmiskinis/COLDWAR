@@ -19,28 +19,33 @@ public class PanelReglas1 extends JPanel implements ActionListener{
 	JButton btnSuiza;
 	JButton btnKazajistan;
 	JButton btnUK;
+	private JLabel lblNewLabel;
 		
 	public PanelReglas1() {
 		setToolTipText("");
 		setBorder(null);
+		setBounds(0,0,1080,768);
 		
-		botonAtras = new JButton ("Atras");
-		botonAtras.setBounds(250, 705, 89, 23);
+		botonAtras = new JButton ("");
+		botonAtras.setBounds(514, 669, 51, 59);
 		botonAtras.addActionListener(this);
+		botonAtras.setIcon(new ImageIcon("E:\\DAW1\\Desktop\\Nuevo dise\u00F1o\\ATRAS_boton.png"));
+		botonAtras.setOpaque(false);
+		botonAtras.setContentAreaFilled(false);
 		setLayout(null);
 		add(botonAtras);
 		
 		// Titulo
 		JLabel LabelTipos = new JLabel("");
-		LabelTipos.setIcon(new ImageIcon(PanelReglas1.class.getResource("/coldwar/assets/textos/Paises_text.png")));
+		LabelTipos.setIcon(new ImageIcon(PanelReglas1.class.getResource("/coldwar/assets/textos/TIPOS_PAISES_texto.png")));
 		LabelTipos.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		LabelTipos.setBounds(160, 23, 420, 71);
+		LabelTipos.setBounds(217, 23, 646, 85);
 		add(LabelTipos);
 		
 		// Primera linia
 		btnlituania = new JButton("");
 		btnlituania.setIcon(new ImageIcon(PanelReglas1.class.getResource("/coldwar/assets/banderas/Lituania140x85.png")));
-		btnlituania.setBounds(20, 100, 140, 85);
+		btnlituania.setBounds(40, 215, 140, 85);
 		btnlituania.setContentAreaFilled(false);
 		btnlituania.setBorderPainted(false);
 		btnlituania.addActionListener(this);
@@ -48,7 +53,7 @@ public class PanelReglas1 extends JPanel implements ActionListener{
 		
 		btnRusia = new JButton("");
 		btnRusia.setIcon(new ImageIcon(PanelReglas1.class.getResource("/coldwar/assets/banderas/Rusia140x85.png")));
-		btnRusia.setBounds(170, 100, 140, 85);
+		btnRusia.setBounds(261, 215, 140, 85);
 		btnRusia.setContentAreaFilled(false);
 		btnRusia.setBorderPainted(false);
 		btnRusia.addActionListener(this);
@@ -56,7 +61,7 @@ public class PanelReglas1 extends JPanel implements ActionListener{
 		
 		btnUsa = new JButton("");
 		btnUsa.setIcon(new ImageIcon(PanelReglas1.class.getResource("/coldwar/assets/banderas/Usa140x8.png")));
-		btnUsa.setBounds(320, 100, 140, 85);
+		btnUsa.setBounds(470, 215, 140, 85);
 		btnUsa.setContentAreaFilled(false);
 		btnUsa.setBorderPainted(false);
 		btnUsa.addActionListener(this);
@@ -64,7 +69,7 @@ public class PanelReglas1 extends JPanel implements ActionListener{
 		
 		btnEspanya = new JButton("");
 		btnEspanya.setIcon(new ImageIcon(PanelReglas1.class.getResource("/coldwar/assets/banderas/Espanya140x85.png")));
-		btnEspanya.setBounds(470, 100, 140, 85);
+		btnEspanya.setBounds(708, 215, 140, 85);
 		btnEspanya.setContentAreaFilled(false);
 		btnEspanya.setBorderPainted(false);
 		btnEspanya.addActionListener(this);
@@ -72,7 +77,7 @@ public class PanelReglas1 extends JPanel implements ActionListener{
 		
 		btnVietnam = new JButton("");
 		btnVietnam.setIcon(new ImageIcon(PanelReglas1.class.getResource("/coldwar/assets/banderas/Vietnam140x85.png")));
-		btnVietnam.setBounds(620, 100, 140, 85);
+		btnVietnam.setBounds(900, 215, 140, 85);
 		btnVietnam.setContentAreaFilled(false);
 		btnVietnam.setBorderPainted(false);
 		btnVietnam.addActionListener(this);
@@ -80,7 +85,7 @@ public class PanelReglas1 extends JPanel implements ActionListener{
 		// segunda linia
 		btnAlemania = new JButton("");
 		btnAlemania.setIcon(new ImageIcon(PanelReglas1.class.getResource("/coldwar/assets/banderas/Alemania140x85.png")));
-		btnAlemania.setBounds(20, 200, 140, 85);
+		btnAlemania.setBounds(40, 311, 140, 85);
 		btnAlemania.setContentAreaFilled(false);
 		btnAlemania.setBorderPainted(false);
 		btnAlemania.addActionListener(this);
@@ -88,7 +93,7 @@ public class PanelReglas1 extends JPanel implements ActionListener{
 		
 		btnFrancia = new JButton("");
 		btnFrancia.setIcon(new ImageIcon(PanelReglas1.class.getResource("/coldwar/assets/banderas/Francia140x85.png")));
-		btnFrancia.setBounds(170, 200, 140, 85);
+		btnFrancia.setBounds(261, 311, 140, 85);
 		btnFrancia.setContentAreaFilled(false);
 		btnFrancia.setBorderPainted(false);
 		btnFrancia.addActionListener(this);
@@ -96,7 +101,7 @@ public class PanelReglas1 extends JPanel implements ActionListener{
 		
 		btnSuiza = new JButton("");
 		btnSuiza.setIcon(new ImageIcon(PanelReglas1.class.getResource("/coldwar/assets/banderas/Suiza140x85.png")));
-		btnSuiza.setBounds(320, 200, 140, 85);
+		btnSuiza.setBounds(708, 311, 140, 85);
 		btnSuiza.setContentAreaFilled(false);
 		btnSuiza.setBorderPainted(false);
 		btnSuiza.addActionListener(this);
@@ -104,7 +109,7 @@ public class PanelReglas1 extends JPanel implements ActionListener{
 		
 		btnKazajistan = new JButton("");
 		btnKazajistan.setIcon(new ImageIcon(PanelReglas1.class.getResource("/coldwar/assets/banderas/Kazajistan140x85.png")));
-		btnKazajistan.setBounds(470, 200, 140, 85);
+		btnKazajistan.setBounds(900, 311, 140, 85);
 		btnKazajistan.setContentAreaFilled(false);
 		btnKazajistan.setBorderPainted(false);
 		btnKazajistan.addActionListener(this);
@@ -112,15 +117,20 @@ public class PanelReglas1 extends JPanel implements ActionListener{
 		
 		btnUK = new JButton("");
 		btnUK.setIcon(new ImageIcon(PanelReglas1.class.getResource("/coldwar/assets/banderas/UK140x85.png")));
-		btnUK.setBounds(620, 200, 140, 85);
+		btnUK.setBounds(470, 310, 140, 85);
 		btnUK.setContentAreaFilled(false);
 		btnUK.setBorderPainted(false);
 		btnUK.addActionListener(this);
 		add(btnUK);
+		
+		lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon("E:\\DAW1\\Desktop\\Nuevo dise\u00F1o\\FondoBanderas1040.png"));
+		lblNewLabel.setBounds(20, 195, 1050, 221);
+		add(lblNewLabel);
 		// Fondo
 		JLabel LabelFondo = new JLabel();
-		LabelFondo.setIcon(new ImageIcon(PanelReglas1.class.getResource("/coldwar/assets/degradado.png")));
-		LabelFondo.setBounds(0,0,800,800);
+		LabelFondo.setIcon(new ImageIcon(PanelReglas1.class.getResource("/coldwar/assets/fondos/FondoNegro_Menu.png")));
+		LabelFondo.setBounds(0,0,1080,768);
 		add(LabelFondo);
 		
 
