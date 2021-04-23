@@ -11,6 +11,7 @@ public class PanelJuego extends JPanel implements ActionListener{
 	JButton botonAtras;
 	JButton btnanadir;
 	JTextPane equipos;
+	JComboBox<String> desplegable;
 	public PanelJuego() {
 		setBounds(0,0,1080,768);
 		setLayout(null);
@@ -19,6 +20,23 @@ public class PanelJuego extends JPanel implements ActionListener{
 		botonAtras.setBounds(10, 11, 89, 23);
 		botonAtras.addActionListener(this);
 		add(botonAtras);
+		
+		
+		desplegable = new JComboBox();
+		desplegable.setMaximumRowCount(10);
+		desplegable.setBounds(339, 323, 172, 34);
+		desplegable.addItem("UK");
+		desplegable.addItem("Lituania");
+		desplegable.addItem("Rusia");
+		desplegable.addItem("USA");
+		desplegable.addItem("España");
+		desplegable.addItem("Vietnam");
+		desplegable.addItem("Alemania");
+		desplegable.addItem("Francia");
+		desplegable.addItem("Suiza");
+		desplegable.addItem("Kazagistan");
+		add(desplegable);
+
 
 		btnanadir = new JButton("");
 		btnanadir.setIcon(new ImageIcon(PanelJuego.class.getResource("/coldwar/assets/textos/MAS_boton.png")));
@@ -27,8 +45,7 @@ public class PanelJuego extends JPanel implements ActionListener{
 		btnanadir.setBorderPainted(false);
 		btnanadir.addActionListener(this);
 		add(btnanadir);
-
-
+		
 		// Fondo
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(PanelJuego.class.getResource("/coldwar/assets/textos/FondoNegro_Menu.png")));
@@ -52,17 +69,24 @@ public class PanelJuego extends JPanel implements ActionListener{
 		} // Preguntar a gavin lo de los objetos sin nombre
 		if (e.getSource() == btnanadir) {
 			Pais pais1 = new Pais();
+			
+			
 			JTextPane equipos= new JTextPane();
 			equipos.setBounds(20, 410, 740, 200);
+			equipos.setVisible(false);
+
+			
 			// crear el pop up
-			final JFrame parent = new JFrame();
+			JFrame parent = new JFrame();
 			String name = JOptionPane.showInputDialog(parent,
 					"Introduce nombre del equipo");
 			// poner el nombre del equipo 
 			pais1.setNombre(name);
 			// Mostrarlo
 			equipos.setText("Equipo" + num + " " + pais1.getNombre() + "\n");
+			equipos.setVisible(true);
 			add(equipos);
+
 			// añadir numero de equipo
 			num ++;
 		}
