@@ -2,6 +2,7 @@ package coldwar;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.*;
 import java.awt.Font;
@@ -80,7 +81,12 @@ public class PanelCrearJugador extends JPanel implements ActionListener{
 		if (e.getSource() == botonAtras) {
 			JFrame marco=(JFrame) SwingUtilities.getWindowAncestor(this);
 			marco.remove(this);
-			marco.getContentPane().add(new MenuPrincipal());
+			try {
+				marco.getContentPane().add(new MenuPrincipal());
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			marco.setVisible(true);
 
 		}

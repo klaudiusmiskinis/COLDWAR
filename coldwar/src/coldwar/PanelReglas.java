@@ -23,6 +23,7 @@ public class PanelReglas extends JPanel implements ActionListener{
 		botonAtras.setContentAreaFilled(false);
 		botonAtras.setBounds(449, 669, 52, 59);
 		botonAtras.addActionListener(this);
+		botonAtras.setFocusable(false);
 		botonAtras.setBorderPainted(false);
 
 		botonAdelante = new JButton ("");
@@ -30,6 +31,8 @@ public class PanelReglas extends JPanel implements ActionListener{
 		botonAdelante.setOpaque(false);
 		botonAdelante.setContentAreaFilled(false);
 		botonAdelante.setBounds(581, 669, 57, 59);
+		botonAdelante.setFocusable(false);
+		botonAdelante.setBorderPainted(false);
 		botonAdelante.addActionListener(this);
 		setLayout(null);
 

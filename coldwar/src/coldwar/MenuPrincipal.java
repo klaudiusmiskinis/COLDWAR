@@ -35,6 +35,7 @@ public class MenuPrincipal extends JPanel implements ActionListener{
 		boton2.setOpaque(false);
 		boton2.setContentAreaFilled(false);
 		boton2.setBounds(334, 285, 412, 50);
+		boton2.setFocusable(false);
 		boton2.setBorderPainted(false);
 
 		boton3= new JButton("");
@@ -42,12 +43,14 @@ public class MenuPrincipal extends JPanel implements ActionListener{
 		boton3.setOpaque(false);
 		boton3.setContentAreaFilled(false);
 		boton3.setBounds(334, 369, 412, 50);
+		boton3.setFocusable(false);
 		boton3.setBorderPainted(false);
 
 		boton4= new JButton("Cargar");
 		boton4.setForeground(Color.WHITE);
 		boton4.setContentAreaFilled(false);
 		boton4.setBounds(446, 512, 214, 50);
+		boton4.setFocusable(false);
 		boton4.setBorderPainted(false);
 
 		boton5= new JButton("");
@@ -55,6 +58,7 @@ public class MenuPrincipal extends JPanel implements ActionListener{
 		boton5.setOpaque(false);
 		boton5.setContentAreaFilled(false);
 		boton5.setBounds(334, 451, 412, 50);
+		boton5.setFocusable(false);
 		boton5.setBorderPainted(false);
 
 
@@ -64,6 +68,7 @@ public class MenuPrincipal extends JPanel implements ActionListener{
 		boton4.addActionListener(this);
 		boton5.addActionListener(this);
 		setLayout(null);
+		
 
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/coldwar/assets/textos/Coldwar_texto.png")));
@@ -79,7 +84,7 @@ public class MenuPrincipal extends JPanel implements ActionListener{
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/coldwar/assets/fondos/Fondo_Menu.png")));
 		lblNewLabel.setBackground(Color.WHITE);
-		lblNewLabel.setBounds(0,0,1080,768);
+		lblNewLabel.setBounds(10,11,1080,768);
 		add(lblNewLabel);
 
 	}

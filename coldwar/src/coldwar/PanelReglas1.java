@@ -33,6 +33,7 @@ public class PanelReglas1 extends JPanel implements ActionListener{
 		botonAtras.setOpaque(false);
 		botonAtras.setContentAreaFilled(false);
 		botonAtras.setBorderPainted(false);
+		botonAtras.setFocusable(false);
 		setLayout(null);
 		add(botonAtras);
 		
@@ -49,6 +50,7 @@ public class PanelReglas1 extends JPanel implements ActionListener{
 		btnlituania.setBounds(40, 215, 140, 85);
 		btnlituania.setContentAreaFilled(false);
 		btnlituania.setBorderPainted(false);
+		btnlituania.setFocusable(false);
 		btnlituania.addActionListener(this);
 		add(btnlituania);
 		
@@ -57,6 +59,7 @@ public class PanelReglas1 extends JPanel implements ActionListener{
 		btnRusia.setBounds(261, 215, 140, 85);
 		btnRusia.setContentAreaFilled(false);
 		btnRusia.setBorderPainted(false);
+		btnRusia.setFocusable(false);
 		btnRusia.addActionListener(this);
 		add(btnRusia);
 		
@@ -65,6 +68,7 @@ public class PanelReglas1 extends JPanel implements ActionListener{
 		btnUsa.setBounds(470, 215, 140, 85);
 		btnUsa.setContentAreaFilled(false);
 		btnUsa.setBorderPainted(false);
+		btnUsa.setFocusable(false);
 		btnUsa.addActionListener(this);
 		add(btnUsa);
 		
@@ -74,6 +78,7 @@ public class PanelReglas1 extends JPanel implements ActionListener{
 		btnEspanya.setContentAreaFilled(false);
 		btnEspanya.setBorderPainted(false);
 		btnEspanya.addActionListener(this);
+		btnEspanya.setFocusable(false);
 		add(btnEspanya);
 		
 		btnVietnam = new JButton("");
@@ -82,6 +87,7 @@ public class PanelReglas1 extends JPanel implements ActionListener{
 		btnVietnam.setContentAreaFilled(false);
 		btnVietnam.setBorderPainted(false);
 		btnVietnam.addActionListener(this);
+		btnVietnam.setFocusable(false);
 		add(btnVietnam);
 		// segunda linia
 		btnAlemania = new JButton("");
@@ -89,6 +95,7 @@ public class PanelReglas1 extends JPanel implements ActionListener{
 		btnAlemania.setBounds(40, 311, 140, 85);
 		btnAlemania.setContentAreaFilled(false);
 		btnAlemania.setBorderPainted(false);
+		btnAlemania.setFocusable(false);
 		btnAlemania.addActionListener(this);
 		add(btnAlemania);
 		
@@ -97,6 +104,7 @@ public class PanelReglas1 extends JPanel implements ActionListener{
 		btnFrancia.setBounds(261, 311, 140, 85);
 		btnFrancia.setContentAreaFilled(false);
 		btnFrancia.setBorderPainted(false);
+		btnFrancia.setFocusable(false);
 		btnFrancia.addActionListener(this);
 		add(btnFrancia);
 		
@@ -105,6 +113,7 @@ public class PanelReglas1 extends JPanel implements ActionListener{
 		btnSuiza.setBounds(708, 311, 140, 85);
 		btnSuiza.setContentAreaFilled(false);
 		btnSuiza.setBorderPainted(false);
+		btnSuiza.setFocusable(false);
 		btnSuiza.addActionListener(this);
 		add(btnSuiza);
 		
@@ -113,6 +122,7 @@ public class PanelReglas1 extends JPanel implements ActionListener{
 		btnKazajistan.setBounds(900, 311, 140, 85);
 		btnKazajistan.setContentAreaFilled(false);
 		btnKazajistan.setBorderPainted(false);
+		btnKazajistan.setFocusable(false);
 		btnKazajistan.addActionListener(this);
 		add(btnKazajistan);
 		
@@ -121,6 +131,7 @@ public class PanelReglas1 extends JPanel implements ActionListener{
 		btnUK.setBounds(470, 310, 140, 85);
 		btnUK.setContentAreaFilled(false);
 		btnUK.setBorderPainted(false);
+		btnUK.setFocusable(false);
 		btnUK.addActionListener(this);
 		add(btnUK);
 		
