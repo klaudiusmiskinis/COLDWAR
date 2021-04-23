@@ -84,6 +84,7 @@ public class PanelJuego extends JPanel implements ActionListener{
 			pais1.setNombre(name);
 			// Mostrarlo
 			equipos.setText("Equipo" + num + " " + pais1.getNombre() + "\n");
+			// Añadir get text para pooner el tipo de pais en el objeto
 			equipos.setVisible(true);
 			add(equipos);
 
