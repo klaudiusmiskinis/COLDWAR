@@ -72,7 +72,7 @@ public class PanelJuego extends JPanel implements ActionListener{
 			
 			
 			JTextPane equipos= new JTextPane();
-			equipos.setBounds(20, 410, 740, 200);
+			equipos.setBounds(20, 410, 200, 200);
 			equipos.setVisible(false);
 
 			
@@ -82,14 +82,16 @@ public class PanelJuego extends JPanel implements ActionListener{
 					"Introduce nombre del equipo");
 			// poner el nombre del equipo 
 			pais1.setNombre(name);
+			pais1.setTipo(desplegable.getSelectedItem().toString());
 			// Mostrarlo
-			equipos.setText("Equipo" + num + " " + pais1.getNombre() + "\n");
+			equipos.setText("Equipo " + num + " " + pais1.getNombre() + " " + pais1.getTipo()+ "\n" );
 			// Añadir get text para pooner el tipo de pais en el objeto
 			equipos.setVisible(true);
 			add(equipos);
 
 			// añadir numero de equipo
 			num ++;
+
 		}
 	}
 }
