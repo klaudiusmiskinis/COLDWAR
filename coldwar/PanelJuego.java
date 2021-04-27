@@ -1,5 +1,6 @@
 package coldwar;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -8,6 +9,8 @@ import javax.swing.*;
 
 public class PanelJuego extends JPanel implements ActionListener{
 
+	int num = 1;
+	int contador = 50;
 	JButton botonAtras;
 	JButton btnanadir;
 	JTextPane equipos;
@@ -16,13 +19,18 @@ public class PanelJuego extends JPanel implements ActionListener{
 		setBounds(0,0,1080,768);
 		setLayout(null);
 
-		botonAtras = new JButton ("Atras");
-		botonAtras.setBounds(10, 11, 89, 23);
+		botonAtras = new JButton ("");
+		botonAtras.setForeground(Color.WHITE);
+		botonAtras.setBounds(514, 669, 51, 59);
 		botonAtras.addActionListener(this);
+		botonAtras.setIcon(new ImageIcon(PanelReglas1.class.getResource("/coldwar/assets/iconos/ATRAS_boton.png")));
+		botonAtras.setOpaque(false);
+		botonAtras.setContentAreaFilled(false);
+		botonAtras.setBorderPainted(false);
+		botonAtras.setFocusable(false);
 		add(botonAtras);
 		
-		
-		desplegable = new JComboBox();
+		desplegable = new JComboBox<String>();
 		desplegable.setMaximumRowCount(10);
 		desplegable.setBounds(339, 323, 172, 34);
 		desplegable.addItem("UK");
@@ -55,7 +63,7 @@ public class PanelJuego extends JPanel implements ActionListener{
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		int num = 1;
+
 		if (e.getSource() == botonAtras) {
 			JFrame marco=(JFrame) SwingUtilities.getWindowAncestor(this);
 			marco.remove(this);
@@ -68,13 +76,12 @@ public class PanelJuego extends JPanel implements ActionListener{
 			marco.setVisible(true);
 		} // Preguntar a gavin lo de los objetos sin nombre
 		if (e.getSource() == btnanadir) {
+			if(num<10){
 			Pais pais1 = new Pais();
 			
-			
 			JTextPane equipos= new JTextPane();
-			equipos.setBounds(20, 410, 200, 200);
+			equipos.setBounds(800,contador, 200, 50);
 			equipos.setVisible(false);
-
 			
 			// crear el pop up
 			JFrame parent = new JFrame();
@@ -82,16 +89,18 @@ public class PanelJuego extends JPanel implements ActionListener{
 					"Introduce nombre del equipo");
 			// poner el nombre del equipo 
 			pais1.setNombre(name);
+			// poner el tipo de pais
 			pais1.setTipo(desplegable.getSelectedItem().toString());
 			// Mostrarlo
 			equipos.setText("Equipo " + num + " " + pais1.getNombre() + " " + pais1.getTipo()+ "\n" );
-			// Añadir get text para pooner el tipo de pais en el objeto
 			equipos.setVisible(true);
 			add(equipos);
-
 			// añadir numero de equipo
 			num ++;
-
+			contador = contador + 50;
+			System.out.println(num);
+			System.out.println(contador);
+			}
 		}
 	}
 }
