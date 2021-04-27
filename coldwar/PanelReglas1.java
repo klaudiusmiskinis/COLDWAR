@@ -151,7 +151,7 @@ public class PanelReglas1 extends JPanel implements ActionListener{
 		
 		// Fondo banderas
 		fondobandera = new JLabel("");
-		fondobandera.setIcon(new ImageIcon(PanelReglas1.class.getResource("/coldwar2/assets/fondos/FondoBanderas1040.png")));
+		fondobandera.setIcon(new ImageIcon(PanelReglas1.class.getResource("/coldwar/assets/fondos/FondoBanderas1040.png")));
 		fondobandera.setBounds(15, 195, 1040, 221);
 		add(fondobandera);
 		
