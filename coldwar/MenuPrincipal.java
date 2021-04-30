@@ -113,7 +113,20 @@ public class MenuPrincipal extends JPanel implements ActionListener{
 		}
 
 		if (e.getSource() == boton5) {
-			System.exit(0);
+			//Se inicializan el PopUp pasandole los botones SI y NO
+			Object[] options = {"Sí","No"};
+			JOptionPane popUp = new JOptionPane();
+			
+			int a = JOptionPane.showOptionDialog(null, "               " + "¿Seguro qué quieres salir?", "COLDWAR",            
+		            JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+			
+			if (a == JOptionPane.YES_OPTION) {
+				System.out.println("Saliendo");
+				System.exit(0);
+			} else {
+				remove(popUp);
+				System.out.println("Volviendo al menú");
+			}
 		}
 	}
 }

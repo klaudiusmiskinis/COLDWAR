@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.*;
 
@@ -15,6 +16,7 @@ public class PanelJuego extends JPanel implements ActionListener{
 	JButton btnanadir;
 	JTextPane equipos;
 	JComboBox<String> desplegable;
+	ArrayList<Paises> paisesCreados = new ArrayList<Paises>();
 	public PanelJuego() {
 		setBounds(0,0,1080,768);
 		setLayout(null);
@@ -29,7 +31,7 @@ public class PanelJuego extends JPanel implements ActionListener{
 		botonAtras.setBorderPainted(false);
 		botonAtras.setFocusable(false);
 		add(botonAtras);
-		
+
 		desplegable = new JComboBox<String>();
 		desplegable.setMaximumRowCount(10);
 		desplegable.setBounds(339, 323, 172, 34);
@@ -42,7 +44,7 @@ public class PanelJuego extends JPanel implements ActionListener{
 		desplegable.addItem("Alemania");
 		desplegable.addItem("Francia");
 		desplegable.addItem("Suiza");
-		desplegable.addItem("Kazagistan");
+		desplegable.addItem("Kazajistan");
 		add(desplegable);
 
 
@@ -53,7 +55,7 @@ public class PanelJuego extends JPanel implements ActionListener{
 		btnanadir.setBorderPainted(false);
 		btnanadir.addActionListener(this);
 		add(btnanadir);
-		
+
 		// Fondo
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(PanelJuego.class.getResource("/coldwar/assets/textos/FondoNegro_Menu.png")));
@@ -63,7 +65,7 @@ public class PanelJuego extends JPanel implements ActionListener{
 	}
 
 	public void actionPerformed(ActionEvent e) {
-
+		String name = "";
 		if (e.getSource() == botonAtras) {
 			JFrame marco=(JFrame) SwingUtilities.getWindowAncestor(this);
 			marco.remove(this);
@@ -76,30 +78,41 @@ public class PanelJuego extends JPanel implements ActionListener{
 			marco.setVisible(true);
 		} // Preguntar a gavin lo de los objetos sin nombre
 		if (e.getSource() == btnanadir) {
-			if(num<10){
-			Pais pais1 = new Pais();
-			
-			JTextPane equipos= new JTextPane();
-			equipos.setBounds(800,contador, 200, 50);
-			equipos.setVisible(false);
-			
-			// crear el pop up
-			JFrame parent = new JFrame();
-			String name = JOptionPane.showInputDialog(parent,
-					"Introduce nombre del equipo");
-			// poner el nombre del equipo 
-			pais1.setNombre(name);
-			// poner el tipo de pais
-			pais1.setTipo(desplegable.getSelectedItem().toString());
-			// Mostrarlo
-			equipos.setText("Equipo " + num + " " + pais1.getNombre() + " " + pais1.getTipo()+ "\n" );
-			equipos.setVisible(true);
-			add(equipos);
-			// añadir numero de equipo
-			num ++;
-			contador = contador + 50;
-			System.out.println(num);
-			System.out.println(contador);
+			if(num < 11){
+				Paises pais = new Paises();
+
+				JTextPane equipos= new JTextPane();
+				equipos.setBounds(800,contador, 200, 50);
+				equipos.setVisible(false);
+
+				// crear el pop up
+
+				do {
+
+					Object[] options = {"Nombre del jugador"};
+					JFrame parent = new JFrame();
+					name = JOptionPane.showInputDialog(parent, options,"Jugador", 1);
+					
+				}while(name.equals(""));
+				// poner el nombre del equipo 
+				pais.setNombre(name);
+				// poner el tipo de pais
+				pais.setTipo(desplegable.getSelectedItem().toString());
+				paisesCreados.add(pais);
+				pais.asignacionRecursos(pais.getNombre(),pais.getTipo());
+				System.out.println(pais.getVida() + " " + pais.getMisiles());
+				for(Paises pais1 : paisesCreados) {
+
+					Paises p = (Paises)pais1;
+					System.out.println(p.getNombre());
+				}
+				// Mostrarlo
+				equipos.setText("Jugador " + num + " " + pais.getNombre() + " " + pais.getTipo()+ "\n" );
+				equipos.setVisible(true);
+				add(equipos);
+				// añadir numero de equipo
+				num ++;
+				contador = contador + 60;
 			}
 		}
 	}
