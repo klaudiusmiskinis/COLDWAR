@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 import java.awt.CardLayout;
 import javax.swing.ImageIcon;
@@ -21,17 +22,26 @@ public class PanelInformacion extends JPanel implements ActionListener{
 	JButton caraKlaus;
 	JButton caraMarc;
 	JButton caraMiquel;
-	JLabel lblNewLabel_1; 
-	JLabel lblNewLabel_2; 
-	JLabel lblNewLabel_3; 
+	JButton botonAtras;
+	JTextPane txtpaises; 
 	public PanelInformacion() {
 		setBounds(0,0,1080,768);
 		setLayout(null);
 
-
+		botonAtras = new JButton ("");
+		botonAtras.setForeground(Color.WHITE);
+		botonAtras.setBounds(539, 656, 51, 59);
+		botonAtras.addActionListener(this);
+		botonAtras.setIcon(new ImageIcon(PanelReglas1.class.getResource("/coldwar/assets/iconos/ATRAS_boton.png")));
+		botonAtras.setOpaque(false);
+		botonAtras.setContentAreaFilled(false);
+		botonAtras.setBorderPainted(false);
+		botonAtras.setFocusable(false);
+		add(botonAtras);
+		
 		caraKlaus = new JButton("New button");
 		caraKlaus.setIcon(new ImageIcon(PanelInformacion.class.getResource("/coldwar/assets/iconos/caraKlaus.jpg")));
-		caraKlaus.setBounds(449, 181, 226, 234);
+		caraKlaus.setBounds(459, 96, 226, 234);
 		caraKlaus.setBorderPainted(false);
 		caraKlaus.setFocusable(false);
 		caraKlaus.addActionListener(this);
@@ -40,7 +50,7 @@ public class PanelInformacion extends JPanel implements ActionListener{
 
 		caraMiquel = new JButton("New button");
 		caraMiquel.setIcon(new ImageIcon(PanelInformacion.class.getResource("/coldwar/assets/iconos/caraMiquel.jpg")));
-		caraMiquel.setBounds(743, 181, 217, 234);
+		caraMiquel.setBounds(753, 96, 217, 234);
 		caraMiquel.setBorderPainted(false);
 		caraMiquel.setFocusable(false);
 		caraMiquel.addActionListener(this);
@@ -48,60 +58,53 @@ public class PanelInformacion extends JPanel implements ActionListener{
 
 		caraMarc = new JButton("New button");
 		caraMarc.setIcon(new ImageIcon(PanelInformacion.class.getResource("/coldwar/assets/iconos/caraMarc.jpg")));
-		caraMarc.setBounds(154, 181, 217, 234);
+		caraMarc.setBounds(164, 96, 217, 234);
 		caraMarc.setBorderPainted(false);
 		caraMarc.setFocusable(false);
 		caraMarc.addActionListener(this);
 		add(caraMarc);
 
-		lblNewLabel_1 = new JLabel("Hola soy Marc, co-creador de este juego. Disfrutadlo en compañia, para cualquier consulta marcgavingrau@gmail.com");
-		lblNewLabel_1.setForeground(Color.WHITE);
-		lblNewLabel_1.setBackground(Color.WHITE);
-		lblNewLabel_1.setBounds(154, 448, 706, 92);
-		lblNewLabel_1.setVisible(false);
+		//Texto
+		txtpaises = new JTextPane();
+		txtpaises.setBounds(232, 425, 674, 92);
+		txtpaises.setForeground(Color.BLACK);
+		txtpaises.setOpaque(false);
+		txtpaises.setText("");
+		add(txtpaises);
+
+		//Fondo texto
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setIcon(new ImageIcon(PanelReglas.class.getResource("/coldwar/assets/fondos/PanelCuadro.png")));
+		lblNewLabel_1.setBounds(219, 370, 700, 242);
 		add(lblNewLabel_1);
-
-		lblNewLabel_2 = new JLabel("Hola soy Miquel, encargado del diseño del videojuego.Espero que os guste. Para cualquier comentario miquelgatiusfarras@gmail.com");
 		
-		lblNewLabel_2.setForeground(Color.WHITE);
-		lblNewLabel_2.setBackground(Color.WHITE);
-		lblNewLabel_2.setBounds(165, 448, 905, 92);
-		lblNewLabel_2.setVisible(false);
-		add(lblNewLabel_2);
-
-		lblNewLabel_3 = new JLabel("Buenas, soy Klaus. Me he encargado de la creacion de este juego. Puedes contactar conmigo en klaudiusmiskinis@gmail.com");
-		lblNewLabel_3.setForeground(Color.WHITE);
-		lblNewLabel_3.setBackground(Color.WHITE);
-		lblNewLabel_3.setBounds(154, 448, 750, 92);
-		lblNewLabel_3.setVisible(false);
-		add(lblNewLabel_3);
-
+		// Fondo
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(PanelJuego.class.getResource("/coldwar/assets/textos/FondoNegro_Menu.png")));
-		lblNewLabel.setBounds(0,-11,1080,768);
+		lblNewLabel.setBounds(0,0,1080,768);
 		add(lblNewLabel);
-
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == caraMarc) {
-			System.out.println("A");
-			lblNewLabel_2.setVisible(false);
-			lblNewLabel_3.setVisible(false);
-			lblNewLabel_1.setVisible(true);
+		if (e.getSource() == botonAtras) {
+			JFrame marco=(JFrame) SwingUtilities.getWindowAncestor(this);
+			marco.remove(this);
+			try {
+				marco.getContentPane().add(new MenuPrincipal());
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			marco.setVisible(true);
 		}
-
+		if (e.getSource() == caraMarc) {
+			txtpaises.setText("Hola soy Marc, co-creador de este juego. Disfrutadlo en compañia.\nPara cualquier consulta marcgavingrau@gmail.com");
+		}
 		if (e.getSource() == caraMiquel) {
-			System.out.println("B");
-			lblNewLabel_2.setVisible(true);
-			lblNewLabel_3.setVisible(false);
-			lblNewLabel_1.setVisible(false);
+			txtpaises.setText("Hola soy Miquel, Me he encargado de la creacion de este juego. Espero que os guste.\nPara cualquier comentario miquelgatiusfarras@gmail.com");
 		}
 		if (e.getSource() == caraKlaus) {
-			System.out.println("C");
-			lblNewLabel_3.setVisible(true);
-			lblNewLabel_1.setVisible(false);
-			lblNewLabel_2.setVisible(false);
+			txtpaises.setText("Buenas, soy Klaus. encargado del diseno del videojuego. Pasaoslo bien.\nPuedes contactar conmigo en klaudiusmiskinis@gmail.com");
 		}
 	}
 }
