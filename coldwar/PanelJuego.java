@@ -1,97 +1,148 @@
 package coldwar;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.*;
 
 public class PanelJuego extends JPanel implements ActionListener{
-
-	JButton botonAtras;
-	JButton btnanadir;
+	//ATRIBUTOS
+	int num = 1;
+	int contador = 50;
 	JTextPane equipos;
+	JButton atras, jugar, anadir;
 	JComboBox<String> desplegable;
+	ArrayList<Paises> paisesCreados = new ArrayList<Paises>();
+
+	//CONSTRUCTOR
 	public PanelJuego() {
+		//METODOS DE LA VENTANA
 		setBounds(0,0,1080,768);
 		setLayout(null);
 
-		botonAtras = new JButton ("Atras");
-		botonAtras.setBounds(10, 11, 89, 23);
-		botonAtras.addActionListener(this);
-		add(botonAtras);
-		
-		
-		desplegable = new JComboBox();
+		//BOTON JUGAR
+		jugar = new JButton();
+		jugar.setBounds(1013, 626, 57, 48);
+		jugar.setIcon(new ImageIcon(PanelReglas1.class.getResource("/coldwar/assets/iconos/ADELANTE_boton.png")));
+		jugar.setOpaque(false);
+		jugar.setContentAreaFilled(false);
+		jugar.setBorderPainted(false);
+		jugar.setFocusable(false);
+		jugar.addActionListener(this);
+
+		//BOTON ATRAS
+		atras = new JButton();
+		atras.setForeground(Color.WHITE);
+		atras.setBounds(10, 626, 51, 48);
+		atras.addActionListener(this);
+		atras.setIcon(new ImageIcon(PanelReglas1.class.getResource("/coldwar/assets/iconos/ATRAS_boton.png")));
+		atras.setOpaque(false);
+		atras.setContentAreaFilled(false);
+		atras.setBorderPainted(false);
+		atras.setFocusable(false);
+
+		//COMBOBOX DESPLEGABLE
+		desplegable = new JComboBox<String>();
 		desplegable.setMaximumRowCount(10);
-		desplegable.setBounds(339, 323, 172, 34);
+		desplegable.setBounds(51, 92, 172, 34);
 		desplegable.addItem("UK");
 		desplegable.addItem("Lituania");
 		desplegable.addItem("Rusia");
 		desplegable.addItem("USA");
-		desplegable.addItem("España");
+		desplegable.addItem("Espaï¿½a");
 		desplegable.addItem("Vietnam");
 		desplegable.addItem("Alemania");
 		desplegable.addItem("Francia");
 		desplegable.addItem("Suiza");
-		desplegable.addItem("Kazagistan");
-		add(desplegable);
+		desplegable.addItem("Kazajistan");
 
-
-		btnanadir = new JButton("");
-		btnanadir.setIcon(new ImageIcon(PanelJuego.class.getResource("/coldwar/assets/textos/MAS_boton.png")));
-		btnanadir.setBounds(182, 308, 50, 50);
-		btnanadir.setContentAreaFilled(false);
-		btnanadir.setBorderPainted(false);
-		btnanadir.addActionListener(this);
-		add(btnanadir);
+		//BOTON AÃ‘ADIR
+		anadir = new JButton();
+		anadir.setIcon(new ImageIcon(PanelJuego.class.getResource("/coldwar/assets/textos/MAS_boton.png")));
+		anadir.setBounds(233, 76, 50, 50);
+		anadir.setContentAreaFilled(false);
+		anadir.setBorderPainted(false);
+		anadir.addActionListener(this);
 		
-		// Fondo
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(PanelJuego.class.getResource("/coldwar/assets/textos/FondoNegro_Menu.png")));
-		lblNewLabel.setBounds(0,0,1080,768);
-		add(lblNewLabel);
-
+		//FONDO JLABEL
+		JLabel fondo = new JLabel();
+		fondo.setIcon(new ImageIcon(PanelJuego.class.getResource("/coldwar/assets/textos/FondoNegro_Menu.png")));
+		fondo.setBounds(0,0,1080,768);
+		
+		//SE AÃ‘ADEN LOS ELEMENTOS A LA VENTANA
+		add(anadir);
+		add(desplegable);
+		add(atras);
+		add(jugar);
+		add(fondo);
+				
 	}
 
+	//EVENTOS DE LOS BOTONES
 	public void actionPerformed(ActionEvent e) {
-		int num = 1;
-		if (e.getSource() == botonAtras) {
+		//VARIABLES
+		String name = "";
+
+		//ACCION BOTON ATRAS
+		if (e.getSource() == atras) {
 			JFrame marco=(JFrame) SwingUtilities.getWindowAncestor(this);
 			marco.remove(this);
 			try {
 				marco.getContentPane().add(new MenuPrincipal());
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			marco.setVisible(true);
-		} // Preguntar a gavin lo de los objetos sin nombre
-		if (e.getSource() == btnanadir) {
-			Pais pais1 = new Pais();
-			
-			
-			JTextPane equipos= new JTextPane();
-			equipos.setBounds(20, 410, 200, 200);
-			equipos.setVisible(false);
+		}
 
-			
-			// crear el pop up
-			JFrame parent = new JFrame();
-			String name = JOptionPane.showInputDialog(parent,
-					"Introduce nombre del equipo");
-			// poner el nombre del equipo 
-			pais1.setNombre(name);
-			pais1.setTipo(desplegable.getSelectedItem().toString());
-			// Mostrarlo
-			equipos.setText("Equipo " + num + " " + pais1.getNombre() + " " + pais1.getTipo()+ "\n" );
-			// Añadir get text para pooner el tipo de pais en el objeto
-			equipos.setVisible(true);
-			add(equipos);
+		//ACCION BOTON JUGAR
+		if (e.getSource() == jugar) {
+			JFrame marco = (JFrame) SwingUtilities.getWindowAncestor(this);
+			marco.remove(this);
+			marco.getContentPane().add(new PanelPartida(paisesCreados));
+			marco.setVisible(true);
+		}
 
-			// añadir numero de equipo
-			num ++;
+		//ACCION BOTON AÃ‘ADIR
+		if (e.getSource() == anadir) {
 
+			if(num < 11) {
+				Paises pais = new Paises(); //SE CREA EL OBJETO PAIS
+				JTextPane equipos= new JTextPane();
+				equipos.setBounds(800,contador, 200, 50);
+				equipos.setVisible(false);
+
+				//CONTROL DE ENTRADA DE DATOS
+				do {
+					Object[] options = {"Nombre del jugador"};
+					JFrame parent = new JFrame();
+					name = JOptionPane.showInputDialog(parent, options,"Jugador", 1);
+				} while(name.equals(""));
+
+				pais.setNombre(name); //DAMOS NOMBRE AL OBJETO
+				pais.setTipo(desplegable.getSelectedItem().toString()); //DAMOS TIPO AL OBJETO
+				paisesCreados.add(pais); //AÃ‘ADIMOS EL OBJETO AL ARRAYLIST
+				pais.asignacionRecursos(pais.getNombre(),pais.getTipo()); //INICIALIZAMOS SU VIDA Y MISILES
+
+				//PRINT EN CONSOLA DEL OBJETO
+				System.out.println(pais.getVida() + " " + pais.getMisiles());
+				for(Paises pais1 : paisesCreados) {
+					Paises p = (Paises)pais1;
+					System.out.println(p.getNombre());
+				}
+
+				//CUADRO DE EQUIPO AÃ‘ADIDO
+				equipos.setText("Jugador " + num + " " + pais.getNombre() + " " + pais.getTipo()+ "\n" );
+				equipos.setVisible(true);
+				add(equipos);
+
+				//CONTROL DE CANTIDAD DE EQUIPOS
+				num ++;
+				contador = contador + 60;
+			}
 		}
 	}
 }

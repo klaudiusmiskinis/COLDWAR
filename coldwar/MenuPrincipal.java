@@ -11,121 +11,136 @@ import javax.swing.*;
 
 public class MenuPrincipal extends JPanel implements ActionListener{
 
-	JButton boton1;
-	JButton boton2;
-	JButton boton3;
-	JButton boton4;
-	JButton boton5;
+	//ATRIBUTOS
+	JButton jugar, reglas, informacion, cargar, salir;
 
+	//CONSTRUCTOR
 	public MenuPrincipal() throws IOException {
+		//METODOS DE LA VENTANA
 		setBorder(null);
 		setBounds(0,0,1080,768);
-
-		boton1= new JButton("");
-
-		boton1.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/coldwar/assets/textos/JUGAR_boton.png")));
-		boton1.setOpaque(false);
-		boton1.setContentAreaFilled(false);
-		boton1.setBounds(334, 198, 412, 50);
-		boton1.setFocusable(false);
-		boton1.setBorderPainted(false);
-
-		boton2= new JButton("");
-		boton2.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/coldwar/assets/textos/REGLAS_boton.png")));
-		boton2.setOpaque(false);
-		boton2.setContentAreaFilled(false);
-		boton2.setBounds(334, 285, 412, 50);
-		boton2.setFocusable(false);
-		boton2.setBorderPainted(false);
-
-		boton3= new JButton("");
-		boton3.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/coldwar/assets/textos/INFORMACI\u00D3N_boton.png")));
-		boton3.setOpaque(false);
-		boton3.setContentAreaFilled(false);
-		boton3.setBounds(334, 369, 412, 50);
-		boton3.setFocusable(false);
-		boton3.setBorderPainted(false);
-
-		boton4= new JButton("Cargar");
-		boton4.setForeground(Color.WHITE);
-		boton4.setContentAreaFilled(false);
-		boton4.setBounds(446, 512, 214, 50);
-		boton4.setFocusable(false);
-		boton4.setBorderPainted(false);
-
-		boton5= new JButton("");
-		boton5.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/coldwar/assets/textos/SALIR_boton.png")));
-		boton5.setOpaque(false);
-		boton5.setContentAreaFilled(false);
-		boton5.setBounds(334, 451, 412, 50);
-		boton5.setFocusable(false);
-		boton5.setBorderPainted(false);
-
-
-		boton1.addActionListener(this);
-		boton2.addActionListener(this);
-		boton3.addActionListener(this);
-		boton4.addActionListener(this);
-		boton5.addActionListener(this);
 		setLayout(null);
-		
 
-		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/coldwar/assets/textos/Coldwar_texto.png")));
-		lblNewLabel_1.setBounds(277, 24, 525, 117);
-		add(lblNewLabel_1);
-		
-		add(boton1);
-		add(boton2);
-		add(boton3);
-		add(boton4);
-		add(boton5);
-		
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/coldwar/assets/fondos/Fondo_Menu.png")));
-		lblNewLabel.setBackground(Color.WHITE);
-		lblNewLabel.setBounds(0,0,1080,768);
-		add(lblNewLabel);
-		
-		
+		//BOTON JUGAR
+		jugar= new JButton();
+		jugar.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/coldwar/assets/textos/JUGAR_boton.png")));
+		jugar.setOpaque(false);
+		jugar.setContentAreaFilled(false);
+		jugar.setBounds(334, 198, 412, 50);
+		jugar.setFocusable(false);
+		jugar.setBorderPainted(false);
+
+		//BOTON REGLAS
+		reglas= new JButton();
+		reglas.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/coldwar/assets/textos/REGLAS_boton.png")));
+		reglas.setOpaque(false);
+		reglas.setContentAreaFilled(false);
+		reglas.setBounds(334, 285, 412, 50);
+		reglas.setFocusable(false);
+		reglas.setBorderPainted(false);
+
+		//BOTON INFORMACION
+		informacion = new JButton();
+		informacion.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/coldwar/assets/textos/INFORMACI\u00D3N_boton.png")));
+		informacion.setOpaque(false);
+		informacion.setContentAreaFilled(false);
+		informacion.setBounds(334, 369, 412, 50);
+		informacion.setFocusable(false);
+		informacion.setBorderPainted(false);
+
+		//BOTON CARGAR PARTIDA
+		cargar= new JButton();
+		cargar.setForeground(Color.WHITE);
+		cargar.setContentAreaFilled(false);
+		cargar.setBounds(446, 512, 214, 50);
+		cargar.setFocusable(false);
+		cargar.setBorderPainted(false);
+
+		//BOTON SALIR
+		salir= new JButton();
+		salir.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/coldwar/assets/textos/SALIR_boton.png")));
+		salir.setOpaque(false);
+		salir.setContentAreaFilled(false);
+		salir.setBounds(334, 451, 412, 50);
+		salir.setFocusable(false);
+		salir.setBorderPainted(false);
+
+		//SE AÃ‘ADEN LOS LISTENERS DE EVENTOS
+		jugar.addActionListener(this);
+		reglas.addActionListener(this);
+		informacion.addActionListener(this);
+		cargar.addActionListener(this);
+		salir.addActionListener(this);
+		//FONDO JLABEL
+		JLabel fondo = new JLabel();
+		fondo.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/coldwar/assets/fondos/Fondo_Menu.png")));
+		fondo.setBackground(Color.WHITE);
+		fondo.setBounds(0,0,1080,768);
+
+		//SE AÃ‘ADEN LOS ELEMENTOS A LA VENTANA
+		add(jugar);
+		add(reglas);
+		add(informacion);
+		add(cargar);
+		add(salir);
+
+		//TEXTO COLDWAR
+		JLabel titulo = new JLabel("");
+		titulo.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/coldwar/assets/textos/Coldwar_texto.png")));
+		titulo.setBounds(277, 24, 525, 117);
+		add(titulo);
+		add(fondo);
 	}
 
 	@Override
+	//EVENTOS DE LOS BOTONES
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == boton1) {
+		//EVENTO BOTON JUGAR
+		if (e.getSource() == jugar) {
 			JFrame marco=(JFrame) SwingUtilities.getWindowAncestor(this);
 			marco.remove(this);
 			marco.getContentPane().add(new PanelJuego());
 			marco.setVisible(true);
 		}
-		if (e.getSource() == boton2) {
+
+		//EVENTO BOTON REGLAS
+		if (e.getSource() == reglas) {
 			JFrame marco=(JFrame) SwingUtilities.getWindowAncestor(this);
 			marco.remove(this);
 			marco.getContentPane().add(new PanelReglas());
 			marco.setVisible(true);
 		}
 
-		if (e.getSource() == boton3) {
+		//EVENTO BOTON INFORMACION
+		if (e.getSource() == informacion) {
 			System.out.println("Informacion");
 		}
-		if (e.getSource() == boton4) {
+
+		//EVENTO BOTON CARGAR
+		if (e.getSource() == cargar) {
 			System.out.println("Cargarpartida");
 		}
 
-		if (e.getSource() == boton5) {
-			//Se inicializan el PopUp pasandole los botones SI y NO
-			Object[] options = {"Sí","No"};
+		//EVENTO BOTON SALIR
+		if (e.getSource() == salir) {
+
+			//OBJETO ENCARGADO DE DAR NOMBRE A LOS BOTONES
+			Object[] options = {"Si","No"};
+
+			//INICIALIZANDO EL PANEL POPUP
 			JOptionPane popUp = new JOptionPane();
-			
-			int a = popUp.showOptionDialog(null, "               " + "¿Seguro qué quieres salir?", "COLDWAR",            
-		            JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
-			
+
+			//RECOGIDA DE LA ELECCION POR USUARIO
+			int a = JOptionPane.showOptionDialog(null, "               " + "Â¿Seguro que quieres salir?", "COLDWAR",            
+					JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+
+			//CONTROL DE ELECCION DE USUARIO
 			if (a == JOptionPane.YES_OPTION) {
 				System.out.println("Saliendo");
-				System.exit(0);
+				System.exit(0); 
 			} else {
 				remove(popUp);
-				System.out.println("Volviendo al menú");
+				System.out.println("Volviendo al menï¿½");
 			}
 		}
 	}
