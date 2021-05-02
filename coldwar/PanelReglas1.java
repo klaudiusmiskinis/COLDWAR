@@ -32,7 +32,8 @@ public class PanelReglas1 extends JPanel implements ActionListener{
 		
 		// Texto
 		txtpaises = new JTextPane();
-		txtpaises.setBounds(44, 437, 668, 200);
+		txtpaises.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 16));
+		txtpaises.setBounds(195, 475, 640, 169);
 		txtpaises.setForeground(Color.BLACK);
 		txtpaises.setOpaque(false);
 		txtpaises.setText("");
@@ -158,7 +159,7 @@ public class PanelReglas1 extends JPanel implements ActionListener{
 		//Fondo texto
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setIcon(new ImageIcon(PanelReglas.class.getResource("/coldwar/assets/fondos/PanelCuadro.png")));
-		lblNewLabel_1.setBounds(30, 416, 701, 242);
+		lblNewLabel_1.setBounds(162, 463, 701, 181);
 		add(lblNewLabel_1);
 		
 		// Fondo
