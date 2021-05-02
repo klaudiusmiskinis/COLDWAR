@@ -66,7 +66,7 @@ public class PanelInformacion extends JPanel implements ActionListener{
 
 		//Texto
 		txtpaises = new JTextPane();
-		txtpaises.setBounds(232, 425, 674, 92);
+		txtpaises.setBounds(373, 435, 674, 92);
 		txtpaises.setForeground(Color.BLACK);
 		txtpaises.setOpaque(false);
 		txtpaises.setText("");
@@ -75,7 +75,7 @@ public class PanelInformacion extends JPanel implements ActionListener{
 		//Fondo texto
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setIcon(new ImageIcon(PanelReglas.class.getResource("/coldwar/assets/fondos/PanelCuadro.png")));
-		lblNewLabel_1.setBounds(219, 370, 700, 242);
+		lblNewLabel_1.setBounds(285, 390, 582, 137);
 		add(lblNewLabel_1);
 		
 		// Fondo
