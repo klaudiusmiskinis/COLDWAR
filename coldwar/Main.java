@@ -8,7 +8,7 @@ public class Main {
 
 		Menu window = new Menu();
 		
-		
+		window.setResizable(false);
 	}
 		
 }
