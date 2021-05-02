@@ -9,9 +9,13 @@ import javax.swing.JRadioButton;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.event.DocumentListener;
+
 import java.awt.Color;
 import javax.swing.JComboBox;
 import java.awt.event.ItemListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.Button;
 import javax.swing.JToggleButton;
@@ -19,71 +23,63 @@ import javax.swing.JMenuItem;
 import javax.swing.JSeparator;
 import javax.swing.JFormattedTextField;
 import java.awt.Font;
+import javax.swing.JButton;
 
-public class PanelPartida extends JPanel {
-	JComboBox desplegable;
-
+public class PanelPartida extends JPanel implements ActionListener {
 
 	//ATRIBUTOS
 	ArrayList<Paises> paisesJugar;
-
-
-
+	JComboBox desplegable;
+	JButton bAtacar, bDefender;
+	JFormattedTextField tAtacar, tDefender;
 
 
 	//CONSTRUCTOR QUE RECIBE ARRAYLIST
 	public PanelPartida(ArrayList<Paises> paisesCreados) {
 
-
-		setBackground(Color.BLACK);
-		this.paisesJugar = paisesCreados; //SE GUARDA EL ARRAYLIST DE LA VENTANA DE CREACION DE EQUIPOS
 		//METODOS DE LA VENTANA
 		setBounds(0,0,1080,768);
-		System.out.println("\r \n \r");
+		setLayout(null);
+		setBackground(Color.BLACK);
+		this.paisesJugar = paisesCreados; //SE GUARDA EL ARRAYLIST DE LA VENTANA DE CREACION DE EQUIPOS
 
 		//PRINT DEL ARRAYLIST
-		for(Paises pais1 : paisesJugar) {
+		for (Paises pais1 : paisesJugar) {
 			Paises p = (Paises)pais1;
 			System.out.println(p.getNombre() + " " + p.getTipo() + " " + p.getVida() + " " + p.getMisiles());
 		}
 
 		JComboBox desplegable= new JComboBox();
-
-		JFormattedTextField formattedTextField = new JFormattedTextField();
-		formattedTextField.setFont(new Font("Haettenschweiler", Font.BOLD, 21));
-		GroupLayout groupLayout = new GroupLayout(this);
-		groupLayout.setHorizontalGroup(
-				groupLayout.createParallelGroup(Alignment.TRAILING)
-				.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
-						.addGap(528)
-						.addComponent(desplegable, GroupLayout.PREFERRED_SIZE, 159, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.UNRELATED)
-						.addComponent(formattedTextField, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(314, Short.MAX_VALUE))
-				);
-		groupLayout.setVerticalGroup(
-				groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-						.addGap(256)
-						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)	
-								.addComponent(formattedTextField, Alignment.TRAILING)
-								.addComponent(desplegable, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE))
-						.addContainerGap(468, Short.MAX_VALUE))
-				);
-
 		desplegable.setMaximumRowCount(10);
-		desplegable.setBounds(51, 92, 172, 34);
-		for(int i=0;i<paisesCreados.size();i++) {
-			desplegable.addItem(paisesCreados.get(i).getNombre());
+		desplegable.setBounds(10, 257, 159, 38);
+		add(desplegable);
 
+		for(int i = 0; i < paisesCreados.size(); i++) {
+			desplegable.addItem(paisesCreados.get(i).getNombre());
 		}
 
+		JFormattedTextField tAtacar = new JFormattedTextField();
+		tAtacar.setBounds(179, 257, 123, 38);
+		tAtacar.setFont(new Font("Arial", Font.PLAIN, 18));
+		add(tAtacar);
 
-		setLayout(groupLayout);
+		JButton bAtacar = new JButton("Atacar");
+		bAtacar.setBounds(312, 257, 100, 38);
+		add(bAtacar);
 
+		JFormattedTextField tDefender = new JFormattedTextField();
+		tDefender.setBounds(179, 306, 123, 38);
+		add(tDefender);
 
-
-
-
+		JButton bDefender = new JButton("Defender");
+		bDefender.setBounds(312, 306, 100, 38);
+		bDefender.addActionListener(this);
+		add(bDefender);
 	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		
+	}
+	
 }

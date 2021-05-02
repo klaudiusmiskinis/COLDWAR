@@ -66,19 +66,19 @@ public class PanelJuego extends JPanel implements ActionListener{
 		anadir.setContentAreaFilled(false);
 		anadir.setBorderPainted(false);
 		anadir.addActionListener(this);
-		
+
 		//FONDO JLABEL
 		JLabel fondo = new JLabel();
 		fondo.setIcon(new ImageIcon(PanelJuego.class.getResource("/coldwar/assets/textos/FondoNegro_Menu.png")));
 		fondo.setBounds(0,0,1080,768);
-		
+
 		//SE AÑADEN LOS ELEMENTOS A LA VENTANA
 		add(anadir);
 		add(desplegable);
 		add(atras);
 		add(jugar);
 		add(fondo);
-				
+
 	}
 
 	//EVENTOS DE LOS BOTONES
