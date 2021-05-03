@@ -52,44 +52,56 @@ public class PanelPartida extends JPanel implements ActionListener {
 			System.out.println(p.getNombre() + " " + p.getTipo() + " " + p.getVida() + " " + p.getMisiles());
 		}*/
 
+		// Botones y GUI
+
 		JFormattedTextField tAtacar = new JFormattedTextField();
-		tAtacar.setBounds(179, 257, 123, 38);
+		tAtacar.setText("0");
+		tAtacar.setBounds(401, 366, 123, 38);
 		tAtacar.setFont(new Font("Arial", Font.PLAIN, 18));
 		add(tAtacar);
 
 		JButton bAtacar = new JButton("Atacar");
-		bAtacar.setBounds(312, 257, 100, 38);
+		bAtacar.setBounds(607, 306, 100, 38);
 		add(bAtacar);
 
 		JFormattedTextField tDefender = new JFormattedTextField();
-		tDefender.setBounds(179, 306, 123, 38);
+		tDefender.setText("Cantidad de misiles\r\n");
+		tDefender.setBounds(179, 306, 123, 118);
 		add(tDefender);
 
 		JButton bDefender = new JButton("Defender");
-		bDefender.setBounds(312, 306, 100, 38);
+		bDefender.setBounds(607, 419, 100, 38);
 		bDefender.addActionListener(this);
 		add(bDefender);	
-		
+
 		JFormattedTextField turno = new JFormattedTextField();
 		turno.setText("Turno de : " + (jugactual = paisesCreados.get(ronda).getNombre()));
 		turno.setBounds(65, 53, 429, 126);
 		add(turno);
-		
+
 		JComboBox<String> desplegable= new JComboBox<String>();
 		desplegable.setMaximumRowCount(10);
-		desplegable.setBounds(10, 257, 159, 38);
+		desplegable.setBounds(759, 306, 159, 38);
 		add(desplegable);
 		
-		
+		JButton bturno = new JButton("Siguiente turno");
+		bturno.setBounds(872, 582, 133, 23);
+		add(bturno);
+
+		// Programa
 		for(int i = 0; i < paisesCreados.size(); i++) {
 			if (!paisesCreados.get(i).getNombre().equals(jugactual)) {
 				desplegable.addItem(paisesCreados.get(i).getNombre());
 			}
 		}
+		do {
+			
+		}while(paisesCreados.get(ronda).getMisiles() > 0);
 	}
+
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+
 	}
 }

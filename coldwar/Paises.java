@@ -125,21 +125,15 @@ public class Paises {
 
 		if(paisAtacado.getTipo().equals("Vietnam")||paisAtacado.getTipo().equals("Lituania")) {
 			variablesDefensa(paisQueAtaca,paisAtacado,misilesAtaque,misilesDefensa);
-
 		}
 
 		else if(paisQueAtaca.getTipo().equals("UK")) {
 			paisAtacado.setSumaAtaque(misilesAtaque+paisAtacado.getSumaAtaque());
-
-
-
 		}
 
 		else if(paisQueAtaca.getTipo().equals("Kazajistan")) {
 			if(paisAtacado.getTipo().equals("Lituania")) {
 				misilesAtaque=misilesAtaque*2;
-
-
 			}
 			else if(paisAtacado.getTipo().equals("Rusia")) {
 				misilesAtaque=misilesAtaque/2;
@@ -167,7 +161,6 @@ public class Paises {
 		}
 
 		else if(paisQueAtaca.getTipo().equals("Vietnam")) {
-
 			paisAtacado.setSumaAtaque(misilesAtaque+paisAtacado.getSumaAtaque());
 		}
 
