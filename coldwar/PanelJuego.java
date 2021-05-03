@@ -25,7 +25,7 @@ public class PanelJuego extends JPanel implements ActionListener{
 
 		//BOTON JUGAR
 		jugar = new JButton();
-		jugar.setBounds(1013, 626, 57, 48);
+		jugar.setBounds(911, 626, 57, 48);
 		jugar.setIcon(new ImageIcon(PanelReglas1.class.getResource("/coldwar/assets/iconos/ADELANTE_boton.png")));
 		jugar.setOpaque(false);
 		jugar.setContentAreaFilled(false);
@@ -36,7 +36,7 @@ public class PanelJuego extends JPanel implements ActionListener{
 		//BOTON ATRAS
 		atras = new JButton();
 		atras.setForeground(Color.WHITE);
-		atras.setBounds(10, 626, 51, 48);
+		atras.setBounds(114, 626, 51, 48);
 		atras.addActionListener(this);
 		atras.setIcon(new ImageIcon(PanelReglas1.class.getResource("/coldwar/assets/iconos/ATRAS_boton.png")));
 		atras.setOpaque(false);
@@ -58,12 +58,7 @@ public class PanelJuego extends JPanel implements ActionListener{
 		desplegable.addItem("Francia");
 		desplegable.addItem("Suiza");
 		desplegable.addItem("Kazajistan");
-		
-		/*
-		 
-		if 
-		 
-		 */
+
 		//BOTON AÑADIR
 		anadir = new JButton();
 		anadir.setIcon(new ImageIcon(PanelJuego.class.getResource("/coldwar/assets/textos/MAS_boton.png")));
@@ -83,7 +78,6 @@ public class PanelJuego extends JPanel implements ActionListener{
 		add(atras);
 		add(jugar);
 		add(fondo);
-
 	}
 
 	//EVENTOS DE LOS BOTONES
@@ -105,10 +99,14 @@ public class PanelJuego extends JPanel implements ActionListener{
 
 		//ACCION BOTON JUGAR
 		if (e.getSource() == jugar) {
-			JFrame marco = (JFrame) SwingUtilities.getWindowAncestor(this);
-			marco.remove(this);
-			marco.getContentPane().add(new PanelPartida(paisesCreados));
-			marco.setVisible(true);
+			if (paisesCreados.size() >= 2) {
+				JFrame marco = (JFrame) SwingUtilities.getWindowAncestor(this);
+				marco.remove(this);
+				marco.getContentPane().add(new PanelPartida(paisesCreados));
+				marco.setVisible(true);
+			} else {
+				JOptionPane.showMessageDialog(new JFrame(), "No hay equipos suficientes para empezar", "ERROR",JOptionPane.ERROR_MESSAGE);
+			}
 		}
 
 		//ACCION BOTON AÑADIR
