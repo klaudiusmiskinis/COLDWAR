@@ -12,6 +12,7 @@ public class PanelJuego extends JPanel implements ActionListener{
 	//ATRIBUTOS
 	int num = 1;
 	int contador = 50;
+	int turno = 0;
 	JTextPane equipos;
 	JButton atras, jugar, anadir;
 	JComboBox<String> desplegable;
@@ -102,7 +103,7 @@ public class PanelJuego extends JPanel implements ActionListener{
 			if (paisesCreados.size() >= 2) {
 				JFrame marco = (JFrame) SwingUtilities.getWindowAncestor(this);
 				marco.remove(this);
-				marco.getContentPane().add(new PanelPartida(paisesCreados));
+				marco.getContentPane().add(new PanelPartida(paisesCreados,turno));
 				marco.setVisible(true);
 			} else {
 				JOptionPane.showMessageDialog(new JFrame(), "No hay equipos suficientes para empezar", "ERROR",JOptionPane.ERROR_MESSAGE);
