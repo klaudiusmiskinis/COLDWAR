@@ -39,6 +39,7 @@ public class PanelPartida extends JPanel implements ActionListener {
 
 		// Variebles
 		int ronda = 0;
+		String jugactual = "";
 		//METODOS DE LA VENTANA
 		setBounds(0,0,1080,768);
 		setLayout(null);
@@ -46,10 +47,10 @@ public class PanelPartida extends JPanel implements ActionListener {
 		this.paisesJugar = paisesCreados; //SE GUARDA EL ARRAYLIST DE LA VENTANA DE CREACION DE EQUIPOS
 
 		//PRINT DEL ARRAYLIST
-		for (Paises pais1 : paisesJugar) {
+		/*for (Paises pais1 : paisesJugar) {
 			Paises p = (Paises)pais1;
 			System.out.println(p.getNombre() + " " + p.getTipo() + " " + p.getVida() + " " + p.getMisiles());
-		}
+		}*/
 
 		JFormattedTextField tAtacar = new JFormattedTextField();
 		tAtacar.setBounds(179, 257, 123, 38);
@@ -70,19 +71,21 @@ public class PanelPartida extends JPanel implements ActionListener {
 		add(bDefender);	
 		
 		JFormattedTextField turno = new JFormattedTextField();
-		turno.setText("Turno de : " + paisesCreados.get(ronda).getNombre());
+		turno.setText("Turno de : " + (jugactual = paisesCreados.get(ronda).getNombre()));
 		turno.setBounds(65, 53, 429, 126);
 		add(turno);
 		
-		JComboBox desplegable= new JComboBox();
+		JComboBox<String> desplegable= new JComboBox<String>();
 		desplegable.setMaximumRowCount(10);
 		desplegable.setBounds(10, 257, 159, 38);
 		add(desplegable);
-
-		for(int i = 0; i < paisesCreados.size(); i++) {
-			desplegable.addItem(paisesCreados.get(i).getNombre());
-		}
 		
+		
+		for(int i = 0; i < paisesCreados.size(); i++) {
+			if (!paisesCreados.get(i).getNombre().equals(jugactual)) {
+				desplegable.addItem(paisesCreados.get(i).getNombre());
+			}
+		}
 	}
 
 	@Override

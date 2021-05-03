@@ -52,7 +52,7 @@ public class PanelJuego extends JPanel implements ActionListener{
 		desplegable.addItem("Lituania");
 		desplegable.addItem("Rusia");
 		desplegable.addItem("USA");
-		desplegable.addItem("Espa�a");
+		desplegable.addItem("España");
 		desplegable.addItem("Vietnam");
 		desplegable.addItem("Alemania");
 		desplegable.addItem("Francia");
@@ -133,11 +133,11 @@ public class PanelJuego extends JPanel implements ActionListener{
 				pais.asignacionRecursos(pais.getNombre(),pais.getTipo()); //INICIALIZAMOS SU VIDA Y MISILES
 
 				//PRINT EN CONSOLA DEL OBJETO
-				System.out.println(pais.getVida() + " " + pais.getMisiles());
+				/*System.out.println(pais.getVida() + " " + pais.getMisiles());
 				for(Paises pais1 : paisesCreados) {
 					Paises p = (Paises)pais1;
 					System.out.println(p.getNombre());
-				}
+				}*/
 
 				//CUADRO DE EQUIPO AÑADIDO
 				equipos.setText("Jugador " + num + " " + pais.getNombre() + " " + pais.getTipo()+ "\n" );
