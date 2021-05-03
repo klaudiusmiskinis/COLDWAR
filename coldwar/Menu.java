@@ -8,7 +8,6 @@ import javax.swing.JFrame;
 
 public class Menu extends JFrame {
 
-
 	MenuPrincipal menuprin;
 
 	public Menu() throws IOException {
