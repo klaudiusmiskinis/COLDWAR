@@ -37,6 +37,8 @@ public class PanelPartida extends JPanel implements ActionListener {
 	//CONSTRUCTOR QUE RECIBE ARRAYLIST
 	public PanelPartida(ArrayList<Paises> paisesCreados) {
 
+		// Variebles
+		int ronda = 0;
 		//METODOS DE LA VENTANA
 		setBounds(0,0,1080,768);
 		setLayout(null);
@@ -47,15 +49,6 @@ public class PanelPartida extends JPanel implements ActionListener {
 		for (Paises pais1 : paisesJugar) {
 			Paises p = (Paises)pais1;
 			System.out.println(p.getNombre() + " " + p.getTipo() + " " + p.getVida() + " " + p.getMisiles());
-		}
-
-		JComboBox desplegable= new JComboBox();
-		desplegable.setMaximumRowCount(10);
-		desplegable.setBounds(10, 257, 159, 38);
-		add(desplegable);
-
-		for(int i = 0; i < paisesCreados.size(); i++) {
-			desplegable.addItem(paisesCreados.get(i).getNombre());
 		}
 
 		JFormattedTextField tAtacar = new JFormattedTextField();
@@ -74,12 +67,26 @@ public class PanelPartida extends JPanel implements ActionListener {
 		JButton bDefender = new JButton("Defender");
 		bDefender.setBounds(312, 306, 100, 38);
 		bDefender.addActionListener(this);
-		add(bDefender);
+		add(bDefender);	
+		
+		JFormattedTextField turno = new JFormattedTextField();
+		turno.setText("Turno de : " + paisesCreados.get(ronda).getNombre());
+		turno.setBounds(65, 53, 429, 126);
+		add(turno);
+		
+		JComboBox desplegable= new JComboBox();
+		desplegable.setMaximumRowCount(10);
+		desplegable.setBounds(10, 257, 159, 38);
+		add(desplegable);
+
+		for(int i = 0; i < paisesCreados.size(); i++) {
+			desplegable.addItem(paisesCreados.get(i).getNombre());
+		}
+		
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
 	}
-	
 }

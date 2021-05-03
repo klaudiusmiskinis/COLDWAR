@@ -58,7 +58,12 @@ public class PanelJuego extends JPanel implements ActionListener{
 		desplegable.addItem("Francia");
 		desplegable.addItem("Suiza");
 		desplegable.addItem("Kazajistan");
-
+		
+		/*
+		 
+		if 
+		 
+		 */
 		//BOTON AÑADIR
 		anadir = new JButton();
 		anadir.setIcon(new ImageIcon(PanelJuego.class.getResource("/coldwar/assets/textos/MAS_boton.png")));

@@ -113,7 +113,10 @@ public class MenuPrincipal extends JPanel implements ActionListener{
 
 		//EVENTO BOTON INFORMACION
 		if (e.getSource() == informacion) {
-			System.out.println("Informacion");
+			JFrame marco=(JFrame) SwingUtilities.getWindowAncestor(this);
+			marco.remove(this);
+			marco.getContentPane().add(new PanelInformacion());
+			marco.setVisible(true);
 		}
 
 		//EVENTO BOTON CARGAR
