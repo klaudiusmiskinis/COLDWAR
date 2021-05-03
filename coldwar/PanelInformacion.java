@@ -98,7 +98,7 @@ public class PanelInformacion extends JPanel implements ActionListener{
 			marco.setVisible(true);
 		}
 		if (e.getSource() == caraMarc) {
-			txtpaises.setText("Hola soy Marc, co-creador de este juego. Disfrutadlo en compañia.\nPara cualquier consulta marcgavingrau@gmail.com");
+			txtpaises.setText("Hola soy Marc, co-creador de este juego. Disfrutadlo en compaÃ±ia.\nPara cualquier consulta marcgavingrau@gmail.com");
 		}
 		if (e.getSource() == caraMiquel) {
 			txtpaises.setText("Hola soy Miquel, Me he encargado de la creacion de este juego. Espero que os guste.\nPara cualquier comentario miquelgatiusfarras@gmail.com");

@@ -5,6 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.regex.Matcher; 
+import java.util.regex.Pattern;
 
 import javax.swing.*;
 
@@ -17,6 +19,7 @@ public class PanelJuego extends JPanel implements ActionListener{
 	JButton atras, jugar, anadir;
 	JComboBox<String> desplegable;
 	ArrayList<Paises> paisesCreados = new ArrayList<Paises>();
+	ArrayList<String> nombres = new ArrayList<String>();
 
 	//CONSTRUCTOR
 	public PanelJuego() {
@@ -85,6 +88,7 @@ public class PanelJuego extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		//VARIABLES
 		String name = "";
+		boolean pasar = false;
 
 		//ACCION BOTON ATRAS
 		if (e.getSource() == atras) {
@@ -103,7 +107,7 @@ public class PanelJuego extends JPanel implements ActionListener{
 			if (paisesCreados.size() >= 2) {
 				JFrame marco = (JFrame) SwingUtilities.getWindowAncestor(this);
 				marco.remove(this);
-				marco.getContentPane().add(new PanelPartida(paisesCreados,turno));
+				marco.getContentPane().add(new PanelPartida(paisesCreados, turno));
 				marco.setVisible(true);
 			} else {
 				JOptionPane.showMessageDialog(new JFrame(), "No hay equipos suficientes para empezar", "ERROR",JOptionPane.ERROR_MESSAGE);
@@ -126,27 +130,61 @@ public class PanelJuego extends JPanel implements ActionListener{
 					name = JOptionPane.showInputDialog(parent, options,"Jugador", 1);
 				} while(name.equals(""));
 
-				pais.setNombre(name); //DAMOS NOMBRE AL OBJETO
-				pais.setTipo(desplegable.getSelectedItem().toString()); //DAMOS TIPO AL OBJETO
-				paisesCreados.add(pais); //AÑADIMOS EL OBJETO AL ARRAYLIST
-				pais.asignacionRecursos(pais.getNombre(),pais.getTipo()); //INICIALIZAMOS SU VIDA Y MISILES
+				pasar = validarNombres(name, nombres);
 
-				//PRINT EN CONSOLA DEL OBJETO
-				/*System.out.println(pais.getVida() + " " + pais.getMisiles());
-				for(Paises pais1 : paisesCreados) {
-					Paises p = (Paises)pais1;
-					System.out.println(p.getNombre());
-				}*/
+				if (pasar == true) {
+					nombres.add(name); //AÑADIMOS EL NOMBRE AL ARRAYLIST
+					pais.setNombre(name); //DAMOS NOMBRE AL OBJETO
+					pais.setTipo(desplegable.getSelectedItem().toString()); //DAMOS TIPO AL OBJETO
+					paisesCreados.add(pais); //AÑADIMOS EL OBJETO AL ARRAYLIST
+					pais.asignacionRecursos(pais.getNombre(),pais.getTipo()); //INICIALIZAMOS SU VIDA Y MISILES
 
-				//CUADRO DE EQUIPO AÑADIDO
-				equipos.setText("Jugador " + num + " " + pais.getNombre() + " " + pais.getTipo()+ "\n" );
-				equipos.setVisible(true);
-				add(equipos);
+					//CUADRO DE EQUIPO AÑADIDO
+					equipos.setText("Jugador " + num + " " + pais.getNombre() + " " + pais.getTipo()+ "\n" );
+					equipos.setVisible(true);
+					equipos.setEditable(false);
+					add(equipos);
 
-				//CONTROL DE CANTIDAD DE EQUIPOS
-				num ++;
-				contador = contador + 60;
+					//CONTROL DE CANTIDAD DE EQUIPOS
+					num ++;
+					contador = contador + 60;
+				}
 			}
 		}
+	}
+
+	//METODO PARA VALIDAR NOMBRES
+	public boolean validarNombres(String name, ArrayList<String> nombresArray) {
+		Pattern pattern = Pattern.compile("[^a-zA-Z0-9]");
+		Matcher matcher = pattern.matcher(name);
+
+		//CONTIENE SIMBOLOS
+		if(matcher.find() == true) {
+			JOptionPane.showMessageDialog(new JFrame(), "El nombre no puede contener símbolos y espacios", "ERROR",JOptionPane.ERROR_MESSAGE);
+			System.out.println("Contiene simbolos");
+			return false;
+		}
+		
+		//CONTIENE NUMEROS
+		if (name.matches(".*\\d.*")) {
+			JOptionPane.showMessageDialog(new JFrame(), "El nombre no puede contener números", "ERROR",JOptionPane.ERROR_MESSAGE);
+			System.out.println("Contiene numeros");
+			return false;
+		}
+		
+		//EL NOMBRE ES DEMASIADO LARGO
+		if (name.length() > 18) {
+			JOptionPane.showMessageDialog(new JFrame(), "El nombre es demasiado largo", "ERROR",JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		
+		//EL NOMBRE ESTA REPETIDO
+		for(int i = 0; i < nombresArray.size(); i++) {
+			if (name.toLowerCase().equals(nombresArray.get(i).toLowerCase())) {
+				JOptionPane.showMessageDialog(new JFrame(), "El nombre ya existe", "ERROR",JOptionPane.ERROR_MESSAGE);
+				return false;
+			}
+		}
+		return true;
 	}
 }

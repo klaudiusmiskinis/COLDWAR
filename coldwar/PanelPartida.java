@@ -111,9 +111,7 @@ public class PanelPartida extends JPanel implements ActionListener {
 		}
 		/*
 		do {
-
 		} while(paisesCreados.get(turno).getMisiles() > 0); 
-
 		 */
 	}
 
@@ -134,8 +132,7 @@ public class PanelPartida extends JPanel implements ActionListener {
 				marco.remove(this);
 				marco.getContentPane().add(new PanelResumen(paisesJugar));
 				marco.setVisible(true);
-			} 
-			else {
+			} else {
 				turno++;
 				JFrame marco=(JFrame) SwingUtilities.getWindowAncestor(this);
 				marco.remove(this);
@@ -146,4 +143,3 @@ public class PanelPartida extends JPanel implements ActionListener {
 		}
 	}
 }
-

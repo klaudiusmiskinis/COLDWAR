@@ -21,8 +21,6 @@ public class Paises {
 		this.setMisiles(0);
 		this.setSumaDefensa(0);
 		this.setSumaAtaque(0);
-
-
 	}
 
 	//CONSTRUCTOR CON PARAMETROS
@@ -34,9 +32,8 @@ public class Paises {
 		this.setSumaAtaque(sumaAtaque);
 		this.setSumaDefensa(sumaDefensa);
 	}
-	//	METODOS
-
-
+	
+	//METODOS
 	//ASIGNAMOS LA VIDA I LOS MISILES SEGUN EL TIPO DE PAIS
 	public void asignacionRecursos(String nombre,String tipo){
 		if(tipo.equals("UK")) {
@@ -116,9 +113,6 @@ public class Paises {
 
 		else if(this.getTipo().equals("UK")) {
 			paisAtacado.setSumaAtaque(misilesAtaque+paisAtacado.getSumaAtaque());
-
-
-
 		}
 
 		else if(this.getTipo().equals("Kazajistan")) {
