@@ -11,6 +11,7 @@ import javax.swing.JRadioButton;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.border.LineBorder;
 import javax.swing.event.*;
 
 import java.awt.Color;
@@ -39,33 +40,28 @@ public class PanelPartida extends JPanel implements ActionListener {
 	ArrayList<Paises> paisesJugar;
 	JComboBox<String> desplegable;
 	JButton bAtacar, bDefender,sTurno;
-	JFormattedTextField misilesCantidad, tTurno, tCantidad;
+	JFormattedTextField insertMisiles, infoTurno, infoMisiles;
 	int turno = 0;
+	int contador = 0;
 	//CONSTRUCTOR QUE RECIBE ARRAYLIST
 	public PanelPartida(ArrayList<Paises> paisesCreados,int a) {
 
-		// Variebles
+		//VARIABLES
 		this.paisesJugar = paisesCreados;
 		this.turno = a;
 		String jugActual = "";
-		//METODOS DE LA VENTANA
+
+		//ELEMENTOS DE LA VENTANA
 		setBounds(0,0,1080,768);
 		setLayout(null);
 		setBackground(Color.BLACK);
 
-		//PRINT DEL ARRAYLIST
-		/*for (Paises pais1 : paisesJugar) {
-			Paises p = (Paises)pais1;
-			System.out.println(p.getNombre() + " " + p.getTipo() + " " + p.getVida() + " " + p.getMisiles());
-		}*/
-
-
 		//TEXTFIELD ATACAR
-		misilesCantidad = new JFormattedTextField();
-		misilesCantidad.setText("0");
-		misilesCantidad.setBounds(256, 229, 133, 38);
-		misilesCantidad.addActionListener(this);
-		add(misilesCantidad);
+		insertMisiles = new JFormattedTextField();
+		insertMisiles.setText("0");
+		insertMisiles.setBounds(256, 229, 133, 38);
+		insertMisiles.addActionListener(this);
+		add(insertMisiles);
 
 		//BOTON ATACAR
 		bAtacar = new JButton("Atacar");
@@ -74,12 +70,12 @@ public class PanelPartida extends JPanel implements ActionListener {
 		add(bAtacar);
 
 		//TEXTFIELD CANTIDAD MISILES
-		tCantidad = new JFormattedTextField();
-		tCantidad.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 16));
-		tCantidad.setEditable(false);
-		tCantidad.setText("Cantidad de misiles: " + paisesCreados.get(turno).getMisiles());
-		tCantidad.setBounds(263, 52, 206, 56);
-		add(tCantidad);
+		infoMisiles = new JFormattedTextField();
+		infoMisiles.setFont(new Font("Calibri", Font.BOLD | Font.ITALIC, 14));
+		infoMisiles.setEditable(false);
+		infoMisiles.setText("Cantidad de misiles: " + paisesCreados.get(turno).getMisiles());
+		infoMisiles.setBounds(263, 52, 206, 56);
+		add(infoMisiles);
 
 		//BOTON DEFENDER
 		bDefender = new JButton("Defender");
@@ -88,17 +84,21 @@ public class PanelPartida extends JPanel implements ActionListener {
 		add(bDefender);	
 
 		//TEXTFIELD TURNO
-		tTurno = new JFormattedTextField();
-		tTurno.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 15));
-		tTurno.setEditable(false);
-		tTurno.setText("Turno de : " + (jugActual = paisesCreados.get(turno).getNombre()));
-		tTurno.setBounds(29, 53, 198, 56);
-		tTurno.addActionListener(this);
-		add(tTurno);
+		infoTurno = new JFormattedTextField();
+		infoTurno.setFont(new Font("Calibri", Font.BOLD | Font.ITALIC, 14));
+		infoTurno.setEditable(false);
+		infoTurno.setText("Turno de : " + (jugActual = paisesCreados.get(turno).getNombre()));
+		infoTurno.setBounds(29, 53, 198, 56);
+		infoTurno.addActionListener(this);
+		add(infoTurno);
 
 		//COMBOBOX DESPLEGABLE
 		desplegable= new JComboBox<String>();
 		desplegable.setMaximumRowCount(10);
+		desplegable.setForeground(Color.WHITE);
+		desplegable.setBackground(Color.BLACK);
+		desplegable.setBorder(new LineBorder(Color.BLACK));
+		desplegable.setFocusable(false);
 		desplegable.setBounds(51, 273, 159, 38);
 		add(desplegable);
 
@@ -113,60 +113,67 @@ public class PanelPartida extends JPanel implements ActionListener {
 				desplegable.addItem(paisesCreados.get(i).getNombre());
 			}
 		}
-		/*
-		do {
-		} while(paisesCreados.get(turno).getMisiles() > 0); 
-		 */
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Pattern pattern = Pattern.compile("[^a-zA-Z0-9]");
-		Matcher matcher = pattern.matcher(misilesCantidad.getText());
+		Matcher matcher = pattern.matcher(insertMisiles.getText());
 		int misiles = 0;
+
 		try {
-			misiles = Integer.parseInt(misilesCantidad.getText());
-		}catch(Exception a) {
+			misiles = Integer.parseInt(insertMisiles.getText());
+		} catch(Exception a) {
 			misiles = 0;
-			misilesCantidad.setText("0");
+			insertMisiles.setText("0");
 			JOptionPane.showMessageDialog(new JFrame(), "Has introducido letras", "ERROR",JOptionPane.ERROR_MESSAGE);
 		}
+
+
 		if (e.getSource() == bAtacar) {
-			System.out.println("Atacando con " + misilesCantidad.getText());
-			// CONTIENE CANTIDAD DE MISILES NO VALIDA
+			System.out.println("Atacando con " + insertMisiles.getText());
+
+			//VALIDACION DE TEXTFIELD
+			//CONTIENE CANTIDAD DE MISILES NO VALIDA
 			if (misiles > paisesJugar.get(turno).getMisiles() || misiles < 0) {
 				JOptionPane.showMessageDialog(new JFrame(), "Numero de misiles no valido", "ERROR",JOptionPane.ERROR_MESSAGE);
 			} 
-			// CONTIENE LETRAS
-			else if (misilesCantidad.getText().contains("[a-zA-Z]+")) {
+
+			//CONTIENE LETRAS
+			else if (insertMisiles.getText().contains("[a-zA-Z]+")) {
 				JOptionPane.showMessageDialog(new JFrame(), "Has introducido letras", "ERROR",JOptionPane.ERROR_MESSAGE);
 			}
+
 			//CONTIENE SIMBOLOS
 			else if(matcher.find() == true) {
 				JOptionPane.showMessageDialog(new JFrame(), "El nombre no puede contener simbolos y espacios", "ERROR",JOptionPane.ERROR_MESSAGE);
-				System.out.println("Contiene simbolos");
 			}
-			String ab = desplegable.getSelectedItem().toString();
+
+			String elementoDesplegable = desplegable.getSelectedItem().toString();
 			Paises paisAtacado = new Paises();
 			for(int i = 0; i < paisesJugar.size();i++) {
-				if (ab == paisesJugar.get(i).getNombre()) {
-				paisAtacado = paisesJugar.get(i);
-				System.out.println(paisAtacado.getNombre());
+				if (elementoDesplegable == paisesJugar.get(i).getNombre()) {
+					paisAtacado = paisesJugar.get(i);
+					System.out.println(paisAtacado.getNombre());
 				}
 			}
+			
 			paisesJugar.get(turno).variables(paisAtacado,misiles,0);
+
 			System.out.println(paisAtacado.getSumaAtaque());
-			paisesJugar.get(turno).actualizarDatos(paisAtacado);
+			if (turno == paisesJugar.size()-1) {
+				paisesJugar.get(turno).actualizarDatos(paisAtacado);
+			}
 		}
 
 		if (e.getSource() == bDefender) {
-			System.out.println("Defendiendo con " + misilesCantidad.getText());
+			System.out.println("Defendiendo con " + insertMisiles.getText());
 			// CONTIENE CANTIDAD DE MISILES NO VALIDA
 			if (misiles > paisesJugar.get(turno).getMisiles() || misiles < 0) {
 				JOptionPane.showMessageDialog(new JFrame(), "Numero de misiles no valido", "ERROR",JOptionPane.ERROR_MESSAGE);
 			} 
 			// CONTIENE LETRAS
-			else if (misilesCantidad.getText().contains("[a-zA-Z]+")) {
+			else if (insertMisiles.getText().contains("[a-zA-Z]+")) {
 				JOptionPane.showMessageDialog(new JFrame(), "Has introducido letras", "ERROR",JOptionPane.ERROR_MESSAGE);
 			}
 			//CONTIENE SIMBOLOS
@@ -189,7 +196,7 @@ public class PanelPartida extends JPanel implements ActionListener {
 				marco.remove(this);
 				marco.getContentPane().add(new PanelPartida(paisesJugar,turno));
 				marco.setVisible(true);
-				System.out.println("Defendiendo con " + misilesCantidad.getText());
+				System.out.println("Defendiendo con " + insertMisiles.getText());
 			}
 		}
 	}

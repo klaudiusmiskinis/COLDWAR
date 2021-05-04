@@ -1,6 +1,7 @@
 package coldwar;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -9,6 +10,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 
 public class PanelJuego extends JPanel implements ActionListener{
 	//ATRIBUTOS
@@ -20,6 +22,7 @@ public class PanelJuego extends JPanel implements ActionListener{
 	JComboBox<String> desplegable;
 	ArrayList<Paises> paisesCreados = new ArrayList<Paises>();
 	ArrayList<String> nombres = new ArrayList<String>();
+	Font fuente;
 
 	//CONSTRUCTOR
 	public PanelJuego() {
@@ -50,13 +53,18 @@ public class PanelJuego extends JPanel implements ActionListener{
 
 		//COMBOBOX DESPLEGABLE
 		desplegable = new JComboBox<String>();
+		desplegable.setForeground(Color.WHITE);
+		desplegable.setBackground(Color.BLACK);
+		desplegable.setBorder(new LineBorder(Color.BLACK));
+		desplegable.setFocusable(false);
+		desplegable.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		desplegable.setMaximumRowCount(10);
 		desplegable.setBounds(51, 92, 172, 34);
 		desplegable.addItem("UK");
 		desplegable.addItem("Lituania");
 		desplegable.addItem("Rusia");
 		desplegable.addItem("USA");
-		desplegable.addItem("España");
+		desplegable.addItem("Espaï¿½a");
 		desplegable.addItem("Vietnam");
 		desplegable.addItem("Alemania");
 		desplegable.addItem("Francia");
@@ -128,6 +136,7 @@ public class PanelJuego extends JPanel implements ActionListener{
 					Object[] options = {"Nombre del jugador"};
 					JFrame parent = new JFrame();
 					name = JOptionPane.showInputDialog(parent, options,"Jugador", 1);
+					
 				} while(name.equals(""));
 
 				pasar = validarNombres(name, nombres);
