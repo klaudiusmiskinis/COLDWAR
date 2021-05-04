@@ -118,8 +118,6 @@ public class Paises {
 		else if(this.getTipo().equals("Kazajistan")) {
 			if(paisAtacado.getTipo().equals("Lituania")) {
 				misilesAtaque=misilesAtaque*2;
-
-
 			}
 			else if(paisAtacado.getTipo().equals("Rusia")) {
 				misilesAtaque=misilesAtaque/2;

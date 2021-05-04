@@ -56,7 +56,7 @@ public class PanelJuego extends JPanel implements ActionListener{
 		desplegable.addItem("Lituania");
 		desplegable.addItem("Rusia");
 		desplegable.addItem("USA");
-		desplegable.addItem("EspaÃ±a");
+		desplegable.addItem("España");
 		desplegable.addItem("Vietnam");
 		desplegable.addItem("Alemania");
 		desplegable.addItem("Francia");
