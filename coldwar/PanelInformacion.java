@@ -17,6 +17,7 @@ import javax.swing.SwingUtilities;
 import java.awt.Color;
 import javax.swing.JTextField;
 import javax.swing.JSlider;
+import java.awt.Font;
 
 public class PanelInformacion extends JPanel implements ActionListener{
 	JButton caraKlaus;
@@ -27,6 +28,7 @@ public class PanelInformacion extends JPanel implements ActionListener{
 	public PanelInformacion() {
 		setBounds(0,0,1080,768);
 		setLayout(null);
+		setBackground(Color.BLACK);
 
 		botonAtras = new JButton ("");
 		botonAtras.setForeground(Color.WHITE);
@@ -39,7 +41,7 @@ public class PanelInformacion extends JPanel implements ActionListener{
 		botonAtras.setFocusable(false);
 		add(botonAtras);
 		
-		caraKlaus = new JButton("New button");
+		caraKlaus = new JButton("");
 		caraKlaus.setIcon(new ImageIcon(PanelInformacion.class.getResource("/coldwar/assets/iconos/caraKlaus.jpg")));
 		caraKlaus.setBounds(459, 96, 226, 234);
 		caraKlaus.setBorderPainted(false);
@@ -48,7 +50,7 @@ public class PanelInformacion extends JPanel implements ActionListener{
 		add(caraKlaus);
 
 
-		caraMiquel = new JButton("New button");
+		caraMiquel = new JButton("");
 		caraMiquel.setIcon(new ImageIcon(PanelInformacion.class.getResource("/coldwar/assets/iconos/caraMiquel.jpg")));
 		caraMiquel.setBounds(753, 96, 217, 234);
 		caraMiquel.setBorderPainted(false);
@@ -56,7 +58,7 @@ public class PanelInformacion extends JPanel implements ActionListener{
 		caraMiquel.addActionListener(this);
 		add(caraMiquel);
 
-		caraMarc = new JButton("New button");
+		caraMarc = new JButton("");
 		caraMarc.setIcon(new ImageIcon(PanelInformacion.class.getResource("/coldwar/assets/iconos/caraMarc.jpg")));
 		caraMarc.setBounds(164, 96, 217, 234);
 		caraMarc.setBorderPainted(false);
@@ -66,23 +68,19 @@ public class PanelInformacion extends JPanel implements ActionListener{
 
 		//Texto
 		txtpaises = new JTextPane();
-		txtpaises.setBounds(373, 435, 674, 92);
+		txtpaises.setEditable(false);
+		txtpaises.setFont(new Font("Calibri", Font.BOLD | Font.ITALIC, 15));
+		txtpaises.setBounds(232, 413, 624, 92);
 		txtpaises.setForeground(Color.BLACK);
 		txtpaises.setOpaque(false);
 		txtpaises.setText("");
 		add(txtpaises);
 
 		//Fondo texto
-		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(new ImageIcon(PanelReglas.class.getResource("/coldwar/assets/fondos/PanelCuadro.png")));
-		lblNewLabel_1.setBounds(285, 390, 582, 137);
-		add(lblNewLabel_1);
-		
-		// Fondo
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(PanelJuego.class.getResource("/coldwar/assets/textos/FondoNegro_Menu.png")));
-		lblNewLabel.setBounds(0,0,1080,768);
-		add(lblNewLabel);
+		JLabel recuadro = new JLabel("");
+		recuadro.setIcon(new ImageIcon(PanelReglas.class.getResource("/coldwar/assets/fondos/PanelCuadro.png")));
+		recuadro.setBounds(223, 390, 644, 137);
+		add(recuadro);
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -98,7 +96,7 @@ public class PanelInformacion extends JPanel implements ActionListener{
 			marco.setVisible(true);
 		}
 		if (e.getSource() == caraMarc) {
-			txtpaises.setText("Hola soy Marc, co-creador de este juego. Disfrutadlo en compañia.\nPara cualquier consulta marcgavingrau@gmail.com");
+			txtpaises.setText("Hola soy Marc, co-creador de este juego. Disfrutadlo en compaÃ±ia.\nPara cualquier consulta marcgavingrau@gmail.com");
 		}
 		if (e.getSource() == caraMiquel) {
 			txtpaises.setText("Hola soy Miquel, Me he encargado de la creacion de este juego. Espero que os guste.\nPara cualquier comentario miquelgatiusfarras@gmail.com");

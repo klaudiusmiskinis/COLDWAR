@@ -91,7 +91,6 @@ public class MenuPrincipal extends JPanel implements ActionListener{
 		add(titulo);
 		add(fondo);
 	}
-
 	@Override
 	//EVENTOS DE LOS BOTONES
 	public void actionPerformed(ActionEvent e) {
