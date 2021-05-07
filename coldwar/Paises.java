@@ -13,6 +13,7 @@ public class Paises {
 	private int sumaAtaque;
 	private int sumaDefensa;
 	int contadorJugador=0;
+	boolean paisMuerto=false;
 	//CONSTRUCTOR VACIO
 	public Paises(){
 		this.setVida(0);
@@ -116,6 +117,8 @@ public class Paises {
 		}
 
 		else if(this.getTipo().equals("Kazajistan")) {
+			
+			
 			if(paisAtacado.getTipo().equals("Lituania")) {
 				misilesAtaque=misilesAtaque*2;
 			}
@@ -166,6 +169,7 @@ public class Paises {
 			if(paisAtacado.getTipo().equals("Vietnam")) {
 				misilesAtaque=misilesAtaque/2;
 			}
+			
 			paisAtacado.setSumaAtaque(misilesAtaque+paisAtacado.getSumaAtaque());
 		}
 
@@ -191,10 +195,17 @@ public class Paises {
 	//REALIZAMOS LA RESTA DE LA VIDA DEL JUGADOR SEGUN EL ATAQUE RECIBIDO I LA DEFENSA APLICADA
 	public void actualizarDatos(Paises pais) {
 		if((pais.getSumaAtaque()-pais.getSumaDefensa())<=0) {
-			System.out.println();
+			System.out.println("EL PAIS"+ pais.getNombre()+"HA MUERTO");
+			
 		}
+		
+		else if(pais.getVida()<(pais.getVida()-(pais.getSumaAtaque()-pais.getSumaDefensa()))){
 		if((pais.getSumaAtaque()-pais.getSumaDefensa())>0) {
 			pais.setVida(pais.getVida()-(pais.getSumaAtaque()-pais.getSumaDefensa()));
+		}
+		}
+		else {
+			System.out.println("LA VIDA DEL PAIS MENOS LO QUE LE HAN ATACADO MAS LA DEFENSA ES MAYOR A LA VIDA QUE TENIA,O ESTA MUERTO.");
 		}
 		//		pais.setVida((pais.getVida()-sumaAtaque));
 	}
