@@ -58,7 +58,7 @@ public class MenuPrincipal extends JPanel implements ActionListener{
 
 		//BOTON SALIR
 		salir= new JButton();
-		salir.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/coldwar/assets/textos/SALIR_boton.png")));
+		salir.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/coldwar/assets/iconos/SALIR_boton.png")));
 		salir.setOpaque(false);
 		salir.setContentAreaFilled(false);
 		salir.setBounds(334, 451, 412, 50);
