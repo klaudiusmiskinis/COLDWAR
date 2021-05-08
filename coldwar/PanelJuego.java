@@ -1,4 +1,4 @@
-package coldwar2;
+package coldwar;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -32,7 +32,7 @@ public class PanelJuego extends JPanel implements ActionListener{
 
 		//BOTON JUGAR
 		jugar = new JButton();
-		jugar.setBounds(911, 626, 57, 48);
+		jugar.setBounds(968, 672, 91, 59);
 		jugar.setIcon(new ImageIcon(PanelReglas1.class.getResource("/coldwar/assets/iconos/ADELANTE_boton.png")));
 		jugar.setOpaque(false);
 		jugar.setContentAreaFilled(false);
@@ -43,7 +43,7 @@ public class PanelJuego extends JPanel implements ActionListener{
 		//BOTON ATRAS
 		atras = new JButton();
 		atras.setForeground(Color.WHITE);
-		atras.setBounds(114, 626, 51, 48);
+		atras.setBounds(10, 672, 91, 59);
 		atras.addActionListener(this);
 		atras.setIcon(new ImageIcon(PanelReglas1.class.getResource("/coldwar/assets/iconos/ATRAS_boton.png")));
 		atras.setOpaque(false);
@@ -59,7 +59,7 @@ public class PanelJuego extends JPanel implements ActionListener{
 		desplegable.setFocusable(false);
 		desplegable.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		desplegable.setMaximumRowCount(10);
-		desplegable.setBounds(51, 92, 172, 34);
+		desplegable.setBounds(23, 323, 284, 34);
 		desplegable.addItem("UK");
 		desplegable.addItem("Lituania");
 		desplegable.addItem("Rusia");
@@ -74,14 +74,14 @@ public class PanelJuego extends JPanel implements ActionListener{
 		//BOTON AÑADIR
 		anadir = new JButton();
 		anadir.setIcon(new ImageIcon(PanelJuego.class.getResource("/coldwar/assets/textos/MAS_boton.png")));
-		anadir.setBounds(233, 76, 50, 50);
+		anadir.setBounds(314, 323, 51, 34);
 		anadir.setContentAreaFilled(false);
 		anadir.setBorderPainted(false);
 		anadir.addActionListener(this);
 
 		//FONDO JLABEL
 		JLabel fondo = new JLabel();
-		fondo.setIcon(new ImageIcon(PanelJuego.class.getResource("/coldwar/assets/textos/FondoNegro_Menu.png")));
+		fondo.setIcon(new ImageIcon(PanelJuego.class.getResource("/coldwar/assets/fondos/FondoPanelJugar.png")));
 		fondo.setBounds(0,0,1080,768);
 
 		//SE AÑADEN LOS ELEMENTOS A LA VENTANA
@@ -128,7 +128,10 @@ public class PanelJuego extends JPanel implements ActionListener{
 			if(num < 11) {
 				Paises pais = new Paises(); //SE CREA EL OBJETO PAIS
 				JTextPane equipos= new JTextPane();
-				equipos.setBounds(800,contador, 200, 50);
+				equipos.setBounds(600, contador, 400, 40);
+				equipos.setBackground(Color.black);
+				equipos.setForeground(Color.red);
+				equipos.setBorder(new LineBorder(Color.red));
 				equipos.setVisible(false);
 
 				//CONTROL DE ENTRADA DE DATOS

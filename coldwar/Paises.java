@@ -1,4 +1,4 @@
-package coldwar2;
+package coldwar;
 import java.util.ArrayList;
 import java.util.Random;
 

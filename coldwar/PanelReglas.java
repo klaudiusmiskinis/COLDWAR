@@ -1,4 +1,4 @@
-package coldwar2;
+package coldwar;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,7 +23,7 @@ public class PanelReglas extends JPanel implements ActionListener{
 		botonAtras.setIcon(new ImageIcon(PanelReglas.class.getResource("/coldwar/assets/iconos/ATRAS_boton.png")));
 		botonAtras.setOpaque(false);
 		botonAtras.setContentAreaFilled(false);
-		botonAtras.setBounds(449, 669, 52, 59);
+		botonAtras.setBounds(461, 669, 98, 59);
 		botonAtras.addActionListener(this);
 		botonAtras.setFocusable(false);
 		botonAtras.setBorderPainted(false);
@@ -33,7 +33,7 @@ public class PanelReglas extends JPanel implements ActionListener{
 		botonAdelante.setIcon(new ImageIcon(PanelReglas.class.getResource("/coldwar/assets/iconos/ADELANTE_boton.png")));
 		botonAdelante.setOpaque(false);
 		botonAdelante.setContentAreaFilled(false);
-		botonAdelante.setBounds(581, 669, 57, 59);
+		botonAdelante.setBounds(558, 669, 89, 59);
 		botonAdelante.setFocusable(false);
 		botonAdelante.setBorderPainted(false);
 		botonAdelante.addActionListener(this);

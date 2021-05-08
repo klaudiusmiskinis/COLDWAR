@@ -1,4 +1,4 @@
-package coldwar2;
+package coldwar;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -60,66 +60,90 @@ public class PanelPartida extends JPanel implements ActionListener {
 
 		//ELEMENTOS DE LA VENTANA
 		setBounds(0,0,1080,768);
-		setLayout(null);
 		setBackground(Color.BLACK);
 
 		//TEXTFIELD ATACAR
 		insertMisiles = new JFormattedTextField();
+		insertMisiles.setForeground(Color.WHITE);
+		insertMisiles.setBackground(Color.BLACK);
+		insertMisiles.setBounds(24, 362, 218, 38);
 		insertMisiles.setText("0");
-		insertMisiles.setBounds(256, 229, 133, 38);
 		insertMisiles.addActionListener(this);
+		setLayout(null);
 		add(insertMisiles);
 
 		//BOTON ATACAR
-		bAtacar = new JButton("Atacar");
-		bAtacar.setBounds(220, 273, 100, 38);
+		bAtacar = new JButton("");
+		bAtacar.setIcon(new ImageIcon(PanelPartida.class.getResource("/coldwar/assets/textos/BOTON_ATACAR.png")));
+		bAtacar.setBounds(245, 362, 54, 38);
+		bAtacar.setOpaque(false);
+		bAtacar.setContentAreaFilled(false);
+		bAtacar.setFocusable(false);
+		bAtacar.setBorderPainted(false);
 		bAtacar.addActionListener(this);
 		add(bAtacar);
 
 		//TEXTFIELD CANTIDAD MISILES
 		infoMisiles = new JFormattedTextField();
+		infoMisiles.setForeground(Color.WHITE);
+		infoMisiles.setBackground(Color.BLACK);
+		infoMisiles.setBounds(24, 77, 339, 45);
 		infoMisiles.setFont(new Font("Calibri", Font.BOLD | Font.ITALIC, 14));
 		infoMisiles.setEditable(false);
 		infoMisiles.setText("Cantidad de misiles: " + paisesCreados.get(turno).getMisiles());
-		infoMisiles.setBounds(263, 52, 206, 56);
 		add(infoMisiles);
 
 		//BOTON DEFENDER
-		bDefender = new JButton("Defender");
-		bDefender.setBounds(326, 273, 100, 38);
+		bDefender = new JButton("");
+		bDefender.setIcon(new ImageIcon(PanelPartida.class.getResource("/coldwar/assets/textos/BOTON_DEFENDER.png")));
+		bDefender.setBounds(309, 362, 54, 38);
+		bDefender.setOpaque(false);
+		bDefender.setContentAreaFilled(false);
+		bDefender.setFocusable(false);
+		bDefender.setBorderPainted(false);
 		bDefender.addActionListener(this);
 		add(bDefender);	
 
 		//TEXTFIELD TURNO
 		infoTurno = new JFormattedTextField();
+		infoTurno.setForeground(Color.WHITE);
+		infoTurno.setBackground(Color.BLACK);
+		infoTurno.setBounds(24, 28, 339, 45);
 		infoTurno.setFont(new Font("Calibri", Font.BOLD | Font.ITALIC, 14));
 		infoTurno.setEditable(false);
 		infoTurno.setText("Turno de : " + (jugActual = paisesCreados.get(turno).getNombre()));
-		infoTurno.setBounds(29, 53, 198, 56);
 		infoTurno.addActionListener(this);
 		add(infoTurno);
 
 		//COMBOBOX DESPLEGABLE
 		desplegable= new JComboBox<String>();
+		desplegable.setBounds(24, 318, 218, 38);
 		desplegable.setMaximumRowCount(10);
 		desplegable.setForeground(Color.WHITE);
 		desplegable.setBackground(Color.BLACK);
 		desplegable.setBorder(new LineBorder(Color.BLACK));
 		desplegable.setFocusable(false);
-		desplegable.setBounds(51, 273, 159, 38);
 		add(desplegable);
 
-		sTurno = new JButton("Pasar turno");
-		sTurno.setBounds(981, 682, 89, 23);
+		sTurno = new JButton("");
+		sTurno.setIcon(new ImageIcon(PanelPartida.class.getResource("/coldwar/assets/textos/ADELANTE_boton.png")));
+		sTurno.setBounds(976, 653, 94, 53);
 		sTurno.addActionListener(this);
+		sTurno.setOpaque(false);
+		sTurno.setContentAreaFilled(false);
+		sTurno.setFocusable(false);
+		sTurno.setBorderPainted(false);
 		add(sTurno);
+		
+		JLabel fondo = new JLabel("");
+		fondo.setIcon(new ImageIcon(PanelPartida.class.getResource("/coldwar/assets/fondos/FondoPartidaV3.png")));
+		fondo.setBounds(0, 0, 1080, 768);
+		add(fondo);
 
 		//PROGRAMA
 		for(int i = 0; i < paisesCreados.size(); i++) {
 			if (!paisesCreados.get(i).getNombre().equals(jugActual)) {
-
 				if(paisesCreados.get(i).getVida()>0) {
-
 					desplegable.addItem(paisesCreados.get(i).getNombre());
 				}
 			}
