@@ -1,7 +1,5 @@
-package coldwar2;
+package coldwar;
 
-import javax.swing.JPanel;
-import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -31,17 +29,28 @@ public class PanelResumen extends JPanel implements ActionListener{
 		add(panel);
 
 		texto= new JTextPane();
-		texto.setBounds(173, 197, 632, 258);
+		texto.setBackground(Color.BLACK);
+		texto.setForeground(Color.WHITE);
+		texto.setBounds(224, 113, 632, 529);
 		panel.add(texto);
 
 		bRonda = new JButton("Siguiente ronda\r\n");
 		bRonda.setBounds(910, 708, 117, 23);
+		bRonda = new JButton("");
+		bRonda.setIcon(new ImageIcon(PanelPartida.class.getResource("/coldwar/assets/textos/ADELANTE_boton.png")));
+		bRonda.setBounds(961, 643, 94, 53);
 		bRonda.addActionListener(this);
+		bRonda.setOpaque(false);
+		bRonda.setContentAreaFilled(false);
+		bRonda.setFocusable(false);
+		bRonda.setBorderPainted(false);
 		panel.add(bRonda);
 
 		titulo = new JTextPane();
+		titulo.setForeground(Color.RED);
+		titulo.setBackground(Color.BLACK);
 		titulo.setText("Resumen de esta ronda");
-		titulo.setBounds(206, 33, 533, 92);
+		titulo.setBounds(479, 33, 121, 34);
 		panel.add(titulo);
 
 
