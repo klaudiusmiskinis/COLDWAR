@@ -1,19 +1,22 @@
 package coldwar;
+import java.util.ArrayList;
 import java.util.Random;
 
 
 public class Paises {
 	//ATRIBUTOS
 
-	static Random ran=new Random();
+	static Random ran = new Random();
 	private String nombre;
 	private int vida;
 	private int misiles;
 	private String tipo;
 	private int sumaAtaque;
 	private int sumaDefensa;
-	int contadorJugador=0;
-	boolean paisMuerto=false;
+	int contadorJugador = 0;
+	boolean paisMuerto = false;
+
+
 	//CONSTRUCTOR VACIO
 	public Paises(){
 		this.setVida(0);
@@ -33,7 +36,7 @@ public class Paises {
 		this.setSumaAtaque(sumaAtaque);
 		this.setSumaDefensa(sumaDefensa);
 	}
-	
+
 	//METODOS
 	//ASIGNAMOS LA VIDA I LOS MISILES SEGUN EL TIPO DE PAIS
 	public void asignacionRecursos(String nombre,String tipo){
@@ -61,7 +64,7 @@ public class Paises {
 			this.setVida(130);
 			this.setMisiles(60);
 		}
-		if(tipo.equals("Espa�a")) {
+		if(tipo.equals("Espanya")) {
 			this.setVida(180);
 			this.setMisiles(50);
 		}
@@ -79,37 +82,41 @@ public class Paises {
 		}
 	}
 
-
-
-
-	public  void variablesDefensa(Paises paisAtacado,int misilesAtaque,int misilesDefensa) {
-		int cuentaMisiles=0;
+	public void variablesDefensa(Paises paisAtacado, int misilesAtaque) {
+		int cuentaMisiles = 0;
 		if(paisAtacado.getTipo().equals("Vietnam")) {
-			for(int i =0;i<misilesAtaque;i++){
-				int retorna=ran.nextInt(2);
-				if(retorna==1) {
+			for(int i = 0; i < misilesAtaque; i++){
+				int retorna = ran.nextInt(2);
+				if(retorna == 1) {
 					cuentaMisiles++;
 				}
 			}
 			paisAtacado.setSumaAtaque(cuentaMisiles);
 		}
 		if(paisAtacado.getTipo().equals("Lituania")) {
-			for(int i =0;i<misilesAtaque;i++){
-				int retorna=ran.nextInt(3);
-				if(retorna==1) {
+			for(int i = 0; i < misilesAtaque; i++){
+				int retorna = ran.nextInt(3);
+				if(retorna == 1) {
 					cuentaMisiles++;
 				}
 			}
-			paisAtacado.setSumaAtaque(misilesAtaque-cuentaMisiles);
+			paisAtacado.setSumaAtaque(misilesAtaque - cuentaMisiles);
 			this.setSumaAtaque(cuentaMisiles);
 		}
 	}
-	//					OBTENEMOS LA SUMA DEL ATAQUE SEGUN LAS VARIABLES DE CADA TIPO DE JUGADOR
-	public void variables( Paises paisAtacado,int misilesAtaque,int misilesDefensa) {
 
+	//DEFENSA
+	public void sumaDefensa(int a) {
+		this.setSumaDefensa(a);
+	}
+
+	//OBTENEMOS LA SUMA DEL ATAQUE SEGUN LAS VARIABLES DE CADA TIPO DE JUGADOR
+	public void variables(Paises paisAtacado,int misilesAtaque) {
+		
+		
+		
 		if(paisAtacado.getTipo().equals("Vietnam")||paisAtacado.getTipo().equals("Lituania")) {
-			variablesDefensa(paisAtacado,misilesAtaque,misilesDefensa);
-
+			variablesDefensa(paisAtacado,misilesAtaque);
 		}
 
 		else if(this.getTipo().equals("UK")) {
@@ -117,8 +124,8 @@ public class Paises {
 		}
 
 		else if(this.getTipo().equals("Kazajistan")) {
-			
-			
+
+
 			if(paisAtacado.getTipo().equals("Lituania")) {
 				misilesAtaque=misilesAtaque*2;
 			}
@@ -152,8 +159,8 @@ public class Paises {
 			paisAtacado.setSumaAtaque(misilesAtaque+paisAtacado.getSumaAtaque());
 		}
 
-		else if(this.getTipo().equals("Espa�a")) {
-			boolean alertaEsp=false;
+		else if(this.getTipo().equals("Espanya")) {
+			boolean alertaEsp = false;
 			int suerte=ran.nextInt(10);
 			if(suerte==1) {
 				this.vida=this.vida+40;
@@ -169,7 +176,7 @@ public class Paises {
 			if(paisAtacado.getTipo().equals("Vietnam")) {
 				misilesAtaque=misilesAtaque/2;
 			}
-			
+
 			paisAtacado.setSumaAtaque(misilesAtaque+paisAtacado.getSumaAtaque());
 		}
 
@@ -185,27 +192,27 @@ public class Paises {
 		else if(this.getTipo().equals("Lituania")) {
 			paisAtacado.setSumaAtaque(misilesAtaque+paisAtacado.getSumaAtaque());
 		}
-	}
-	//PRUEBA NO VALIDA
-	public void rondaPelea(Paises paisOfensiva,Paises paisAtacado,int misilesAtaque) {
-		if(paisOfensiva.getTipo().equals("UK")) {
-			;
+		if(this.getVida()<0) {
+			this.setVida(0);
 		}
 	}
+
+
 	//REALIZAMOS LA RESTA DE LA VIDA DEL JUGADOR SEGUN EL ATAQUE RECIBIDO I LA DEFENSA APLICADA
-	public void actualizarDatos(Paises pais) {
-		if((pais.getSumaAtaque()-pais.getSumaDefensa())<=0) {
-			System.out.println("EL PAIS"+ pais.getNombre()+"HA MUERTO");
-			
+	public void actualizarDatos() {
+		if(this.getVida() - (this.getSumaAtaque() + this.getSumaDefensa()) == 0) {
+			System.out.println("EL PAIS " + this.getNombre() + " HA MUERTO");
+			this.setVida(this.getVida() - (this.getSumaAtaque() + this.getSumaDefensa()));
 		}
-		
-		else if(pais.getVida()<(pais.getVida()-(pais.getSumaAtaque()-pais.getSumaDefensa()))){
-		if((pais.getSumaAtaque()-pais.getSumaDefensa())>0) {
-			pais.setVida(pais.getVida()-(pais.getSumaAtaque()-pais.getSumaDefensa()));
-		}
+
+		else if(this.getSumaAtaque() > this.getSumaDefensa()) {
+			if((this.getSumaAtaque() - this.getSumaDefensa()) > 0) {
+				this.setVida(this.getVida() - (this.getSumaAtaque() + this.getSumaDefensa()));
+				 
+			}
 		}
 		else {
-			System.out.println("LA VIDA DEL PAIS MENOS LO QUE LE HAN ATACADO MAS LA DEFENSA ES MAYOR A LA VIDA QUE TENIA,O ESTA MUERTO.");
+			System.out.println("VIDA - (ATAQUE + DEFENSA) es MAYOR a VIDA");
 		}
 		//		pais.setVida((pais.getVida()-sumaAtaque));
 	}
@@ -244,6 +251,6 @@ public class Paises {
 		return sumaDefensa;
 	}
 	public void setSumaDefensa(int sumaDefensa) {
-		this.sumaAtaque = sumaDefensa;
+		this.sumaDefensa = sumaDefensa;
 	}
 }

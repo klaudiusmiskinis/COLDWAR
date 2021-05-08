@@ -43,13 +43,22 @@ public class PanelPartida extends JPanel implements ActionListener {
 	JFormattedTextField insertMisiles, infoTurno, infoMisiles;
 	int turno = 0;
 	int contador = 0;
+	Paises paisAtacado;
 	//CONSTRUCTOR QUE RECIBE ARRAYLIST
 	public PanelPartida(ArrayList<Paises> paisesCreados,int a) {
+
+
 
 		//VARIABLES
 		this.paisesJugar = paisesCreados;
 		this.turno = a;
 		String jugActual = "";
+
+		do {
+			if(paisesCreados.get(turno).getVida()==0) {
+				turno++;
+			}
+		}while(paisesCreados.get(turno).getVida()==0);
 
 		//ELEMENTOS DE LA VENTANA
 		setBounds(0,0,1080,768);
@@ -110,7 +119,12 @@ public class PanelPartida extends JPanel implements ActionListener {
 		//PROGRAMA
 		for(int i = 0; i < paisesCreados.size(); i++) {
 			if (!paisesCreados.get(i).getNombre().equals(jugActual)) {
-				desplegable.addItem(paisesCreados.get(i).getNombre());
+
+				if(paisesCreados.get(i).getVida()>0) {
+
+					desplegable.addItem(paisesCreados.get(i).getNombre());
+				}
+
 			}
 		}
 	}
@@ -131,7 +145,7 @@ public class PanelPartida extends JPanel implements ActionListener {
 
 
 		if (e.getSource() == bAtacar) {
-			System.out.println("Atacando con " + insertMisiles.getText());
+			System.out.println("Atacando con " + insertMisiles.getText() + " a " + desplegable.getSelectedItem().toString());
 
 			//VALIDACION DE TEXTFIELD
 			//CONTIENE CANTIDAD DE MISILES NO VALIDA
@@ -149,20 +163,19 @@ public class PanelPartida extends JPanel implements ActionListener {
 				JOptionPane.showMessageDialog(new JFrame(), "El nombre no puede contener simbolos y espacios", "ERROR",JOptionPane.ERROR_MESSAGE);
 			}
 
+			//FUNCIONALIDAD ATACAR
 			String elementoDesplegable = desplegable.getSelectedItem().toString();
-			Paises paisAtacado = new Paises();
+			paisAtacado = new Paises();
 			for(int i = 0; i < paisesJugar.size();i++) {
 				if (elementoDesplegable == paisesJugar.get(i).getNombre()) {
 					paisAtacado = paisesJugar.get(i);
-					System.out.println(paisAtacado.getNombre());
 				}
 			}
-			
-			paisesJugar.get(turno).variables(paisAtacado,misiles,0);
+			paisesJugar.get(turno).variables(paisAtacado,misiles);
 
 			System.out.println(paisAtacado.getSumaAtaque());
 			if (turno == paisesJugar.size()-1) {
-				paisesJugar.get(turno).actualizarDatos(paisAtacado);
+				paisesJugar.get(turno).actualizarDatos();
 			}
 		}
 
@@ -181,11 +194,29 @@ public class PanelPartida extends JPanel implements ActionListener {
 				JOptionPane.showMessageDialog(new JFrame(), "El nombre no puede contener simbolos y espacios", "ERROR",JOptionPane.ERROR_MESSAGE);
 				System.out.println("Contiene simbolos");
 			}
+
+			//FUNCIONALIDAD DEFENDER
+			String elementoDesplegable = desplegable.getSelectedItem().toString();
+			Paises paisAtacado = new Paises();
+			for(int i = 0; i < paisesJugar.size();i++) {
+
+				if (elementoDesplegable == paisesJugar.get(i).getNombre()) {
+					paisAtacado = paisesJugar.get(i);
+				}
+			}
+
+			misiles = Integer.parseInt(insertMisiles.getText());
+			paisesJugar.get(turno).sumaDefensa(misiles);
+			System.out.println(paisesJugar.get(turno).getSumaDefensa());
+
 		}
 
 		if (e.getSource() == sTurno) {
 			if (turno == paisesJugar.size()-1) {
 				ronda++;
+				for (int i = 0; i < paisesJugar.size()-1; i++) {
+					paisesJugar.get(i).actualizarDatos();
+				}
 				JFrame marco=(JFrame) SwingUtilities.getWindowAncestor(this);
 				marco.remove(this);
 				marco.getContentPane().add(new PanelResumen(paisesJugar));
@@ -196,7 +227,6 @@ public class PanelPartida extends JPanel implements ActionListener {
 				marco.remove(this);
 				marco.getContentPane().add(new PanelPartida(paisesJugar,turno));
 				marco.setVisible(true);
-				System.out.println("Defendiendo con " + insertMisiles.getText());
 			}
 		}
 	}

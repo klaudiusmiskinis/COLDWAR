@@ -34,7 +34,7 @@ public class PanelCarga extends JWindow  {
         JLabel lblColdwar = new JLabel("");
         lblColdwar.setIcon(new ImageIcon(PanelCarga.class.getResource("/coldwar/assets/textos/Coldwar_texto.png")));
         lblColdwar.setFont(new Font("Verdana", Font.BOLD, 14));
-        lblColdwar.setBounds(251, 56, 589, 330);
+        lblColdwar.setBounds(251, 58, 589, 330);
         panel.add(lblColdwar);
         progressBar.setForeground(new Color(139, 0, 0));
         progressBar.setBounds(88, 570, 887, 39);
@@ -45,7 +45,7 @@ public class PanelCarga extends JWindow  {
         JLabel loading = new JLabel("");
         ImageIcon icon = new ImageIcon(this.getClass().getResource("/loading.gif"));
         loading.setIcon(icon);
-        loading.setBounds(214, 307, 733, 235);
+        loading.setBounds(451, 348, 156, 144);
         panel.add(loading);
         
         JLabel lblNewLabel = new JLabel("");
@@ -64,11 +64,12 @@ public class PanelCarga extends JWindow  {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 count++;
 
-                progressBar.setValue(count);
+                progressBar.setValue(1);
+                progressBar.setMaximum(1);
 
                 System.out.println(count);
 
-                if (count == 60) {
+                if (count == 1) {
 
                     createFrame();
 

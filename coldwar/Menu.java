@@ -16,6 +16,7 @@ public class Menu extends JFrame {
 		menuprin = new MenuPrincipal();
 		add(menuprin);
 		setVisible(true);
+		 setLocationRelativeTo(null);
 	}
 
 
