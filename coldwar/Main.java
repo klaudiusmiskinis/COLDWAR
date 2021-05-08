@@ -1,4 +1,4 @@
-package coldwar;
+package coldwar2;
 
 import java.io.IOException;
 

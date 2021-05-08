@@ -1,4 +1,4 @@
-package coldwar;
+package coldwar2;
 
 import javax.swing.JPanel;
 import javax.swing.JButton;
@@ -52,14 +52,14 @@ public class PanelResumen extends JPanel implements ActionListener{
 			if(paisesCreados.get(i).getVida() == 0) {
 				String resumen = "El pais : " + paisesCreados.get(i).getNombre() + " ha muerto."+ "\n";
 				System.out.println(resumen);
-				resumen = resumen + texto.getText();
-				texto.setText("\n" + resumen);
+				resumen = texto.getText() + resumen;
+				texto.setText(resumen + "\n");
 			}
 			else {
 				String resumen = "Nombre : " + paisesCreados.get(i).getNombre() + "\nVida : " + paisesCreados.get(i).getVida()+ "\n";
 				System.out.println(resumen);
-				resumen = resumen + texto.getText();
-				texto.setText("\n" + resumen);
+				resumen = texto.getText() + resumen;
+				texto.setText(resumen + "\n");
 			}
 		}
 	}

@@ -1,4 +1,4 @@
-package coldwar;
+package coldwar2;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -146,7 +146,7 @@ public class PanelJuego extends JPanel implements ActionListener{
 					pais.setNombre(name); //DAMOS NOMBRE AL OBJETO
 					pais.setTipo(desplegable.getSelectedItem().toString()); //DAMOS TIPO AL OBJETO
 					paisesCreados.add(pais); //AÑADIMOS EL OBJETO AL ARRAYLIST
-					pais.asignacionRecursos(pais.getNombre(),pais.getTipo()); //INICIALIZAMOS SU VIDA Y MISILES
+					pais.asignacionRecursos(pais.getTipo()); //INICIALIZAMOS SU VIDA Y MISILES
 
 					//CUADRO DE EQUIPO AÑADIDO
 					equipos.setText("Jugador " + num + " " + pais.getNombre() + " " + pais.getTipo()+ "\n" );

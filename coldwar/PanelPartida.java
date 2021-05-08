@@ -1,4 +1,4 @@
-package coldwar;
+package coldwar2;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -47,13 +47,11 @@ public class PanelPartida extends JPanel implements ActionListener {
 	//CONSTRUCTOR QUE RECIBE ARRAYLIST
 	public PanelPartida(ArrayList<Paises> paisesCreados,int a) {
 
-
-
 		//VARIABLES
 		this.paisesJugar = paisesCreados;
 		this.turno = a;
 		String jugActual = "";
-
+		//PARA EVITAR QUE SALGA UN PAIS MUERTO
 		do {
 			if(paisesCreados.get(turno).getVida()==0) {
 				turno++;
@@ -124,7 +122,6 @@ public class PanelPartida extends JPanel implements ActionListener {
 
 					desplegable.addItem(paisesCreados.get(i).getNombre());
 				}
-
 			}
 		}
 	}
@@ -171,63 +168,73 @@ public class PanelPartida extends JPanel implements ActionListener {
 					paisAtacado = paisesJugar.get(i);
 				}
 			}
-			paisesJugar.get(turno).variables(paisAtacado,misiles);
-
+			if ( paisesJugar.get(turno).getMisiles() > 0) {
+				paisesJugar.get(turno).variables(paisAtacado,misiles);
+			paisesJugar.get(turno).setMisiles((paisesJugar.get(turno).getMisiles() - misiles));
 			System.out.println(paisAtacado.getSumaAtaque());
-			if (turno == paisesJugar.size()-1) {
-				paisesJugar.get(turno).actualizarDatos();
-			}
-		}
-
-		if (e.getSource() == bDefender) {
-			System.out.println("Defendiendo con " + insertMisiles.getText());
-			// CONTIENE CANTIDAD DE MISILES NO VALIDA
-			if (misiles > paisesJugar.get(turno).getMisiles() || misiles < 0) {
-				JOptionPane.showMessageDialog(new JFrame(), "Numero de misiles no valido", "ERROR",JOptionPane.ERROR_MESSAGE);
-			} 
-			// CONTIENE LETRAS
-			else if (insertMisiles.getText().contains("[a-zA-Z]+")) {
-				JOptionPane.showMessageDialog(new JFrame(), "Has introducido letras", "ERROR",JOptionPane.ERROR_MESSAGE);
-			}
-			//CONTIENE SIMBOLOS
-			else if(matcher.find() == true) {
-				JOptionPane.showMessageDialog(new JFrame(), "El nombre no puede contener simbolos y espacios", "ERROR",JOptionPane.ERROR_MESSAGE);
-				System.out.println("Contiene simbolos");
-			}
-
-			//FUNCIONALIDAD DEFENDER
-			String elementoDesplegable = desplegable.getSelectedItem().toString();
-			Paises paisAtacado = new Paises();
-			for(int i = 0; i < paisesJugar.size();i++) {
-
-				if (elementoDesplegable == paisesJugar.get(i).getNombre()) {
-					paisAtacado = paisesJugar.get(i);
-				}
-			}
-
-			misiles = Integer.parseInt(insertMisiles.getText());
-			paisesJugar.get(turno).sumaDefensa(misiles);
-			System.out.println(paisesJugar.get(turno).getSumaDefensa());
-
-		}
-
-		if (e.getSource() == sTurno) {
-			if (turno == paisesJugar.size()-1) {
-				ronda++;
-				for (int i = 0; i < paisesJugar.size()-1; i++) {
-					paisesJugar.get(i).actualizarDatos();
-				}
-				JFrame marco=(JFrame) SwingUtilities.getWindowAncestor(this);
-				marco.remove(this);
-				marco.getContentPane().add(new PanelResumen(paisesJugar));
-				marco.setVisible(true);
-			} else {
-				turno++;
-				JFrame marco=(JFrame) SwingUtilities.getWindowAncestor(this);
-				marco.remove(this);
-				marco.getContentPane().add(new PanelPartida(paisesJugar,turno));
-				marco.setVisible(true);
-			}
+			infoMisiles.setText("Cantidad de misiles: " + paisesJugar.get(turno).getMisiles());
+		} else {
+			System.out.println("NO AMMO");
 		}
 	}
+
+	if (e.getSource() == bDefender) {
+		System.out.println("Defendiendo con " + insertMisiles.getText());
+		// CONTIENE CANTIDAD DE MISILES NO VALIDA
+		if (misiles > paisesJugar.get(turno).getMisiles() || misiles < 0) {
+			JOptionPane.showMessageDialog(new JFrame(), "Numero de misiles no valido", "ERROR",JOptionPane.ERROR_MESSAGE);
+		} 
+		// CONTIENE LETRAS
+		else if (insertMisiles.getText().contains("[a-zA-Z]+")) {
+			JOptionPane.showMessageDialog(new JFrame(), "Has introducido letras", "ERROR",JOptionPane.ERROR_MESSAGE);
+		}
+		//CONTIENE SIMBOLOS
+		else if(matcher.find() == true) {
+			JOptionPane.showMessageDialog(new JFrame(), "El nombre no puede contener simbolos y espacios", "ERROR",JOptionPane.ERROR_MESSAGE);
+			System.out.println("Contiene simbolos");
+		}
+
+		//FUNCIONALIDAD DEFENDER
+		String elementoDesplegable = desplegable.getSelectedItem().toString();
+		for(int i = 0; i < paisesJugar.size();i++) {
+
+			if (elementoDesplegable == paisesJugar.get(i).getNombre()) {
+				paisAtacado = paisesJugar.get(i);
+			}
+		}
+		if ( paisesJugar.get(turno).getMisiles() > 0) {
+		misiles = Integer.parseInt(insertMisiles.getText());
+		paisesJugar.get(turno).setSumaDefensa(misiles/2);
+		paisesJugar.get(turno).setMisiles((paisesJugar.get(turno).getMisiles() - misiles));
+		System.out.println(paisesJugar.get(turno).getSumaDefensa());
+		infoMisiles.setText("Cantidad de misiles: " + paisesJugar.get(turno).getMisiles());
+		} else {
+			System.out.println("NO AMMO");
+		}
+	}
+
+	if (e.getSource() == sTurno) {
+		if (turno == paisesJugar.size()-1) {
+			ronda++;
+
+			for (int i = 0; i < paisesJugar.size(); i++) {
+				System.out.println("TIRO EN BOCA " + paisesJugar.get(i).getSumaAtaque() + " AAAAAAAAAAAAAAAAAAAA " + paisesJugar.get(i).getNombre() + paisesJugar.get(i).getMisiles());
+				paisesJugar.get(i).actualizarDatos();
+				paisesJugar.get(i).recargar();
+				paisesJugar.get(i).setSumaAtaque(0);
+				paisesJugar.get(i).setSumaDefensa(0);
+			}
+			JFrame marco=(JFrame) SwingUtilities.getWindowAncestor(this);
+			marco.remove(this);
+			marco.getContentPane().add(new PanelResumen(paisesJugar));
+			marco.setVisible(true);
+		} else {
+			turno++;
+			JFrame marco=(JFrame) SwingUtilities.getWindowAncestor(this);
+			marco.remove(this);
+			marco.getContentPane().add(new PanelPartida(paisesJugar,turno));
+			marco.setVisible(true);
+		}
+	}
+}
 }

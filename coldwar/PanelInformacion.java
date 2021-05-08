@@ -1,4 +1,4 @@
-package coldwar;
+package coldwar2;
 
 import javax.swing.JPanel;
 import javax.swing.JButton;

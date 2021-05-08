@@ -1,4 +1,4 @@
-package coldwar;
+package coldwar2;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -15,6 +15,7 @@ public class Paises {
 	private int sumaDefensa;
 	int contadorJugador = 0;
 	boolean paisMuerto = false;
+	int misilesa = 10;
 
 
 	//CONSTRUCTOR VACIO
@@ -39,10 +40,10 @@ public class Paises {
 
 	//METODOS
 	//ASIGNAMOS LA VIDA I LOS MISILES SEGUN EL TIPO DE PAIS
-	public void asignacionRecursos(String nombre,String tipo){
+	public void asignacionRecursos(String tipo){
 		if(tipo.equals("UK")) {
-			this.setMisiles(50);
 			this.setVida(200);
+			this.setMisiles(50);
 		}
 		if (tipo.equals("Kazajistan")) {
 			this.setVida(200);
@@ -82,6 +83,40 @@ public class Paises {
 		}
 	}
 
+	// Reiniciamos los misiles de cada pais al final de ronda
+	public void recargar(){
+		if(tipo.equals("UK")) {
+			this.setMisiles(50);
+		}
+		if (tipo.equals("Kazajistan")) {
+			this.setMisiles(40);
+		}
+		if(tipo.equals("Suecia")) {
+			this.setMisiles(35);
+		}
+		if(tipo.equals("Francia")) {
+			this.setMisiles(60);
+		}
+		if(tipo.equals("Alemania")){
+			misilesa = misilesa +2;
+			this.setMisiles(misilesa);
+		}
+		if(tipo.equals("Vietnam")) {
+			this.setMisiles(60);
+		}
+		if(tipo.equals("Espanya")) {
+			this.setMisiles(50);
+		}
+		if(tipo.equals("USA")) {
+			this.setMisiles(70);
+		}
+		if(tipo.equals("Rusia")) {
+			this.setMisiles(45);
+		}
+		if(tipo.equals("Lituania")) {
+			this.setMisiles(50);
+		}
+	}
 	public void variablesDefensa(Paises paisAtacado, int misilesAtaque) {
 		int cuentaMisiles = 0;
 		if(paisAtacado.getTipo().equals("Vietnam")) {
@@ -105,16 +140,9 @@ public class Paises {
 		}
 	}
 
-	//DEFENSA
-	public void sumaDefensa(int a) {
-		this.setSumaDefensa(a);
-	}
-
 	//OBTENEMOS LA SUMA DEL ATAQUE SEGUN LAS VARIABLES DE CADA TIPO DE JUGADOR
 	public void variables(Paises paisAtacado,int misilesAtaque) {
-		
-		
-		
+
 		if(paisAtacado.getTipo().equals("Vietnam")||paisAtacado.getTipo().equals("Lituania")) {
 			variablesDefensa(paisAtacado,misilesAtaque);
 		}
@@ -141,8 +169,8 @@ public class Paises {
 
 		else if(this.getTipo().equals("Francia")) {
 			if(this.vida<=50) {
-				int franciaCaca=ran.nextInt(2);
-				if(franciaCaca==1) {
+				int francia=ran.nextInt(2);
+				if(francia==1) {
 					this.vida=0;
 				}
 			}
@@ -200,15 +228,15 @@ public class Paises {
 
 	//REALIZAMOS LA RESTA DE LA VIDA DEL JUGADOR SEGUN EL ATAQUE RECIBIDO I LA DEFENSA APLICADA
 	public void actualizarDatos() {
-		if(this.getVida() - (this.getSumaAtaque() + this.getSumaDefensa()) == 0) {
+		if(this.getVida() - (this.getSumaAtaque() - this.getSumaDefensa()) == 0) {
 			System.out.println("EL PAIS " + this.getNombre() + " HA MUERTO");
-			this.setVida(this.getVida() - (this.getSumaAtaque() + this.getSumaDefensa()));
+			this.setVida(this.getVida() - (this.getSumaAtaque() - this.getSumaDefensa()));
 		}
 
 		else if(this.getSumaAtaque() > this.getSumaDefensa()) {
 			if((this.getSumaAtaque() - this.getSumaDefensa()) > 0) {
-				this.setVida(this.getVida() - (this.getSumaAtaque() + this.getSumaDefensa()));
-				 
+				this.setVida(this.getVida() - (this.getSumaAtaque() - this.getSumaDefensa()));
+
 			}
 		}
 		else {
