@@ -192,12 +192,13 @@ public class PanelPartida extends JPanel implements ActionListener {
 					paisAtacado = paisesJugar.get(i);
 				}
 			}
-			if ( paisesJugar.get(turno).getMisiles() > 0) {
+			if ( paisesJugar.get(turno).getMisiles() > 0 && (paisesJugar.get(turno).getMisiles()-misiles)>=0) {
 				paisesJugar.get(turno).variables(paisAtacado,misiles);
 			paisesJugar.get(turno).setMisiles((paisesJugar.get(turno).getMisiles() - misiles));
 			System.out.println(paisAtacado.getSumaAtaque());
 			infoMisiles.setText("Cantidad de misiles: " + paisesJugar.get(turno).getMisiles());
 		} else {
+			
 			System.out.println("NO AMMO");
 		}
 	}
@@ -226,9 +227,12 @@ public class PanelPartida extends JPanel implements ActionListener {
 				paisAtacado = paisesJugar.get(i);
 			}
 		}
-		if ( paisesJugar.get(turno).getMisiles() > 0) {
+		if ( paisesJugar.get(turno).getMisiles() > 0 && (paisesJugar.get(turno).getMisiles()-misiles)>=0){
 		misiles = Integer.parseInt(insertMisiles.getText());
 		paisesJugar.get(turno).setSumaDefensa(misiles/2);
+		if(paisesJugar.get(turno).getSumaDefensa()<0) {
+			paisesJugar.get(turno).setSumaDefensa(0);
+		}
 		paisesJugar.get(turno).setMisiles((paisesJugar.get(turno).getMisiles() - misiles));
 		System.out.println(paisesJugar.get(turno).getSumaDefensa());
 		infoMisiles.setText("Cantidad de misiles: " + paisesJugar.get(turno).getMisiles());

@@ -16,6 +16,7 @@ public class PanelResumen extends JPanel implements ActionListener{
 	JTextPane texto, titulo;
 	JButton bRonda;
 	int turno = 0;
+	int contadorVidas=0;
 	public PanelResumen(ArrayList <Paises> paisesCreados) {
 
 		this.paisesCreados = paisesCreados;
@@ -71,15 +72,38 @@ public class PanelResumen extends JPanel implements ActionListener{
 				texto.setText(resumen + "\n");
 			}
 		}
+		for(int i=0;i<paisesCreados.size();i++) {
+			if(paisesCreados.get(i).getVida()>0) {
+				contadorVidas++;
+			}
+		}
 	}
 	public void actionPerformed(ActionEvent e) {
+
+
+
 		if (e.getSource() == bRonda) {
-			System.out.println("A");
-			JFrame marco=(JFrame) SwingUtilities.getWindowAncestor(this);
-			marco.remove(this);
-			marco.getContentPane().add(new PanelPartida(paisesCreados,turno));
-			marco.setVisible(true);
+			if(contadorVidas>1) {
+				System.out.println("A");
+				JFrame marco=(JFrame) SwingUtilities.getWindowAncestor(this);
+				marco.remove(this);
+				marco.getContentPane().add(new PanelPartida(paisesCreados,turno));
+				marco.setVisible(true);
+				contadorVidas=0;
+			}
+			else if(contadorVidas==1) {
+				System.out.println("B");
+				JFrame marco=(JFrame) SwingUtilities.getWindowAncestor(this);
+				marco.remove(this);
+				marco.getContentPane().add(new PanelGanador(paisesCreados));
+				marco.setVisible(true);
+			}
+
+
+
 		}
+
+
 
 
 
