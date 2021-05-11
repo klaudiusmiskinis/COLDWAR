@@ -49,7 +49,7 @@ public class Paises {
 			this.setVida(200);
 			this.setMisiles(40);
 		}
-		if(tipo.equals("Suecia")) {
+		if(tipo.equals("Suiza")) {
 			this.setVida(300);
 			this.setMisiles(35);
 		}
@@ -91,7 +91,7 @@ public class Paises {
 		if (tipo.equals("Kazajistan")) {
 			this.setMisiles(40);
 		}
-		if(tipo.equals("Suecia")) {
+		if(tipo.equals("Suiza")) {
 			this.setMisiles(35);
 		}
 		if(tipo.equals("Francia")) {
@@ -106,6 +106,12 @@ public class Paises {
 		}
 		if(tipo.equals("Espanya")) {
 			this.setMisiles(50);
+			boolean alertaEsp = false;
+			int suerte=ran.nextInt(10);
+			if(suerte==1) {
+				this.vida=this.vida+40;
+				alertaEsp=true;
+			}
 		}
 		if(tipo.equals("USA")) {
 			this.setMisiles(70);
@@ -139,6 +145,16 @@ public class Paises {
 			this.setSumaAtaque(cuentaMisiles);
 		}
 	}
+	public String franciaRendir() {
+		if(this.vida<=50) {
+			int francia=ran.nextInt(2);
+			if(francia==1) {
+				this.vida=0;
+				return "Francia se ha rendido.";
+			}
+		}
+		return "Francia no se ha rendido.";
+	}
 
 	//OBTENEMOS LA SUMA DEL ATAQUE SEGUN LAS VARIABLES DE CADA TIPO DE JUGADOR
 	public void variables(Paises paisAtacado,int misilesAtaque) {
@@ -148,6 +164,7 @@ public class Paises {
 		}
 
 		else if(this.getTipo().equals("UK")) {
+
 			paisAtacado.setSumaAtaque(misilesAtaque+paisAtacado.getSumaAtaque());
 		}
 
@@ -168,17 +185,12 @@ public class Paises {
 		}
 
 		else if(this.getTipo().equals("Francia")) {
-			if(this.vida<=50) {
-				int francia=ran.nextInt(2);
-				if(francia==1) {
-					this.vida=0;
-				}
-			}
+
 			paisAtacado.setSumaAtaque(misilesAtaque+paisAtacado.getSumaAtaque());
 		}
 
 		else if(this.getTipo().equals("Alemania")) {
-			this.misiles=this.misiles+2;
+			//			this.misiles=this.misiles+2;
 			paisAtacado.setSumaAtaque(misilesAtaque+paisAtacado.getSumaAtaque());
 		}
 
@@ -188,12 +200,7 @@ public class Paises {
 		}
 
 		else if(this.getTipo().equals("Espanya")) {
-			boolean alertaEsp = false;
-			int suerte=ran.nextInt(10);
-			if(suerte==1) {
-				this.vida=this.vida+40;
-				alertaEsp=true;
-			}
+
 			paisAtacado.setSumaAtaque(misilesAtaque+paisAtacado.getSumaAtaque());
 		}
 

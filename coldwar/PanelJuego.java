@@ -39,7 +39,7 @@ public class PanelJuego extends JPanel implements ActionListener{
 		jugar.setBorderPainted(false);
 		jugar.setFocusable(false);
 		jugar.addActionListener(this);
-
+			
 		//BOTON ATRAS
 		atras = new JButton();
 		atras.setForeground(Color.WHITE);
@@ -64,7 +64,7 @@ public class PanelJuego extends JPanel implements ActionListener{
 		desplegable.addItem("Lituania");
 		desplegable.addItem("Rusia");
 		desplegable.addItem("USA");
-		desplegable.addItem("Espa�a");
+		desplegable.addItem("Espanya");
 		desplegable.addItem("Vietnam");
 		desplegable.addItem("Alemania");
 		desplegable.addItem("Francia");
@@ -150,7 +150,6 @@ public class PanelJuego extends JPanel implements ActionListener{
 					pais.setTipo(desplegable.getSelectedItem().toString()); //DAMOS TIPO AL OBJETO
 					paisesCreados.add(pais); //AÑADIMOS EL OBJETO AL ARRAYLIST
 					pais.asignacionRecursos(pais.getTipo()); //INICIALIZAMOS SU VIDA Y MISILES
-
 					//CUADRO DE EQUIPO AÑADIDO
 					equipos.setText("Jugador " + num + " " + pais.getNombre() + " " + pais.getTipo()+ "\n" );
 					equipos.setVisible(true);

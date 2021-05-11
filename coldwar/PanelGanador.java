@@ -53,11 +53,16 @@ public class PanelGanador extends JPanel {
 
 
 		if (e.getSource() == volverBoton) {
-			System.out.println("Volver");
 			JFrame marco=(JFrame) SwingUtilities.getWindowAncestor(this);
 			marco.remove(this);
-			marco.getContentPane().add(new Menu());
+			try {
+				marco.getContentPane().add(new MenuPrincipal());
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			marco.setVisible(true);
+		}
 			
 			}
 			
@@ -66,4 +71,4 @@ public class PanelGanador extends JPanel {
 
 	
 	
-}
+
