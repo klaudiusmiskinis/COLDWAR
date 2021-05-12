@@ -252,7 +252,6 @@ public class PanelPartida extends JPanel implements ActionListener {
 					}
 				}
 
-				
 				for (int i = 0; i < paisesJugar.size(); i++) {
 					System.out.println("TIRO EN BOCA " + paisesJugar.get(i).getSumaAtaque() + " AAAAAAAAAAAAAAAAAAAA " + paisesJugar.get(i).getNombre() + paisesJugar.get(i).getMisiles());
 					paisesJugar.get(i).actualizarDatos();
