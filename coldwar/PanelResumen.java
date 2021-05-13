@@ -13,16 +13,21 @@ import javax.swing.*;
 public class PanelResumen extends JPanel implements ActionListener{
 
 	ArrayList <Paises> paisesCreados = new ArrayList<Paises>() ;
+	ArrayList <String> historials = new ArrayList <String>();
+	String story=" ";
 	JTextPane texto, titulo;
 	JButton bRonda;
 	int turno = 0;
 	int contadorVidas=0;
-	public PanelResumen(ArrayList <Paises> paisesCreados) {
+	String guardar =" ";
+	public PanelResumen(ArrayList <Paises> paisesCreados,String story) {
 
+		
 		this.paisesCreados = paisesCreados;
+		this.story = story;
 		setLayout(null);
 		setBounds(0,0,1080,768);
-
+		
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.BLACK);
 		panel.setBounds(0, 0, 1080,768);
@@ -54,8 +59,9 @@ public class PanelResumen extends JPanel implements ActionListener{
 		titulo.setBounds(479, 33, 121, 34);
 		panel.add(titulo);
 
-
+		
 		for(int i = 0; i < paisesCreados.size(); i++) {
+			
 			if(paisesCreados.get(i).getVida()<0) {
 				paisesCreados.get(i).setVida(0);
 			}
@@ -63,20 +69,45 @@ public class PanelResumen extends JPanel implements ActionListener{
 				String resumen = "El pais : " + paisesCreados.get(i).getNombre() + " ha muerto."+ "\n";
 				System.out.println(resumen);
 				resumen = texto.getText() + resumen;
-				texto.setText(resumen + "\n");
+//				texto.setText(resumen + "\n");
+				
 			}
 			else {
-				String resumen = "Nombre : " + paisesCreados.get(i).getNombre() + "\nVida : " + paisesCreados.get(i).getVida()+ "\n";
+				String resumen = "\nEl jugador " + paisesCreados.get(i).getNombre() + " tiene " + paisesCreados.get(i).getVida()+ " de vida\n";
 				System.out.println(resumen);
 				resumen = texto.getText() + resumen;
-				texto.setText(resumen + "\n");
+//				texto.setText(resumen + "\n");
+
+				for(int e =0;i<historials.size();i++) {
+					
+//					texto.setText(historials.toString());
+			
 			}
+			
+				texto.setText(story + resumen);
 		}
-		for(int i=0;i<paisesCreados.size();i++) {
-			if(paisesCreados.get(i).getVida()>0) {
+			
+		for(int w=0;w<paisesCreados.size();w++) {
+			if(paisesCreados.get(w).getVida()>0) {
 				contadorVidas++;
 			}
 		}
+		
+		
+		
+			}
+		
+		
+		guardar=guardar+story;
+		story=" ";
+		
+		//LIMPIAMOS ARRAYLIST DE HISTORIAL
+		for(int i = 0;i<historials.size();i++) {
+			historials.remove(i);
+		}
+		
+		
+		
 	}
 	public void actionPerformed(ActionEvent e) {
 
@@ -87,9 +118,10 @@ public class PanelResumen extends JPanel implements ActionListener{
 				System.out.println("A");
 				JFrame marco=(JFrame) SwingUtilities.getWindowAncestor(this);
 				marco.remove(this);
-				marco.getContentPane().add(new PanelPartida(paisesCreados,turno));
+				marco.getContentPane().add(new PanelPartida(paisesCreados,turno,story));
 				marco.setVisible(true);
 				contadorVidas=0;
+				
 			}
 			else if(contadorVidas==1) {
 				System.out.println("B");

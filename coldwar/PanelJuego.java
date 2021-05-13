@@ -22,6 +22,8 @@ public class PanelJuego extends JPanel implements ActionListener{
 	JComboBox<String> desplegable;
 	ArrayList<Paises> paisesCreados = new ArrayList<Paises>();
 	ArrayList<String> nombres = new ArrayList<String>();
+	ArrayList <String> historial = new ArrayList <String>();
+	String story = " ";
 	Font fuente;
 
 	//CONSTRUCTOR
@@ -39,7 +41,7 @@ public class PanelJuego extends JPanel implements ActionListener{
 		jugar.setBorderPainted(false);
 		jugar.setFocusable(false);
 		jugar.addActionListener(this);
-			
+
 		//BOTON ATRAS
 		atras = new JButton();
 		atras.setForeground(Color.WHITE);
@@ -115,7 +117,7 @@ public class PanelJuego extends JPanel implements ActionListener{
 			if (paisesCreados.size() >= 2) {
 				JFrame marco = (JFrame) SwingUtilities.getWindowAncestor(this);
 				marco.remove(this);
-				marco.getContentPane().add(new PanelPartida(paisesCreados, turno));
+				marco.getContentPane().add(new PanelPartida(paisesCreados, turno,story));
 				marco.setVisible(true);
 			} else {
 				JOptionPane.showMessageDialog(new JFrame(), "No hay equipos suficientes para empezar", "ERROR",JOptionPane.ERROR_MESSAGE);
@@ -139,7 +141,7 @@ public class PanelJuego extends JPanel implements ActionListener{
 					Object[] options = {"Nombre del jugador"};
 					JFrame parent = new JFrame();
 					name = JOptionPane.showInputDialog(parent, options,"Jugador", 1);
-					
+
 				} while(name.equals(""));
 
 				pasar = validarNombres(name, nombres);
@@ -175,20 +177,20 @@ public class PanelJuego extends JPanel implements ActionListener{
 			System.out.println("Contiene simbolos");
 			return false;
 		}
-		
+
 		//CONTIENE NUMEROS
 		if (name.matches(".*\\d.*")) {
 			JOptionPane.showMessageDialog(new JFrame(), "El nombre no puede contener números", "ERROR",JOptionPane.ERROR_MESSAGE);
 			System.out.println("Contiene numeros");
 			return false;
 		}
-		
+
 		//EL NOMBRE ES DEMASIADO LARGO
 		if (name.length() > 18) {
 			JOptionPane.showMessageDialog(new JFrame(), "El nombre es demasiado largo", "ERROR",JOptionPane.ERROR_MESSAGE);
 			return false;
 		}
-		
+
 		//EL NOMBRE ESTA REPETIDO
 		for(int i = 0; i < nombresArray.size(); i++) {
 			if (name.toLowerCase().equals(nombresArray.get(i).toLowerCase())) {
