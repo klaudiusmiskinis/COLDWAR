@@ -1,6 +1,7 @@
 package coldwar;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class BdConexion {
 
@@ -9,6 +10,11 @@ public class BdConexion {
 	private static final String URL = "jdbc:oracle:thin:@192.168.3.26:1521:xe";
 	//private static final String URL = "jdbc:oracle:thin:@oracle.ilerna.com:1521:xe";
 	static Connection conexion =  null;
+	ArrayList <Paises> paisesCreados = new ArrayList<Paises>();
+	static String nombre = "";
+	static String tipo = "";
+	static int vida = 0;
+	static int misiles = 0;
 
 	public static void main(String[] args) throws SQLException {
 
@@ -27,10 +33,10 @@ public class BdConexion {
 		}
 		try {
 			Statement st = conexion.createStatement();
-			//insertPartida("algo",3);
-			int bdgfls = obtenerIdpartida();
-			System.out.println(bdgfls);
-			//insertJugadores("Algo","A",20,50);
+			
+			int idpartida = obtenerIdpartida();
+			System.out.println(idpartida);
+			//insertJugadores(idpartida,nombre,tipo,vida,misiles);
 
 
 		}catch(Exception e) {
@@ -38,23 +44,47 @@ public class BdConexion {
 			System.out.println(e.getMessage());
 		}	
 	}
-	public static void insertPartida(String nombre, int ronda) throws SQLException {
+	public static void guardarDatos (ArrayList <Paises> paisesCreados,String nombre,int ronda) throws SQLException, ClassNotFoundException {
 
+			insertPartida(nombre,ronda);
+		for (int i = 0; i < paisesCreados.size();i++) {
+			nombre = paisesCreados.get(i).getNombre();
+			tipo = paisesCreados.get(i).getTipo();
+			vida = paisesCreados.get(i).getVida();
+			misiles = paisesCreados.get(i).getMisiles();
+			int idpartida = obtenerIdpartida();
+			insertJugadores(idpartida,nombre,tipo,vida,misiles);
+		}
+	}
+	
+	public static void insertPartida(String nombre, int ronda) throws SQLException {
+		try {
 		String insertTabla = "INSERT INTO partida (ronda,nombre) VALUES (?,?)";
+			PreparedStatement insert = conexion.prepareStatement(insertTabla);
+		insert.setInt(1,ronda);
+		insert.setString(2,nombre);
+		insert.executeUpdate();
+		}catch(Exception e) {
+			System.out.println("FCK OFF MATE");
+			System.out.println(e.getMessage());
+		}	
+	}
+
+	public static void insertJugadores(int idpartida,String nombre, String tipo, int vida, int misiles) throws SQLException {
+		String insertTabla = "INSERT INTO jugadores VALUES (?,?,?,?,?)";
 
 		PreparedStatement insert = conexion.prepareStatement(insertTabla);
+		insert.setInt(1,idpartida);
 		insert.setString(2,nombre);
-		insert.setInt(1,ronda);
+		insert.setString(3,tipo);
+		insert.setInt(4,vida);
+		insert.setInt(5,misiles);
 		insert.executeUpdate();
 	}
 
-	public static void insertJugadores(String nombre, String tipo, int vida, int misiles) throws SQLException {
-		Statement st = conexion.createStatement();
-
-		st.executeUpdate("INSERT INTO JUGADORES(nombre, tipo, vida, misiles) " + "VALUES ('"+ nombre+"','"+ tipo+"',"+vida+","+misiles+")");
-	}
-
-	public static int obtenerIdpartida() throws SQLException {
+	public static int obtenerIdpartida() throws SQLException, ClassNotFoundException {
+		Class.forName("oracle.jdbc.driver.OracleDriver");
+		conexion = DriverManager.getConnection(URL, USER, PWD);
 		Statement st = conexion.createStatement();
 		int codigo = 0;
 		System.out.println("g");
@@ -62,8 +92,9 @@ public class BdConexion {
 		while(rs.next()) {
 			codigo = rs.getInt("last_idpartida");
 		}
-		
-		
+
 		return codigo;
 	}
+	
+
 }

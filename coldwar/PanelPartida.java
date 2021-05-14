@@ -49,7 +49,6 @@ public class PanelPartida extends JPanel implements ActionListener {
 	//CONSTRUCTOR QUE RECIBE ARRAYLIST
 	public PanelPartida(ArrayList<Paises> paisesCreados,int a,String b) {
 		
-
 		//VARIABLES
 		this.paisesJugar = paisesCreados;
 		this.history = b;
