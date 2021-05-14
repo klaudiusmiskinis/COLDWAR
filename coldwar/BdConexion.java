@@ -5,48 +5,69 @@ import java.util.ArrayList;
 
 public class BdConexion {
 
+	//ATRIBUTOS 
+	//DATOS DE CONEXION
 	private static final String USER = "DAW1_48257371J";
 	private static final String PWD = "A48257371J";
-	private static final String URL = "jdbc:oracle:thin:@192.168.3.26:1521:xe";
-	//private static final String URL = "jdbc:oracle:thin:@oracle.ilerna.com:1521:xe";
-	static Connection conexion =  null;
-	ArrayList <Paises> paisesCreados = new ArrayList<Paises>();
-	static String nombre = "";
-	static String tipo = "";
-	static int vida = 0;
-	static int misiles = 0;
+	private static final String URLinterna = "jdbc:oracle:thin:@192.168.3.26:1521:xe";
+	private static final String URLexterna = "jdbc:oracle:thin:@oracle.ilerna.com:1521:xe";
 
-	public static void main(String[] args) throws SQLException {
+	//ATRIBUTOS PARA TRATAR CON DATOS
+	private static ArrayList <Paises> paisesCreados = new ArrayList<Paises>();
+	private static String nombre = "";
+	private static String tipo = "";
+	private static int vida = 0;
+	private static int misiles = 0;
 
+	//ATRIBUTO PARA ENLAZAR CONEXION
+	private static Connection con;
 
-		try {
-			System.out.println("A");
-			//DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());S
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			conexion = DriverManager.getConnection(URL, USER, PWD);
-			System.out.println("awp");
-		} catch (SQLException e) {
-			throw new IllegalStateException("Cannot connect the database! ", e);
+	//MAIN
+	public static void main(String[] args) throws SQLException, ClassNotFoundException {
+		con = conexion();
+		
+		Paises pruebaInsert = new Paises("Fonsi", 200, 0,"Espanya", 0, 0);
+		paisesCreados.add(pruebaInsert);
+		pruebaInsert = new Paises("Nelson", 400, 0,"Lituania", 0, 0);
+		paisesCreados.add(pruebaInsert);
+		pruebaInsert = new Paises("Jose", 500, 0,"Francia", 0, 0);
+		paisesCreados.add(pruebaInsert);
+		pruebaInsert = new Paises("Friki", 100, 0,"Alemania", 0, 0);
+		paisesCreados.add(pruebaInsert);
+		pruebaInsert = new Paises("Minguito", 300, 0,"Suiza", 0, 0);
+		paisesCreados.add(pruebaInsert);
 
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+		System.out.println("Insertando partida.");
+		insertPartida("Prueba", 10);
+		System.out.println("Obteniendo id.");
+		int codigo;
+		codigo = obtenerIdpartida();
+		System.out.println("Insertando jugadores.");
+		for(int i = 0; i < paisesCreados.size(); i++) {
+			insertJugadores(codigo, paisesCreados.get(i).getNombre(), paisesCreados.get(i).getTipo(), paisesCreados.get(i).getVida(), paisesCreados.get(i).getMisiles());
 		}
-		try {
-			Statement st = conexion.createStatement();
-			
-			int idpartida = obtenerIdpartida();
-			System.out.println(idpartida);
-			//insertJugadores(idpartida,nombre,tipo,vida,misiles);
-
-
-		}catch(Exception e) {
-			System.out.println("FCK OFF MATE");
-			System.out.println(e.getMessage());
-		}	
+		System.out.println("¡Insertados todos los jugadores!");
+		con.close();
+		System.out.println("Cerrando conexión.");
 	}
-	public static void guardarDatos (ArrayList <Paises> paisesCreados,String nombre,int ronda) throws SQLException, ClassNotFoundException {
 
-			insertPartida(nombre,ronda);
+	private static Connection conexion() throws SQLException {
+		try {
+			System.out.println("Intentado conexion a url externa...");
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			con = DriverManager.getConnection(URLexterna, USER, PWD);
+			System.out.println("¡Conectado!");
+		} catch (Exception error) {
+			System.out.println("Intentado conexion a url interna...");
+			con = DriverManager.getConnection(URLinterna, USER, PWD);
+			System.out.println("¡Conectado!");
+		}
+		return con;
+	}
+
+	private static void guardarDatos(ArrayList <Paises> paisesCreados,String nombre,int ronda) throws SQLException, ClassNotFoundException {
+
+		insertPartida(nombre,ronda);
 		for (int i = 0; i < paisesCreados.size();i++) {
 			nombre = paisesCreados.get(i).getNombre();
 			tipo = paisesCreados.get(i).getTipo();
@@ -56,24 +77,35 @@ public class BdConexion {
 			insertJugadores(idpartida,nombre,tipo,vida,misiles);
 		}
 	}
-	
-	public static void insertPartida(String nombre, int ronda) throws SQLException {
+
+	private static int obtenerIdpartida() throws SQLException, ClassNotFoundException {
+		int codigo = 0;
+		Statement st = con.createStatement();
+		ResultSet rs = st.executeQuery("SELECT LAST_VALUE(idpartida)OVER (ORDER BY idpartida ROWS BETWEEN CURRENT ROW AND 1 FOLLOWING) AS last_idpartida FROM partida");
+
+		while(rs.next()) {
+			codigo = rs.getInt("last_idpartida");
+		}
+		return codigo;
+	}
+
+	private static void insertPartida(String nombre, int ronda) throws SQLException {
 		try {
-		String insertTabla = "INSERT INTO partida (ronda,nombre) VALUES (?,?)";
-			PreparedStatement insert = conexion.prepareStatement(insertTabla);
-		insert.setInt(1,ronda);
-		insert.setString(2,nombre);
-		insert.executeUpdate();
-		}catch(Exception e) {
-			System.out.println("FCK OFF MATE");
-			System.out.println(e.getMessage());
+			String insertTabla = "INSERT INTO partida (ronda,nombre) VALUES (?,?)";
+			PreparedStatement insert = con.prepareStatement(insertTabla);
+
+			insert.setInt(1, ronda);
+			insert.setString(2, nombre);
+			insert.executeUpdate();
+		} catch(Exception e) {
+			System.out.println("Error");
 		}	
 	}
 
-	public static void insertJugadores(int idpartida,String nombre, String tipo, int vida, int misiles) throws SQLException {
+	private static void insertJugadores(int idpartida,String nombre, String tipo, int vida, int misiles) throws SQLException {
 		String insertTabla = "INSERT INTO jugadores VALUES (?,?,?,?,?)";
+		PreparedStatement insert = con.prepareStatement(insertTabla);
 
-		PreparedStatement insert = conexion.prepareStatement(insertTabla);
 		insert.setInt(1,idpartida);
 		insert.setString(2,nombre);
 		insert.setString(3,tipo);
@@ -82,19 +114,6 @@ public class BdConexion {
 		insert.executeUpdate();
 	}
 
-	public static int obtenerIdpartida() throws SQLException, ClassNotFoundException {
-		Class.forName("oracle.jdbc.driver.OracleDriver");
-		conexion = DriverManager.getConnection(URL, USER, PWD);
-		Statement st = conexion.createStatement();
-		int codigo = 0;
-		System.out.println("g");
-		ResultSet rs = st.executeQuery("SELECT LAST_VALUE(idpartida)OVER (ORDER BY idpartida ROWS BETWEEN CURRENT ROW AND 1 FOLLOWING) AS last_idpartida FROM partida");
-		while(rs.next()) {
-			codigo = rs.getInt("last_idpartida");
-		}
-
-		return codigo;
-	}
-	
 
 }
+

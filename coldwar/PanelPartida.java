@@ -44,11 +44,10 @@ public class PanelPartida extends JPanel implements ActionListener {
 	int turno = 0;
 	int contador = 0;
 	Paises paisAtacado;
-	ArrayList <String> historiale= new ArrayList<String>();
 	String history = "";
 	//CONSTRUCTOR QUE RECIBE ARRAYLIST
 	public PanelPartida(ArrayList<Paises> paisesCreados,int a,String b) {
-		
+
 		//VARIABLES
 		this.paisesJugar = paisesCreados;
 		this.history = b;
@@ -197,11 +196,11 @@ public class PanelPartida extends JPanel implements ActionListener {
 					paisAtacado = paisesJugar.get(i);
 				}
 			}
-			
+
 			if(misiles<0) {
 				misiles=0;
 			}
-			
+
 			if ( paisesJugar.get(turno).getMisiles() > 0 && (paisesJugar.get(turno).getMisiles()-misiles)>=0) {
 				paisesJugar.get(turno).variables(paisAtacado,misiles);
 				paisesJugar.get(turno).setMisiles((paisesJugar.get(turno).getMisiles() - misiles));
@@ -214,8 +213,8 @@ public class PanelPartida extends JPanel implements ActionListener {
 			if(Integer.parseInt(insertMisiles.getText())<0 ) {
 				System.out.println("NEGATIVO");
 			}else{
-			history = history + "\nEl jugador "+paisesJugar.get(turno).getNombre()+" ataca a " + desplegable.getSelectedItem().toString()+" con " + insertMisiles.getText()+" misiles\n";
-			historiale.add("El jugador "+paisesJugar.get(turno).getNombre()+" ataca a " + desplegable.getSelectedItem().toString()+" con " + insertMisiles.getText()+" misiles\n");
+				history = history + "\nEl jugador "+paisesJugar.get(turno).getNombre()+" ataca a " + desplegable.getSelectedItem().toString()+" con " + insertMisiles.getText()+" misiles\n";
+				System.out.println("MEatac");
 			}
 		}
 
@@ -243,13 +242,19 @@ public class PanelPartida extends JPanel implements ActionListener {
 					paisAtacado = paisesJugar.get(i);
 				}
 			}
-			
+
 			if ( paisesJugar.get(turno).getMisiles() > 0 && (paisesJugar.get(turno).getMisiles()-misiles)>=0){
 				misiles = Integer.parseInt(insertMisiles.getText());
 				if(misiles<0) {
 					misiles=0;
 				}
-				paisesJugar.get(turno).setSumaDefensa(misiles/2);
+
+				if(misiles/2==0) {
+					System.out.println("dado0"+ misiles/2);
+					paisesJugar.get(turno).setSumaDefensa(1);
+				}else{
+					paisesJugar.get(turno).setSumaDefensa(misiles/2);
+				}
 				if(paisesJugar.get(turno).getSumaDefensa()<0) {
 					paisesJugar.get(turno).setSumaDefensa(0);
 				}
@@ -263,8 +268,8 @@ public class PanelPartida extends JPanel implements ActionListener {
 				System.out.println("NEGATIVO");
 			}else{
 				history = history + "\nEl jugador "+paisesJugar.get(turno).getNombre()+" se defiende con " + insertMisiles.getText()+" misiles\n";
-			historiale.add("El jugador "+paisesJugar.get(turno).getNombre()+" se defiende con " + insertMisiles.getText()+" misiles\n");
-		}
+				System.out.println("MEdefeco");
+			}
 		}
 
 		if (e.getSource() == sTurno) {
@@ -273,7 +278,6 @@ public class PanelPartida extends JPanel implements ActionListener {
 
 				for(int i = 0; i < paisesJugar.size();i++) {
 					if(paisesJugar.get(i).getTipo().equals("Francia")) {
-						historiale.add(paisesJugar.get(i).franciaRendir());
 					}
 				}
 
