@@ -72,6 +72,7 @@ public class PanelJuego extends JPanel implements ActionListener{
 		desplegable.addItem("Francia");
 		desplegable.addItem("Suiza");
 		desplegable.addItem("Kazajistan");
+		desplegable.addActionListener(this);
 
 		//BOTON AÑADIR
 		anadir = new JButton();
@@ -164,6 +165,39 @@ public class PanelJuego extends JPanel implements ActionListener{
 				}
 			}
 		}
+		switch (desplegable.getSelectedItem().toString()) {
+		case "USA": 
+			System.out.println("FUCK YEAH");
+			break;
+		case "UK":
+			System.out.println("GIMMI TEA");
+			break;
+		case "Lituania":
+			System.out.println("Rusia pero menos");
+			break;
+		case "Rusia":
+			System.out.println("ццфы шфщвфыифтуе");
+			break;
+		case "Espanya":
+			System.out.println("Siempre arriba");
+			break;
+		case "Vietnam":
+			System.out.println("Speaking arbol noises");
+			break;
+		case "Alemania":
+			System.out.println("Hans get ze flammenwerfer");
+			break;
+		case "Francia" : 
+			System.out.println("U la la le baggette, i sugender");
+			break;
+		case "Suiza" : 
+			System.out.println("Queso y chocolate, no se nada mas");
+			break;
+		case "Kazajistan":
+			System.out.println("Supongo que tendra cabras o algo");
+			break;
+		}
+
 	}
 
 	//METODO PARA VALIDAR NOMBRES

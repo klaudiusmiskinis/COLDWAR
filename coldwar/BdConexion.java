@@ -23,10 +23,10 @@ public class BdConexion {
 	private static Connection con;
 
 	//MAIN
+	/*
 	public static void main(String[] args) throws SQLException, ClassNotFoundException {
-		con = conexion();
 		
-		Paises pruebaInsert = new Paises("Fonsi", 200, 0,"Espanya", 0, 0);
+		Paises pruebaInsert = new Paises("algo", 200, 0,"Espanya", 0, 0);
 		paisesCreados.add(pruebaInsert);
 		pruebaInsert = new Paises("Nelson", 400, 0,"Lituania", 0, 0);
 		paisesCreados.add(pruebaInsert);
@@ -35,11 +35,8 @@ public class BdConexion {
 		pruebaInsert = new Paises("Friki", 100, 0,"Alemania", 0, 0);
 		paisesCreados.add(pruebaInsert);
 		pruebaInsert = new Paises("Minguito", 300, 0,"Suiza", 0, 0);
-		paisesCreados.add(pruebaInsert);
-
-		System.out.println("Insertando partida.");
-		insertPartida("Prueba", 10);
-		System.out.println("Obteniendo id.");
+		paisesCreados.add(pruebaInsert)
+		
 		int codigo;
 		codigo = obtenerIdpartida();
 		System.out.println("Insertando jugadores.");
@@ -50,8 +47,8 @@ public class BdConexion {
 		con.close();
 		System.out.println("Cerrando conexión.");
 	}
-
-	private static Connection conexion() throws SQLException {
+*/
+	static Connection conexion() throws SQLException {
 		try {
 			System.out.println("Intentado conexion a url externa...");
 			Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -65,15 +62,16 @@ public class BdConexion {
 		return con;
 	}
 
-	private static void guardarDatos(ArrayList <Paises> paisesCreados,String nombre,int ronda) throws SQLException, ClassNotFoundException {
-
+	static void guardarDatos(ArrayList <Paises> paisesCreados,String nombre,int ronda) throws SQLException, ClassNotFoundException {
+		int idpartida = 0;
 		insertPartida(nombre,ronda);
 		for (int i = 0; i < paisesCreados.size();i++) {
 			nombre = paisesCreados.get(i).getNombre();
 			tipo = paisesCreados.get(i).getTipo();
 			vida = paisesCreados.get(i).getVida();
 			misiles = paisesCreados.get(i).getMisiles();
-			int idpartida = obtenerIdpartida();
+			System.out.println(idpartida + "AAAAAAAAAAAAAAAAAA");
+			idpartida = obtenerIdpartida();
 			insertJugadores(idpartida,nombre,tipo,vida,misiles);
 		}
 	}
@@ -91,14 +89,15 @@ public class BdConexion {
 
 	private static void insertPartida(String nombre, int ronda) throws SQLException {
 		try {
+			System.out.println("ASD");
 			String insertTabla = "INSERT INTO partida (ronda,nombre) VALUES (?,?)";
-			PreparedStatement insert = con.prepareStatement(insertTabla);
 
+			PreparedStatement insert = con.prepareStatement(insertTabla);
 			insert.setInt(1, ronda);
 			insert.setString(2, nombre);
 			insert.executeUpdate();
 		} catch(Exception e) {
-			System.out.println("Error");
+			System.out.println(e);
 		}	
 	}
 

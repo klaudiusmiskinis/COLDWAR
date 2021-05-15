@@ -243,13 +243,8 @@ public class Paises {
 		else if(this.getSumaAtaque() > this.getSumaDefensa()) {
 			if((this.getSumaAtaque() - this.getSumaDefensa()) > 0) {
 				this.setVida(this.getVida() - (this.getSumaAtaque() - this.getSumaDefensa()));
-
 			}
 		}
-		else {
-			System.out.println("VIDA - (ATAQUE + DEFENSA) es MAYOR a VIDA");
-		}
-		//		pais.setVida((pais.getVida()-sumaAtaque));
 	}
 	//GETERS Y SETERS
 	public String getTipo() {

@@ -39,7 +39,7 @@ public class PanelPartida extends JPanel implements ActionListener {
 	static int ronda = 0;
 	ArrayList<Paises> paisesJugar;
 	JComboBox<String> desplegable;
-	JButton bAtacar, bDefender,sTurno;
+	JButton bAtacar, bDefender;
 	JFormattedTextField insertMisiles, infoTurno, infoMisiles;
 	int turno = 0;
 	int contador = 0;
@@ -127,16 +127,6 @@ public class PanelPartida extends JPanel implements ActionListener {
 		desplegable.setFocusable(false);
 		add(desplegable);
 
-		sTurno = new JButton("");
-		sTurno.setIcon(new ImageIcon(PanelPartida.class.getResource("/coldwar/assets/textos/ADELANTE_boton.png")));
-		sTurno.setBounds(976, 653, 94, 53);
-		sTurno.addActionListener(this);
-		sTurno.setOpaque(false);
-		sTurno.setContentAreaFilled(false);
-		sTurno.setFocusable(false);
-		sTurno.setBorderPainted(false);
-		add(sTurno);
-
 		JLabel fondo = new JLabel("");
 		fondo.setIcon(new ImageIcon(PanelPartida.class.getResource("/coldwar/assets/fondos/FondoPartidaV3.png")));
 		fondo.setBounds(0, 0, 1080, 768);
@@ -206,22 +196,16 @@ public class PanelPartida extends JPanel implements ActionListener {
 				paisesJugar.get(turno).setMisiles((paisesJugar.get(turno).getMisiles() - misiles));
 				System.out.println(paisAtacado.getSumaAtaque());
 				infoMisiles.setText("Cantidad de misiles: " + paisesJugar.get(turno).getMisiles());
-			} else {
-
-				System.out.println("NO AMMO");
 			}
-			if(Integer.parseInt(insertMisiles.getText())<0 ) {
-				System.out.println("NEGATIVO");
-			}else{
+			if(Integer.parseInt(insertMisiles.getText())>0 ) {
 				history = history + "\nEl jugador "+paisesJugar.get(turno).getNombre()+" ataca a " + desplegable.getSelectedItem().toString()+" con " + insertMisiles.getText()+" misiles\n";
-				System.out.println("MEatac");
 			}
 		}
 
 		if (e.getSource() == bDefender) {
 			System.out.println("Defendiendo con " + insertMisiles.getText());
 			// CONTIENE CANTIDAD DE MISILES NO VALIDA
-			if (misiles > paisesJugar.get(turno).getMisiles() || misiles < 0) {
+			if (misiles > paisesJugar.get(turno).getMisiles() || misiles%2 != 0) {
 				JOptionPane.showMessageDialog(new JFrame(), "Numero de misiles no valido", "ERROR",JOptionPane.ERROR_MESSAGE);
 			} 
 			// CONTIENE LETRAS
@@ -248,31 +232,27 @@ public class PanelPartida extends JPanel implements ActionListener {
 				if(misiles<0) {
 					misiles=0;
 				}
-
-				if(misiles/2==0) {
-					System.out.println("dado0"+ misiles/2);
-					paisesJugar.get(turno).setSumaDefensa(1);
-				}else{
-					paisesJugar.get(turno).setSumaDefensa(misiles/2);
+				if(misiles%2 == 0) {
+					if(misiles/2==0) {
+						paisesJugar.get(turno).setSumaDefensa(1);
+					}else{
+						paisesJugar.get(turno).setSumaDefensa(paisesJugar.get(turno).getSumaDefensa() + (misiles/2));
+					}
+					if(paisesJugar.get(turno).getSumaDefensa()<0) {
+						paisesJugar.get(turno).setSumaDefensa(0);
+					}
+					paisesJugar.get(turno).setMisiles((paisesJugar.get(turno).getMisiles() - misiles));
+					System.out.println(paisesJugar.get(turno).getSumaDefensa());
+					infoMisiles.setText("Cantidad de misiles: " + paisesJugar.get(turno).getMisiles());
 				}
-				if(paisesJugar.get(turno).getSumaDefensa()<0) {
-					paisesJugar.get(turno).setSumaDefensa(0);
+				if(Integer.parseInt(insertMisiles.getText())>0 ) {
+					history = history + "\nEl jugador "+paisesJugar.get(turno).getNombre()+" se defiende con " + insertMisiles.getText()+" misiles\n";
+					System.out.println("TU");
 				}
-				paisesJugar.get(turno).setMisiles((paisesJugar.get(turno).getMisiles() - misiles*2));
-				System.out.println(paisesJugar.get(turno).getSumaDefensa());
-				infoMisiles.setText("Cantidad de misiles: " + paisesJugar.get(turno).getMisiles());
-			} else {
-				System.out.println("NO AMMO");
-			}
-			if(Integer.parseInt(insertMisiles.getText())<0 ) {
-				System.out.println("NEGATIVO");
-			}else{
-				history = history + "\nEl jugador "+paisesJugar.get(turno).getNombre()+" se defiende con " + insertMisiles.getText()+" misiles\n";
-				System.out.println("MEdefeco");
 			}
 		}
 
-		if (e.getSource() == sTurno) {
+		if (paisesJugar.get(turno).getMisiles() == 0) {
 			if (turno == paisesJugar.size()-1) {
 				ronda++;
 
@@ -280,7 +260,6 @@ public class PanelPartida extends JPanel implements ActionListener {
 					if(paisesJugar.get(i).getTipo().equals("Francia")) {
 					}
 				}
-
 
 				for (int i = 0; i < paisesJugar.size(); i++) {
 					System.out.println("TIRO EN BOCA " + paisesJugar.get(i).getSumaAtaque() + " AAAAAAAAAAAAAAAAAAAA " + paisesJugar.get(i).getNombre() + paisesJugar.get(i).getMisiles());
@@ -299,10 +278,6 @@ public class PanelPartida extends JPanel implements ActionListener {
 				marco.remove(this);
 				marco.getContentPane().add(new PanelPartida(paisesJugar,turno,history));
 				marco.setVisible(true);
-				/*LIMPIAMOS ARRAYLIST DE HISTORIAL
-				for(int i = 0;i<historiale.size();i++) {
-					historiale.remove(i);
-				}*/
 			}
 		}
 	}
