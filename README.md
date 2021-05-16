@@ -6,9 +6,11 @@ En este proyecto se desarrolla el juego *COLDWAR*.
 
 ## HERRAMINETAS UTILIZADAS
 
-**`Eclipse IDE for Java Developers`
+**`GITHUB`
+`Eclipse IDE for Java Developers`
 `WindowBuilder 1.9.5`
-`Photoshop CC 2018`**
+`Photoshop CC 2018`
+`SQL ORACLE`**
 
 ¿Por qué utilizamos estas herramientas?
 
@@ -135,7 +137,7 @@ independiente, por ejemplo, si le atacan con 50 misiles, puede ser que le impact
 - 250 puntos de vida
 - 60 misiles por ronda
 - Si sus puntos de vida son reducidos a 50 tiene un 50% de probabilidad de rendirse y quedarse fuera de combate.
-8. **Suecia**
+8. **Suiza**
 - 300 puntos de vida
 - 35 misiles por ronda
 - Los misiles dedicados a defensa tienen el mismo precio que los de ataque : 1
@@ -147,6 +149,27 @@ independiente, por ejemplo, si le atacan con 50 misiles, puede ser que le impact
 10. **UK** (planeta normal)
 - 200 puntos de vida
 - 50 misiles por ronda
+
+## BASE DE DATOS
+
+El proyecto requiere de una base de datos que nos permita conectarnos para poder **GUARDAR** y **CARGAR** datos. En nuestro caso utilizaremos SQL ORACLE.
+Tenemos dos tablas creadas que son `JUGADORES` y `PARTIDA` en las cuales guardamos la Partida con un identificador unico y este identificador se le da a los jugadores de esa partida para saber a cual pertenece.
+
+El proceso que hacemos es el siguiente:
+
+1. El jugador llega a PanelResumen
+2. Pulsa el boton de guardar
+3. Se le pregunta el nombre que quiere darle a su partida
+4. Si el nombre es valido, el programa envia el nombre y la ronda en la que esta el jugador.
+5. Se insertan los datos en la base de datos.
+6. Se guarda y se le pone un identificador autonumerico a la partida guardada.
+7. Se hace una consulta y se recoge el identificador.
+8. Se recorren los jugadores y se envian sus datos con el identificador a la base de datos.
+9. La base de datos guarda a los jugadores con el identificador recibido.
+10. ¡Listo!
+
+
+
 
 
 
