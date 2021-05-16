@@ -34,10 +34,10 @@ public class PanelCarga extends JWindow  {
 		JLabel lblColdwar = new JLabel("");
 		lblColdwar.setIcon(new ImageIcon(PanelCarga.class.getResource("/coldwar/assets/textos/Coldwar_texto.png")));
 		lblColdwar.setFont(new Font("Verdana", Font.BOLD, 14));
-		lblColdwar.setBounds(251, 58, 589, 330);
+		lblColdwar.setBounds(316, 56, 589, 330);
 		panel.add(lblColdwar);
-		progressBar.setForeground(new Color(139, 0, 0));
-		progressBar.setBounds(88, 570, 887, 39);
+		progressBar.setForeground(new Color(255, 51, 0));
+		progressBar.setBounds(0, 560, 1080, 27);
 		panel.add(progressBar);
 
 		progressBar.setMaximum(50);
@@ -58,44 +58,44 @@ public class PanelCarga extends JWindow  {
 		setVisible(true);
 	}
 
-	private void loadProgressBar() throws IOException {
-		ActionListener al = new ActionListener() {
 
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				count++;
+	private void loadProgressBar() { 
+		ActionListener al = new ActionListener() { 
 
-				progressBar.setValue(1);
-				progressBar.setMaximum(1);
+			public void actionPerformed(java.awt.event.ActionEvent evt) { 
+				boolean cerrar = false;
+				
+				count++; 
 
-				System.out.println(count);
+				progressBar.setValue(count); 
 
-				if (count == 1) {
+				System.out.println(count); 
 
-					createFrame();
+				if (count == 55) { 
+					timer1.stop(); 
+					Menu window;
+					try {
 
-					execute.setVisible(false);//swapped this around with timer1.stop()
-
-					timer1.stop();
-
-				}
-
-			}
-
-			private void createFrame() throws HeadlessException {
-				JFrame frame = new JFrame();
-				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				frame.setVisible(true);
-
-			}
+						window = new Menu();
+						window.setVisible(true);
+						cerrar = true;
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				} 
+			} 
 		};
-		timer1 = new Timer(100, al);
-		timer1.start();
-		Menu window = new Menu();
-		window.setResizable(false);
-	}
-
+		
+		timer1 = new Timer(50, al); 
+		timer1.start(); 
+		
+	} 
 	public static void main(String[] args) throws IOException{
-		execute = new PanelCarga();
+		PanelCarga vent= new PanelCarga();
+		vent.setVisible(true);
+
+	
 
 	}
 };

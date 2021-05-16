@@ -4,11 +4,13 @@ import java.io.IOException;
 
 public class Main {
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, InterruptedException {
 
-		Menu window = new Menu();
-		window.setResizable(false);
+		PanelCarga window = new PanelCarga();
+		window.setVisible(true);
 		
+		Thread.sleep(3500);
+		window.setVisible(false);
 	}
 		
 }
