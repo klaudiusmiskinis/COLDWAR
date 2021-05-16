@@ -19,7 +19,7 @@ public class PanelGanador extends JPanel implements ActionListener {
 
 	JButton volverBoton;
 	public PanelGanador(ArrayList <Paises> paisesCreados) {
-
+		int contaWin = 0;
 		Paises ganador= new Paises();
 		this.paisesCreados=paisesCreados;
 		setBounds(0,0,1080,768);
@@ -29,9 +29,10 @@ public class PanelGanador extends JPanel implements ActionListener {
 		for(int i =0;i<paisesCreados.size();i++) {
 			if(paisesCreados.get(i).getVida()>0) {
 				ganador=paisesCreados.get(i);
+				contaWin++;
 			}
 		}
-
+		if(contaWin==1) {
 		JTextPane txtpnElGanadorEs = new JTextPane();
 		txtpnElGanadorEs.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 55));
 		txtpnElGanadorEs.setText("EL GANADOR ES "+ ganador.getNombre()+"\nFELICIDADES.");
@@ -42,6 +43,20 @@ public class PanelGanador extends JPanel implements ActionListener {
 		volverBoton.setBounds(437, 572, 185, 45);
 		volverBoton.addActionListener(this);
 		add(volverBoton);
+		}
+		else {
+			JTextPane txtpnElGanadorEs = new JTextPane();
+			txtpnElGanadorEs.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 55));
+			txtpnElGanadorEs.setText("Hay un empate, todos los paises estan destruidos. Ha sido una masacre. ");
+			txtpnElGanadorEs.setBounds(86, 156, 822, 185);
+			add(txtpnElGanadorEs);
+
+			volverBoton = new JButton("VOLVER AL MENU");
+			volverBoton.setBounds(437, 572, 185, 45);
+			volverBoton.addActionListener(this);
+			add(volverBoton);
+			
+		}
 	}
 
 	public void actionPerformed(ActionEvent e) {

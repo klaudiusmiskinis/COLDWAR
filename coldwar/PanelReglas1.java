@@ -44,7 +44,7 @@ public class PanelReglas1 extends JPanel implements ActionListener{
 		botonAtras.setForeground(Color.WHITE);
 		botonAtras.setBounds(480, 669, 85, 59);
 		botonAtras.addActionListener(this);
-		botonAtras.setIcon(new ImageIcon(PanelReglas1.class.getResource("/coldwar/assets/iconos/ATRAS_boton.png")));
+		botonAtras.setIcon(new ImageIcon(PanelReglas1.class.getResource("/coldwar/assets/iconos/ATRAs.png")));
 		botonAtras.setOpaque(false);
 		botonAtras.setContentAreaFilled(false);
 		botonAtras.setBorderPainted(false);
@@ -54,9 +54,9 @@ public class PanelReglas1 extends JPanel implements ActionListener{
 
 		// Titulo
 		JLabel titulo = new JLabel("");
-		titulo.setIcon(new ImageIcon(PanelReglas1.class.getResource("/coldwar/assets/textos/TIPOS_PAISES_texto.png")));
+		titulo.setIcon(new ImageIcon(PanelReglas1.class.getResource("/coldwar/assets/textos/REGLAS.png")));
 		titulo.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		titulo.setBounds(217, 23, 646, 85);
+		titulo.setBounds(342, 23, 395, 85);
 		add(titulo);
 
 		

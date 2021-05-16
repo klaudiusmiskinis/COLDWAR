@@ -3,7 +3,8 @@ package coldwar;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
+import javax.swing.text.*;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -11,6 +12,7 @@ import javax.swing.JRadioButton;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 import javax.swing.event.*;
 
@@ -27,6 +29,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JSeparator;
+import javax.swing.JTextPane;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 
@@ -40,11 +43,14 @@ public class PanelPartida extends JPanel implements ActionListener {
 	ArrayList<Paises> paisesJugar;
 	JComboBox<String> desplegable;
 	JButton bAtacar, bDefender;
-	JFormattedTextField insertMisiles, infoTurno, infoMisiles;
+	JLabel banderaImagen, fondo, infoBandera;
+	JFormattedTextField insertMisiles, infoTurno, infoMisiles, infoVida;
+	JTextPane infoAtacado;
 	int turno = 0;
 	int contador = 0;
 	Paises paisAtacado;
 	String history = "";
+
 	//CONSTRUCTOR QUE RECIBE ARRAYLIST
 	public PanelPartida(ArrayList<Paises> paisesCreados,int a,String b) {
 
@@ -52,32 +58,98 @@ public class PanelPartida extends JPanel implements ActionListener {
 		this.paisesJugar = paisesCreados;
 		this.history = b;
 		this.turno = a;
-		String jugActual = "";
+		String jugActual = paisesJugar.get(turno).getNombre();
+
 		//PARA EVITAR QUE SALGA UN PAIS MUERTO
 		do {
 			if(paisesCreados.get(turno).getVida()==0) {
 				turno++;
 			}
-		}while(paisesCreados.get(turno).getVida()==0);
+		} while(paisesCreados.get(turno).getVida()==0);
 
 		//ELEMENTOS DE LA VENTANA
-		setBounds(0,0,1080,768);
+		setBounds(0,-5,1080,768);
 		setBackground(Color.BLACK);
+		setLayout(null);
 
 		//TEXTFIELD ATACAR
 		insertMisiles = new JFormattedTextField();
 		insertMisiles.setForeground(Color.WHITE);
 		insertMisiles.setBackground(Color.BLACK);
-		insertMisiles.setBounds(24, 362, 218, 38);
+		insertMisiles.setBounds(24, 477, 157, 38);
 		insertMisiles.setText("0");
 		insertMisiles.addActionListener(this);
-		setLayout(null);
 		add(insertMisiles);
+
+		//TEXTFIELD CANTIDAD DE VIDA
+		infoVida = new JFormattedTextField();
+		infoVida.setText("VIDA: " + paisesJugar.get(turno).getVida());
+		infoVida.setForeground(Color.WHITE);
+		infoVida.setFont(new Font("Calibri", Font.BOLD, 14));
+		infoVida.setEditable(false);
+		infoVida.setBackground(Color.BLACK);
+		infoVida.setBounds(24, 131, 275, 45);
+		add(infoVida);
+
+		//TEXTFIELD CANTIDAD MISILES
+		infoMisiles = new JFormattedTextField();
+		infoMisiles.setForeground(Color.WHITE);
+		infoMisiles.setBackground(Color.BLACK);
+		infoMisiles.setBounds(24, 187, 275, 45);
+		infoMisiles.setFont(new Font("Calibri", Font.BOLD, 14));
+		infoMisiles.setEditable(false);
+		infoMisiles.setText("MISILES: " + paisesJugar.get(turno).getMisiles());
+		add(infoMisiles);
+
+		//JLABEL BANDERAPAISATACADO
+		banderaImagen = new JLabel("");
+		banderaImagen.setBackground(Color.WHITE);
+		banderaImagen.setIcon(new ImageIcon(PanelJuego.class.getResource("/coldwar/assets/banderas/Espanya140x85.png")));
+		banderaImagen.setBounds(606, 421, 140, 85);
+		banderaImagen.setVisible(false);
+		add(banderaImagen);
+
+		//TEXTFIELD TURNO
+		infoTurno = new JFormattedTextField();
+		infoTurno.setForeground(Color.WHITE);
+		infoTurno.setBackground(Color.BLACK);
+		infoTurno.setBounds(24, 75, 275, 45);
+		infoTurno.setFont(new Font("Calibri", Font.BOLD, 14));
+		infoTurno.setEditable(false);
+		infoTurno.setText("TURNO DE: " + paisesJugar.get(turno).getNombre());
+		infoTurno.addActionListener(this);
+		add(infoTurno);
+
+		//JTEXTPANE INFO DEL ATACADO
+		infoAtacado = new JTextPane();
+		infoAtacado.setForeground(Color.WHITE);
+		infoAtacado.setFont(new Font("Calibri", Font.BOLD, 19));
+		StyledDocument doc = infoAtacado.getStyledDocument();
+		SimpleAttributeSet centrar = new SimpleAttributeSet();
+		StyleConstants.setAlignment(centrar, StyleConstants.ALIGN_LEFT);
+		doc.setParagraphAttributes(0, doc.getLength(), centrar, false);
+		infoAtacado.setEditable(false);
+		infoAtacado.setBounds(349, 417, 176, 108);
+		infoAtacado.setBorder(null);
+		infoAtacado.setOpaque(false);
+		infoAtacado.setBackground(null);
+		add(infoAtacado);
+
+		//BOTON DEFENDER
+		bDefender = new JButton("");
+		bDefender.setIcon(new ImageIcon(PanelPartida.class.getResource("/coldwar/assets/iconos/BOTON_DEFENDER.png")));
+		bDefender.setBounds(245, 477, 54, 38);
+		bDefender.setOpaque(false);
+		bDefender.setContentAreaFilled(false);
+		bDefender.setFocusable(false);
+		bDefender.setBorderPainted(false);
+		bDefender.addActionListener(this);
+		add(bDefender);
 
 		//BOTON ATACAR
 		bAtacar = new JButton("");
-		bAtacar.setIcon(new ImageIcon(PanelPartida.class.getResource("/coldwar/assets/textos/BOTON_ATACAR.png")));
-		bAtacar.setBounds(245, 362, 54, 38);
+		bAtacar.setIcon(new ImageIcon(PanelPartida.class.getResource("/coldwar/assets/iconos/BOTON_ATACAR.png")));
+		bAtacar.setBounds(186, 477, 54, 38);
 		bAtacar.setOpaque(false);
 		bAtacar.setContentAreaFilled(false);
 		bAtacar.setFocusable(false);
@@ -85,50 +157,67 @@ public class PanelPartida extends JPanel implements ActionListener {
 		bAtacar.addActionListener(this);
 		add(bAtacar);
 
-		//TEXTFIELD CANTIDAD MISILES
-		infoMisiles = new JFormattedTextField();
-		infoMisiles.setForeground(Color.WHITE);
-		infoMisiles.setBackground(Color.BLACK);
-		infoMisiles.setBounds(24, 77, 339, 45);
-		infoMisiles.setFont(new Font("Calibri", Font.BOLD | Font.ITALIC, 14));
-		infoMisiles.setEditable(false);
-		infoMisiles.setText("Cantidad de misiles: " + paisesCreados.get(turno).getMisiles());
-		add(infoMisiles);
-
-		//BOTON DEFENDER
-		bDefender = new JButton("");
-		bDefender.setIcon(new ImageIcon(PanelPartida.class.getResource("/coldwar/assets/textos/BOTON_DEFENDER.png")));
-		bDefender.setBounds(309, 362, 54, 38);
-		bDefender.setOpaque(false);
-		bDefender.setContentAreaFilled(false);
-		bDefender.setFocusable(false);
-		bDefender.setBorderPainted(false);
-		bDefender.addActionListener(this);
-		add(bDefender);	
-
-		//TEXTFIELD TURNO
-		infoTurno = new JFormattedTextField();
-		infoTurno.setForeground(Color.WHITE);
-		infoTurno.setBackground(Color.BLACK);
-		infoTurno.setBounds(24, 28, 339, 45);
-		infoTurno.setFont(new Font("Calibri", Font.BOLD | Font.ITALIC, 14));
-		infoTurno.setEditable(false);
-		infoTurno.setText("Turno de : " + (jugActual = paisesCreados.get(turno).getNombre()));
-		infoTurno.addActionListener(this);
-		add(infoTurno);
+		//JLABEL BANDERADELJUGADORTURNO
+		infoBandera = new JLabel();
+		infoBandera.setBounds(24, 243, 275, 85);
+		switch (paisesJugar.get(turno).getTipo().toString()) {
+		case "USA": 
+			infoBandera.setIcon(new ImageIcon(PanelJuego.class.getResource("/coldwar/assets/banderas/Usa140x8.png")));
+			infoBandera.setVisible(true);
+			break;
+		case "UK":
+			infoBandera.setIcon(new ImageIcon(PanelJuego.class.getResource("/coldwar/assets/banderas/UK140x85.png")));
+			infoBandera.setVisible(true);
+			break;
+		case "Lituania":
+			infoBandera.setIcon(new ImageIcon(PanelJuego.class.getResource("/coldwar/assets/banderas/Lituania140x85.png")));
+			infoBandera.setVisible(true);
+			break;
+		case "Rusia":
+			infoBandera.setIcon(new ImageIcon(PanelJuego.class.getResource("/coldwar/assets/banderas/Rusia140x85.png")));
+			infoBandera.setVisible(true);
+			break;
+		case "Espanya":
+			infoBandera.setIcon(new ImageIcon(PanelJuego.class.getResource("/coldwar/assets/banderas/Espanya140x85.png")));
+			infoBandera.setVisible(true);
+			break;
+		case "Vietnam":
+			infoBandera.setIcon(new ImageIcon(PanelJuego.class.getResource("/coldwar/assets/banderas/Vietnam140x85.png")));
+			infoBandera.setVisible(true);
+			break;
+		case "Alemania":
+			infoBandera.setIcon(new ImageIcon(PanelJuego.class.getResource("/coldwar/assets/banderas/Alemania140x85.png")));
+			infoBandera.setVisible(true);
+			break;
+		case "Francia" : 
+			infoBandera.setIcon(new ImageIcon(PanelJuego.class.getResource("/coldwar/assets/banderas/Francia140x85.png")));
+			infoBandera.setVisible(true);
+			break;
+		case "Suiza" : 
+			infoBandera.setIcon(new ImageIcon(PanelJuego.class.getResource("/coldwar/assets/banderas/Suiza140x85.png")));
+			infoBandera.setVisible(true);
+			break;
+		case "Kazajistan":
+			infoBandera.setIcon(new ImageIcon(PanelJuego.class.getResource("/coldwar/assets/banderas/Kazajistan140x85.png")));
+			infoBandera.setVisible(true);
+			break;
+		}
+		add(infoBandera);
 
 		//COMBOBOX DESPLEGABLE
 		desplegable= new JComboBox<String>();
-		desplegable.setBounds(24, 318, 218, 38);
+		desplegable.setBounds(24, 428, 275, 38);
 		desplegable.setMaximumRowCount(10);
 		desplegable.setForeground(Color.WHITE);
 		desplegable.setBackground(Color.BLACK);
 		desplegable.setBorder(new LineBorder(Color.BLACK));
 		desplegable.setFocusable(false);
+		desplegable.addActionListener(this);
 		add(desplegable);
 
-		JLabel fondo = new JLabel("");
-		fondo.setIcon(new ImageIcon(PanelPartida.class.getResource("/coldwar/assets/fondos/FondoPartidaV3.png")));
+		//JLABEL FONDO
+		fondo = new JLabel("");
+		fondo.setIcon(new ImageIcon(PanelPartida.class.getResource("/coldwar/assets/fondos/PanelPartida.png")));
 		fondo.setBounds(0, 0, 1080, 768);
 		add(fondo);
 
@@ -144,6 +233,7 @@ public class PanelPartida extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		boolean misilesCorrectos=false;
 		Pattern pattern = Pattern.compile("[^a-zA-Z0-9]");
 		Matcher matcher = pattern.matcher(insertMisiles.getText());
 		int misiles = 0;
@@ -159,13 +249,62 @@ public class PanelPartida extends JPanel implements ActionListener {
 			JOptionPane.showMessageDialog(new JFrame(), "Has introducido letras", "ERROR",JOptionPane.ERROR_MESSAGE);
 		}
 
+		if(e.getSource() == desplegable) {
+			for(int i = 0;i<paisesJugar.size();i++) {
+				if(desplegable.getSelectedItem().equals(paisesJugar.get(i).getNombre().toString())) {
+					infoAtacado.setText("NOMBRE: " + paisesJugar.get(i).getNombre() + "\nPAIS: "+paisesJugar.get(i).getTipo() + "\nVIDA: "+paisesJugar.get(i).getVida()+"\nMISILES: " + paisesJugar.get(i).getMisiles());
+					switch (paisesJugar.get(i).getTipo().toString()) {
+					case "USA": 
+						banderaImagen.setIcon(new ImageIcon(PanelJuego.class.getResource("/coldwar/assets/banderas/Usa140x8.png")));
+						banderaImagen.setVisible(true);
+						break;
+					case "UK":
+						banderaImagen.setIcon(new ImageIcon(PanelJuego.class.getResource("/coldwar/assets/banderas/UK140x85.png")));
+						banderaImagen.setVisible(true);
+						break;
+					case "Lituania":
+						banderaImagen.setIcon(new ImageIcon(PanelJuego.class.getResource("/coldwar/assets/banderas/Lituania140x85.png")));
+						banderaImagen.setVisible(true);
+						break;
+					case "Rusia":
+						banderaImagen.setIcon(new ImageIcon(PanelJuego.class.getResource("/coldwar/assets/banderas/Rusia140x85.png")));
+						banderaImagen.setVisible(true);
+						break;
+					case "Espanya":
+						banderaImagen.setIcon(new ImageIcon(PanelJuego.class.getResource("/coldwar/assets/banderas/Espanya140x85.png")));
+						banderaImagen.setVisible(true);
+						break;
+					case "Vietnam":
+						banderaImagen.setIcon(new ImageIcon(PanelJuego.class.getResource("/coldwar/assets/banderas/Vietnam140x85.png")));
+						banderaImagen.setVisible(true);
+						break;
+					case "Alemania":
+						banderaImagen.setIcon(new ImageIcon(PanelJuego.class.getResource("/coldwar/assets/banderas/Alemania140x85.png")));
+						banderaImagen.setVisible(true);
+						break;
+					case "Francia" : 
+						banderaImagen.setIcon(new ImageIcon(PanelJuego.class.getResource("/coldwar/assets/banderas/Francia140x85.png")));
+						banderaImagen.setVisible(true);
+						break;
+					case "Suiza" : 
+						banderaImagen.setIcon(new ImageIcon(PanelJuego.class.getResource("/coldwar/assets/banderas/Suiza140x85.png")));
+						banderaImagen.setVisible(true);
+						break;
+					case "Kazajistan":
+						banderaImagen.setIcon(new ImageIcon(PanelJuego.class.getResource("/coldwar/assets/banderas/Kazajistan140x85.png")));
+						banderaImagen.setVisible(true);
+						break;
+					}
+				}
+			}
+		}
 
 		if (e.getSource() == bAtacar) {
-			System.out.println("Atacando con " + insertMisiles.getText() + " a " + desplegable.getSelectedItem().toString());
 			//VALIDACION DE TEXTFIELD
 			//CONTIENE CANTIDAD DE MISILES NO VALIDA
 			if (misiles > paisesJugar.get(turno).getMisiles() || misiles < 0) {
 				JOptionPane.showMessageDialog(new JFrame(), "Numero de misiles no valido", "ERROR",JOptionPane.ERROR_MESSAGE);
+				misilesCorrectos=true;
 			} 
 
 			//CONTIENE LETRAS
@@ -194,20 +333,19 @@ public class PanelPartida extends JPanel implements ActionListener {
 			if ( paisesJugar.get(turno).getMisiles() > 0 && (paisesJugar.get(turno).getMisiles()-misiles)>=0) {
 				paisesJugar.get(turno).variables(paisAtacado,misiles);
 				paisesJugar.get(turno).setMisiles((paisesJugar.get(turno).getMisiles() - misiles));
-				System.out.println(paisAtacado.getSumaAtaque());
 				infoMisiles.setText("Cantidad de misiles: " + paisesJugar.get(turno).getMisiles());
 			}
-			if(Integer.parseInt(insertMisiles.getText())>0 ) {
+
+			if(Integer.parseInt(insertMisiles.getText())>0 && misilesCorrectos==false) {
 				history = history + "\nEl jugador "+paisesJugar.get(turno).getNombre()+" ataca a " + desplegable.getSelectedItem().toString()+" con " + insertMisiles.getText()+" misiles\n";
 			}
 		}
 
 		if (e.getSource() == bDefender) {
-			System.out.println("Defendiendo con " + insertMisiles.getText());
 			// CONTIENE CANTIDAD DE MISILES NO VALIDA
 			if (misiles > paisesJugar.get(turno).getMisiles() || misiles%2 != 0) {
 				JOptionPane.showMessageDialog(new JFrame(), "Numero de misiles no valido", "ERROR",JOptionPane.ERROR_MESSAGE);
-			} 
+			}
 			// CONTIENE LETRAS
 			else if (insertMisiles.getText().contains("[a-zA-Z]+")) {
 				JOptionPane.showMessageDialog(new JFrame(), "Has introducido letras", "ERROR",JOptionPane.ERROR_MESSAGE);
@@ -215,7 +353,6 @@ public class PanelPartida extends JPanel implements ActionListener {
 			//CONTIENE SIMBOLOS
 			else if(matcher.find() == true) {
 				JOptionPane.showMessageDialog(new JFrame(), "El nombre no puede contener simbolos y espacios", "ERROR",JOptionPane.ERROR_MESSAGE);
-				System.out.println("Contiene simbolos");
 			}
 
 			//FUNCIONALIDAD DEFENDER
@@ -233,21 +370,21 @@ public class PanelPartida extends JPanel implements ActionListener {
 					misiles=0;
 				}
 				if(misiles%2 == 0) {
-					if(misiles/2==0) {
+					if(misiles/2 == 0) {
 						paisesJugar.get(turno).setSumaDefensa(1);
-					}else{
+					} else {
 						paisesJugar.get(turno).setSumaDefensa(paisesJugar.get(turno).getSumaDefensa() + (misiles/2));
 					}
-					if(paisesJugar.get(turno).getSumaDefensa()<0) {
+					if(paisesJugar.get(turno).getSumaDefensa() < 0) {
 						paisesJugar.get(turno).setSumaDefensa(0);
 					}
+
 					paisesJugar.get(turno).setMisiles((paisesJugar.get(turno).getMisiles() - misiles));
-					System.out.println(paisesJugar.get(turno).getSumaDefensa());
 					infoMisiles.setText("Cantidad de misiles: " + paisesJugar.get(turno).getMisiles());
 				}
-				if(Integer.parseInt(insertMisiles.getText())>0 ) {
+
+				if(Integer.parseInt(insertMisiles.getText()) > 0 ) {
 					history = history + "\nEl jugador "+paisesJugar.get(turno).getNombre()+" se defiende con " + insertMisiles.getText()+" misiles\n";
-					System.out.println("TU");
 				}
 			}
 		}
@@ -262,7 +399,6 @@ public class PanelPartida extends JPanel implements ActionListener {
 				}
 
 				for (int i = 0; i < paisesJugar.size(); i++) {
-					System.out.println("TIRO EN BOCA " + paisesJugar.get(i).getSumaAtaque() + " AAAAAAAAAAAAAAAAAAAA " + paisesJugar.get(i).getNombre() + paisesJugar.get(i).getMisiles());
 					paisesJugar.get(i).actualizarDatos();
 					paisesJugar.get(i).recargar();
 					paisesJugar.get(i).setSumaAtaque(0);

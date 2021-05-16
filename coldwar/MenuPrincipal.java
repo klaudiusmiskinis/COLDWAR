@@ -1,58 +1,58 @@
 package coldwar;
 
 import java.awt.Color;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-
-import javax.imageio.*;
 import javax.swing.*;
 
+@SuppressWarnings("serial")
 public class MenuPrincipal extends JPanel implements ActionListener{
 
 	//ATRIBUTOS
 	JButton jugar, reglas, informacion, cargar, salir;
+	JLabel titulo;
 
 	//CONSTRUCTOR
 	public MenuPrincipal() throws IOException {
 		//METODOS DE LA VENTANA
-		setBorder(null);
 		setBounds(0,0,1080,768);
 		setLayout(null);
+		setBorder(null);
 
 		//BOTON JUGAR
 		jugar= new JButton();
-		jugar.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/coldwar/assets/textos/JUGAR_boton.png")));
+		jugar.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/coldwar/assets/iconos/JUGAR_boton.png")));
 		jugar.setOpaque(false);
 		jugar.setContentAreaFilled(false);
-		jugar.setBounds(334, 198, 412, 50);
+		jugar.setBounds(334, 182, 412, 50);
 		jugar.setFocusable(false);
 		jugar.setBorderPainted(false);
 
 		//BOTON REGLAS
 		reglas= new JButton();
-		reglas.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/coldwar/assets/textos/REGLAS_boton.png")));
+		reglas.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/coldwar/assets/iconos/REGLAS_boton.png")));
 		reglas.setOpaque(false);
 		reglas.setContentAreaFilled(false);
-		reglas.setBounds(334, 285, 412, 50);
+		reglas.setBounds(334, 252, 412, 50);
 		reglas.setFocusable(false);
 		reglas.setBorderPainted(false);
 
 		//BOTON INFORMACION
 		informacion = new JButton();
-		informacion.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/coldwar/assets/textos/INFORMACI\u00D3N_boton.png")));
+		informacion.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/coldwar/assets/iconos/INFO_boton.png")));
 		informacion.setOpaque(false);
 		informacion.setContentAreaFilled(false);
-		informacion.setBounds(334, 369, 412, 50);
+		informacion.setBounds(334, 392, 412, 50);
 		informacion.setFocusable(false);
 		informacion.setBorderPainted(false);
 
 		//BOTON CARGAR PARTIDA
 		cargar= new JButton();
+		cargar.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/coldwar/assets/iconos/CARGAR_boton.png")));
 		cargar.setForeground(Color.WHITE);
 		cargar.setContentAreaFilled(false);
-		cargar.setBounds(446, 512, 214, 50);
+		cargar.setBounds(334, 322, 414, 50);
 		cargar.setFocusable(false);
 		cargar.setBorderPainted(false);
 
@@ -61,7 +61,7 @@ public class MenuPrincipal extends JPanel implements ActionListener{
 		salir.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/coldwar/assets/iconos/SALIR_boton.png")));
 		salir.setOpaque(false);
 		salir.setContentAreaFilled(false);
-		salir.setBounds(334, 451, 412, 50);
+		salir.setBounds(334, 462, 412, 50);
 		salir.setFocusable(false);
 		salir.setBorderPainted(false);
 
@@ -71,11 +71,12 @@ public class MenuPrincipal extends JPanel implements ActionListener{
 		informacion.addActionListener(this);
 		cargar.addActionListener(this);
 		salir.addActionListener(this);
+		
 		//FONDO JLABEL
 		JLabel fondo = new JLabel();
 		fondo.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/coldwar/assets/fondos/Fondo_Menu.png")));
 		fondo.setBackground(Color.WHITE);
-		fondo.setBounds(0,0,1080,768);
+		fondo.setBounds(0,-5,1080,768);
 
 		//SE AÑADEN LOS ELEMENTOS A LA VENTANA
 		add(jugar);
@@ -85,15 +86,19 @@ public class MenuPrincipal extends JPanel implements ActionListener{
 		add(salir);
 
 		//TEXTO COLDWAR
-		JLabel titulo = new JLabel("");
+		titulo = new JLabel();
 		titulo.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/coldwar/assets/textos/Coldwar_texto.png")));
-		titulo.setBounds(277, 24, 525, 117);
+		titulo.setBounds(342, 24, 395, 117);
 		add(titulo);
 		add(fondo);
 	}
+	
+	
+	
 	@Override
 	//EVENTOS DE LOS BOTONES
 	public void actionPerformed(ActionEvent e) {
+		
 		//EVENTO BOTON JUGAR
 		if (e.getSource() == jugar) {
 			JFrame marco=(JFrame) SwingUtilities.getWindowAncestor(this);
@@ -120,7 +125,7 @@ public class MenuPrincipal extends JPanel implements ActionListener{
 
 		//EVENTO BOTON CARGAR
 		if (e.getSource() == cargar) {
-			System.out.println("Cargarpartida");
+			
 		}
 
 		//EVENTO BOTON SALIR
@@ -138,11 +143,9 @@ public class MenuPrincipal extends JPanel implements ActionListener{
 
 			//CONTROL DE ELECCION DE USUARIO
 			if (a == JOptionPane.YES_OPTION) {
-				System.out.println("Saliendo");
 				System.exit(0); 
 			} else {
 				remove(popUp);
-				System.out.println("Volviendo al men�");
 			}
 		}
 	}

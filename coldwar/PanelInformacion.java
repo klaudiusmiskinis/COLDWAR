@@ -34,7 +34,7 @@ public class PanelInformacion extends JPanel implements ActionListener{
 		botonAtras.setForeground(Color.WHITE);
 		botonAtras.setBounds(493, 656, 94, 59);
 		botonAtras.addActionListener(this);
-		botonAtras.setIcon(new ImageIcon(PanelReglas1.class.getResource("/coldwar/assets/iconos/ATRAS_boton.png")));
+		botonAtras.setIcon(new ImageIcon(PanelInformacion.class.getResource("/coldwar/assets/iconos/ATRAs.png")));
 		botonAtras.setOpaque(false);
 		botonAtras.setContentAreaFilled(false);
 		botonAtras.setBorderPainted(false);

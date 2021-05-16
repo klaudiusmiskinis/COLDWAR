@@ -1,6 +1,7 @@
 package coldwar;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -9,6 +10,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.swing.*;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 
 
 
@@ -26,7 +30,7 @@ public class PanelResumen extends JPanel implements ActionListener{
 
 		this.paisesCreados = paisesCreados;
 		this.story = story;
-		
+
 		setLayout(null);
 		setBounds(0,0,1080,768);
 
@@ -39,21 +43,21 @@ public class PanelResumen extends JPanel implements ActionListener{
 		texto= new JTextPane();
 		texto.setBackground(Color.BLACK);
 		texto.setForeground(Color.WHITE);
-		texto.setBounds(224, 113, 632, 529);
+		texto.setBounds(231, 115, 632, 529);
 		panel.add(texto);
-		
+
 		bRonda = new JButton("Siguiente ronda\r\n");
 		bRonda.setBounds(910, 708, 117, 23);
 		bRonda = new JButton("");
-		bRonda.setIcon(new ImageIcon(PanelPartida.class.getResource("/coldwar/assets/textos/ADELANTE_boton.png")));
-		bRonda.setBounds(961, 643, 94, 53);
+		bRonda.setIcon(new ImageIcon(PanelResumen.class.getResource("/coldwar/assets/iconos/ADELANTE.png")));
+		bRonda.setBounds(1014, 701, 56, 45);
 		bRonda.addActionListener(this);
 		bRonda.setOpaque(false);
 		bRonda.setContentAreaFilled(false);
 		bRonda.setFocusable(false);
 		bRonda.setBorderPainted(false);
 		panel.add(bRonda);
-	
+
 		titulo = new JTextPane();
 		titulo.setForeground(Color.RED);
 		titulo.setBackground(Color.BLACK);
@@ -68,19 +72,22 @@ public class PanelResumen extends JPanel implements ActionListener{
 			if(paisesCreados.get(i).getVida()<0) {
 				paisesCreados.get(i).setVida(0);
 			}
-			
+
 			if(paisesCreados.get(i).getVida() == 0) {
 				resumen = "\nEl pais : " + paisesCreados.get(i).getNombre() + " ha muerto."+ "\n";
-				System.out.println(resumen);
 				story =story + resumen;
-			}else {
+			} else {
 				resumen = "\nEl jugador " + paisesCreados.get(i).getNombre() + " tiene " + paisesCreados.get(i).getVida()+ " de vida\n";
-				System.out.println(resumen);
 				story =story + resumen;
-				System.out.println("PMC2");
 			}
 		}
-		
+
+		StyledDocument doc = texto.getStyledDocument();
+		SimpleAttributeSet centrar = new SimpleAttributeSet();
+		StyleConstants.setAlignment(centrar, StyleConstants.ALIGN_CENTER);
+		doc.setParagraphAttributes(0, doc.getLength(), centrar, false);
+		texto.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 14));
+		texto.setText(story+"\n"+"\n"+"\n"+resumen);
 		texto.setText(story);
 
 		bGuardar = new JButton("Guardar");
@@ -94,7 +101,7 @@ public class PanelResumen extends JPanel implements ActionListener{
 			}
 		}
 	}
-	
+
 	public void actionPerformed(ActionEvent e) {
 
 		String nombre = "";
@@ -111,7 +118,7 @@ public class PanelResumen extends JPanel implements ActionListener{
 				marco.getContentPane().add(new PanelPartida(paisesCreados,turno,story));
 				marco.setVisible(true);
 				contadorVidas=0;
-			}else if(contadorVidas==1) {
+			}else if(contadorVidas<=1) {
 				System.out.println("B");
 				JFrame marco=(JFrame) SwingUtilities.getWindowAncestor(this);
 				marco.remove(this);

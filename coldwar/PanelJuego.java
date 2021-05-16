@@ -8,23 +8,26 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.regex.Matcher; 
 import java.util.regex.Pattern;
-
 import javax.swing.*;
 import javax.swing.border.LineBorder;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 
 public class PanelJuego extends JPanel implements ActionListener{
+
 	//ATRIBUTOS
 	int num = 1;
-	int contador = 50;
 	int turno = 0;
-	JTextPane equipos;
+	int contador = 178;
+	JTextPane infoBanderas;
 	JButton atras, jugar, anadir;
+	JLabel fondo, banderaImagen;
 	JComboBox<String> desplegable;
 	ArrayList<Paises> paisesCreados = new ArrayList<Paises>();
 	ArrayList<String> nombres = new ArrayList<String>();
 	ArrayList <String> historial = new ArrayList <String>();
-	String story = " ";
-	Font fuente;
+	String story = "";
 
 	//CONSTRUCTOR
 	public PanelJuego() {
@@ -34,8 +37,8 @@ public class PanelJuego extends JPanel implements ActionListener{
 
 		//BOTON JUGAR
 		jugar = new JButton();
-		jugar.setBounds(968, 672, 91, 59);
-		jugar.setIcon(new ImageIcon(PanelReglas1.class.getResource("/coldwar/assets/iconos/ADELANTE_boton.png")));
+		jugar.setBounds(986, 672, 58, 45);
+		jugar.setIcon(new ImageIcon(PanelJuego.class.getResource("/coldwar/assets/iconos/ADELANTE.png")));
 		jugar.setOpaque(false);
 		jugar.setContentAreaFilled(false);
 		jugar.setBorderPainted(false);
@@ -45,9 +48,9 @@ public class PanelJuego extends JPanel implements ActionListener{
 		//BOTON ATRAS
 		atras = new JButton();
 		atras.setForeground(Color.WHITE);
-		atras.setBounds(10, 672, 91, 59);
+		atras.setBounds(20, 672, 58, 45);
 		atras.addActionListener(this);
-		atras.setIcon(new ImageIcon(PanelReglas1.class.getResource("/coldwar/assets/iconos/ATRAS_boton.png")));
+		atras.setIcon(new ImageIcon(PanelJuego.class.getResource("/coldwar/assets/iconos/ATRAs.png")));
 		atras.setOpaque(false);
 		atras.setContentAreaFilled(false);
 		atras.setBorderPainted(false);
@@ -61,7 +64,8 @@ public class PanelJuego extends JPanel implements ActionListener{
 		desplegable.setFocusable(false);
 		desplegable.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		desplegable.setMaximumRowCount(10);
-		desplegable.setBounds(23, 323, 284, 34);
+		desplegable.setBounds(36, 189, 402, 34);
+		desplegable.addItem(""); //SI NO SE AÑADE ESTE ELEMENTO, EL PRIMER EQUIPO NO APARECERA AL CREARSE
 		desplegable.addItem("UK");
 		desplegable.addItem("Lituania");
 		desplegable.addItem("Rusia");
@@ -76,22 +80,42 @@ public class PanelJuego extends JPanel implements ActionListener{
 
 		//BOTON AÑADIR
 		anadir = new JButton();
-		anadir.setIcon(new ImageIcon(PanelJuego.class.getResource("/coldwar/assets/textos/MAS_boton.png")));
-		anadir.setBounds(314, 323, 51, 34);
+		anadir.setIcon(new ImageIcon(PanelJuego.class.getResource("/coldwar/assets/iconos/MAS_boton.png")));
+		anadir.setBounds(448, 189, 51, 34);
 		anadir.setContentAreaFilled(false);
 		anadir.setBorderPainted(false);
 		anadir.addActionListener(this);
 
-		//FONDO JLABEL
-		JLabel fondo = new JLabel();
-		fondo.setIcon(new ImageIcon(PanelJuego.class.getResource("/coldwar/assets/fondos/FondoPanelJugar.png")));
+		//JLABEL BANDERAS
+		banderaImagen = new JLabel("");
+		banderaImagen.setBackground(Color.WHITE);
+		banderaImagen.setIcon(new ImageIcon(PanelJuego.class.getResource("/coldwar/assets/banderas/Espanya140x85.png")));
+		banderaImagen.setBounds(36, 558, 140, 85);
+		banderaImagen.setVisible(false);
+
+
+		//TEXTFIELD INFOBANDERAS
+		infoBanderas = new JTextPane();
+		infoBanderas.setForeground(Color.WHITE);
+		infoBanderas.setBackground(Color.BLACK);
+		infoBanderas.setBounds(179, 558, 314, 85);
+		infoBanderas.setVisible(false); 
+		infoBanderas.setFont(new Font("Calibri", Font.PLAIN, 13));
+		infoBanderas.setEditable(false);
+
+		//JLABEL INFO
+		fondo = new JLabel();
+		fondo.setHorizontalAlignment(SwingConstants.CENTER);
+		fondo.setIcon(new ImageIcon(PanelJuego.class.getResource("/coldwar/assets/fondos/PanelJugar.png")));
 		fondo.setBounds(0,0,1080,768);
 
 		//SE AÑADEN LOS ELEMENTOS A LA VENTANA
 		add(anadir);
+		add(jugar);	
 		add(desplegable);
 		add(atras);
-		add(jugar);
+		add(banderaImagen);
+		add(infoBanderas);
 		add(fondo);
 	}
 
@@ -100,6 +124,7 @@ public class PanelJuego extends JPanel implements ActionListener{
 		//VARIABLES
 		String name = "";
 		boolean pasar = false;
+		
 
 		//ACCION BOTON ATRAS
 		if (e.getSource() == atras) {
@@ -126,11 +151,16 @@ public class PanelJuego extends JPanel implements ActionListener{
 		}
 
 		//ACCION BOTON AÑADIR
-		if (e.getSource() == anadir) {
+		if (e.getSource() == anadir && !desplegable.getSelectedItem().toString().equals("")) {
 
 			if(num < 11) {
-				Paises pais = new Paises(); //SE CREA EL OBJETO PAIS
+				Paises pais = new Paises();
+				//DISPLAY DE EQUIPOS EN PANTALLA
 				JTextPane equipos= new JTextPane();
+				StyledDocument doc = equipos.getStyledDocument();
+			    SimpleAttributeSet centrar = new SimpleAttributeSet();
+			    StyleConstants.setAlignment(centrar, StyleConstants.ALIGN_CENTER);
+			    doc.setParagraphAttributes(0, doc.getLength(), centrar, false);
 				equipos.setBounds(600, contador, 400, 40);
 				equipos.setBackground(Color.black);
 				equipos.setForeground(Color.red);
@@ -148,11 +178,13 @@ public class PanelJuego extends JPanel implements ActionListener{
 				pasar = validarNombres(name, nombres);
 
 				if (pasar == true) {
-					nombres.add(name); //AÑADIMOS EL NOMBRE AL ARRAYLIST
-					pais.setNombre(name); //DAMOS NOMBRE AL OBJETO
-					pais.setTipo(desplegable.getSelectedItem().toString()); //DAMOS TIPO AL OBJETO
-					paisesCreados.add(pais); //AÑADIMOS EL OBJETO AL ARRAYLIST
-					pais.asignacionRecursos(pais.getTipo()); //INICIALIZAMOS SU VIDA Y MISILES
+					//AÑADIENDO NOMBRE A ARRAYLIST Y INICIALIZANDO EL EQUIPO CREADO
+					nombres.add(name); 
+					pais.setNombre(name); 
+					pais.setTipo(desplegable.getSelectedItem().toString());
+					paisesCreados.add(pais);
+					pais.asignacionRecursos(pais.getTipo());
+
 					//CUADRO DE EQUIPO AÑADIDO
 					equipos.setText("Jugador " + num + " " + pais.getNombre() + " " + pais.getTipo()+ "\n" );
 					equipos.setVisible(true);
@@ -161,43 +193,73 @@ public class PanelJuego extends JPanel implements ActionListener{
 
 					//CONTROL DE CANTIDAD DE EQUIPOS
 					num ++;
-					contador = contador + 60;
+					contador = contador + 47;
 				}
 			}
 		}
+
 		switch (desplegable.getSelectedItem().toString()) {
 		case "USA": 
-			System.out.println("FUCK YEAH");
+			banderaImagen.setIcon(new ImageIcon(PanelJuego.class.getResource("/coldwar/assets/banderas/Usa140x8.png")));
+			banderaImagen.setVisible(true);
+			infoBanderas.setText("VIDA: 180     MISILES:70\nBONUS:\n-2X a RUSIA\n-1/2 a Vietnam");
+			infoBanderas.setVisible(true);
 			break;
 		case "UK":
-			System.out.println("GIMMI TEA");
+			banderaImagen.setIcon(new ImageIcon(PanelJuego.class.getResource("/coldwar/assets/banderas/UK140x85.png")));
+			banderaImagen.setVisible(true);
+			infoBanderas.setText("VIDA: 200     MISILES:50\n\n\nSIN BONUS");
+			infoBanderas.setVisible(true);
 			break;
 		case "Lituania":
-			System.out.println("Rusia pero menos");
+			banderaImagen.setIcon(new ImageIcon(PanelJuego.class.getResource("/coldwar/assets/banderas/Lituania140x85.png")));
+			banderaImagen.setVisible(true);
+			infoBanderas.setText("VIDA: 240     MISILES:50\n\nBONUS:\n30% de probabilidad de devolver algunos misiles");
+			infoBanderas.setVisible(true);
 			break;
 		case "Rusia":
-			System.out.println("ццфы шфщвфыифтуе");
+			banderaImagen.setIcon(new ImageIcon(PanelJuego.class.getResource("/coldwar/assets/banderas/Rusia140x85.png")));
+			banderaImagen.setVisible(true);
+			infoBanderas.setText("VIDA: 240     MISILES:45\nBONUS:\nAtaca x2 a USA\nAtaca la mitad a Lituania");
+			infoBanderas.setVisible(true);
 			break;
 		case "Espanya":
-			System.out.println("Siempre arriba");
+			banderaImagen.setIcon(new ImageIcon(PanelJuego.class.getResource("/coldwar/assets/banderas/Espanya140x85.png")));
+			banderaImagen.setVisible(true);
+			infoBanderas.setText("VIDA: 180     MISILES:50\n\nBONUS:\n10% de probabilidad de sumar 40 de vida");
+			infoBanderas.setVisible(true);
 			break;
 		case "Vietnam":
-			System.out.println("Speaking arbol noises");
+			banderaImagen.setIcon(new ImageIcon(PanelJuego.class.getResource("/coldwar/assets/banderas/Vietnam140x85.png")));
+			banderaImagen.setVisible(true);
+			infoBanderas.setText("VIDA: 130     MISILES:60\n\nBONUS:\n50% de probabilidad de esquivar misiles independientes");
+			infoBanderas.setVisible(true);
 			break;
 		case "Alemania":
-			System.out.println("Hans get ze flammenwerfer");
+			banderaImagen.setIcon(new ImageIcon(PanelJuego.class.getResource("/coldwar/assets/banderas/Alemania140x85.png")));
+			banderaImagen.setVisible(true);
+			infoBanderas.setText("VIDA: 400     MISILES:10\n\nBONUS:\nSuma +2 misiles cada ronda");
+			infoBanderas.setVisible(true);
 			break;
 		case "Francia" : 
-			System.out.println("U la la le baggette, i sugender");
+			banderaImagen.setIcon(new ImageIcon(PanelJuego.class.getResource("/coldwar/assets/banderas/Francia140x85.png")));
+			banderaImagen.setVisible(true);
+			infoBanderas.setText("VIDA: 250     MISILES:60\n\nBONUS:\n50% de probabilidad de rendirse si la vida es 50 o menor");
+			infoBanderas.setVisible(true);
 			break;
 		case "Suiza" : 
-			System.out.println("Queso y chocolate, no se nada mas");
+			banderaImagen.setIcon(new ImageIcon(PanelJuego.class.getResource("/coldwar/assets/banderas/Suiza140x85.png")));
+			banderaImagen.setVisible(true);
+			infoBanderas.setText("VIDA: 300     MISILES:35\nBONUS:\nLos misiles de defensa valen la mitad\n(1 misil para defender en vez de 2)");
+			infoBanderas.setVisible(true);
 			break;
 		case "Kazajistan":
-			System.out.println("Supongo que tendra cabras o algo");
+			banderaImagen.setIcon(new ImageIcon(PanelJuego.class.getResource("/coldwar/assets/banderas/Kazajistan140x85.png")));
+			banderaImagen.setVisible(true);
+			infoBanderas.setText("VIDA: 200     MISILES:40\nBONUS:\nAtaca el x2 a Lituania\nAtaca la mitad a Rusia");
+			infoBanderas.setVisible(true);
 			break;
 		}
-
 	}
 
 	//METODO PARA VALIDAR NOMBRES
