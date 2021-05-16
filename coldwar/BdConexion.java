@@ -46,7 +46,6 @@ public class BdConexion {
 			tipo = paisesCreados.get(i).getTipo();
 			vida = paisesCreados.get(i).getVida();
 			misiles = paisesCreados.get(i).getMisiles();
-			System.out.println(idpartida + "AAAAAAAAAAAAAAAAAA");
 			idpartida = obtenerIdpartida();
 
 			insertJugadores(idpartida,nombre,tipo,vida,misiles);

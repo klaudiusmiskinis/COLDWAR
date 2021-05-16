@@ -66,11 +66,6 @@ public class CargaPartida extends JPanel implements ActionListener {
 		desplegable.addActionListener(this);
 		add(desplegable);
 
-		jugadores = new JTextPane();
-		jugadores.setBounds(635, 217, 410, 386);
-		add(jugadores);
-
-
 		cargarPartida = new JButton("Cargar partida\r\n");
 		cargarPartida.setBounds(398, 276, 136, 23);
 		cargarPartida.addActionListener(this);
@@ -96,9 +91,6 @@ public class CargaPartida extends JPanel implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		String textoJugadores = "";
-		String jugador = "";
-
 		if (e.getSource() == cargarPartida) {
 
 			try {
@@ -114,20 +106,13 @@ public class CargaPartida extends JPanel implements ActionListener {
 						pais.setMisiles(Integer.parseInt(parts[4]));
 					}
 					paisesJugar.add(pais);
-					System.out.println(pais.getNombre() + " " + pais.getTipo() +" " + pais.getVida()  + " " + pais.getMisiles());
+				}				
 
-					jugador = "\nJugador "+ i +"  : " + datosJugadores.get(i) + " , "+ "\n";
-					textoJugadores = textoJugadores + jugador;
-				}
-				jugadores.setText(textoJugadores);
-				
-				
 				JFrame marco = (JFrame) SwingUtilities.getWindowAncestor(this);
 				marco.remove(this);
-				marco.getContentPane().add(new PanelPartida(paisesJugar,1,""));
+				marco.getContentPane().add(new PanelPartida(paisesJugar,0,""));
 				marco.setVisible(true);
-				
-				
+
 			} catch (ClassNotFoundException | SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
