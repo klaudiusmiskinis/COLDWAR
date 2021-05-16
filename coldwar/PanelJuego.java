@@ -282,7 +282,7 @@ public class PanelJuego extends JPanel implements ActionListener{
 		}
 
 		//EL NOMBRE ES DEMASIADO LARGO
-		if (name.length() > 18) {
+		if (name.length() > 10) {
 			JOptionPane.showMessageDialog(new JFrame(), "El nombre es demasiado largo", "ERROR",JOptionPane.ERROR_MESSAGE);
 			return false;
 		}

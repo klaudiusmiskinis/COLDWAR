@@ -42,11 +42,11 @@ public class PanelCarga extends JWindow  {
 
 		progressBar.setMaximum(50);
 
-		JLabel loading = new JLabel("");
-		ImageIcon icon = new ImageIcon(this.getClass().getResource("/coldwar/assets/loading.gif"));
-		loading.setIcon(icon);
-		loading.setBounds(451, 348, 156, 144);
-		panel.add(loading);
+		//		JLabel loading = new JLabel("");
+		//		ImageIcon icon = new ImageIcon(this.getClass().getResource("/coldwar/assets/loading.gif"));
+		//		loading.setIcon(icon);
+		//		loading.setBounds(451, 348, 156, 144);
+		//		panel.add(loading);
 
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(PanelCarga.class.getResource("/coldwar/assets/fondos/Fondo_Menu.png")));
@@ -58,18 +58,15 @@ public class PanelCarga extends JWindow  {
 		setVisible(true);
 	}
 
-
 	private void loadProgressBar() { 
 		ActionListener al = new ActionListener() { 
 
 			public void actionPerformed(java.awt.event.ActionEvent evt) { 
 				boolean cerrar = false;
-				
+
 				count++; 
 
 				progressBar.setValue(count); 
-
-				System.out.println(count); 
 
 				if (count == 55) { 
 					timer1.stop(); 
@@ -86,16 +83,8 @@ public class PanelCarga extends JWindow  {
 				} 
 			} 
 		};
-		
 		timer1 = new Timer(50, al); 
 		timer1.start(); 
-		
+
 	} 
-	public static void main(String[] args) throws IOException{
-		PanelCarga vent= new PanelCarga();
-		vent.setVisible(true);
-
-	
-
-	}
-};
+}

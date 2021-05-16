@@ -19,7 +19,8 @@ public class PanelReglas extends JPanel implements ActionListener{
 		setBorder(null);
 		setBounds(0,0,1080,768);
 		setBackground(Color.BLACK);
-
+		setLayout(null);
+		
 		botonAtras = new JButton ();
 		botonAtras.setIcon(new ImageIcon(PanelReglas.class.getResource("/coldwar/assets/iconos/ATRAs.png")));
 		botonAtras.setOpaque(false);
@@ -39,7 +40,7 @@ public class PanelReglas extends JPanel implements ActionListener{
 		botonAdelante.setBorderPainted(false);
 		botonAdelante.addActionListener(this);
 		add(botonAdelante);
-		setLayout(null);
+		
 
 		JLabel titulo = new JLabel();
 		titulo.setIcon(new ImageIcon(PanelReglas.class.getResource("/coldwar/assets/textos/REGLAS.png")));
@@ -50,7 +51,7 @@ public class PanelReglas extends JPanel implements ActionListener{
 		tReglas.setFont(new Font("Calibri", Font.BOLD, 13));
 		tReglas.setForeground(Color.BLACK);
 		tReglas.setOpaque(false);
-		tReglas.setBounds(206, 250, 665, 201);
+		tReglas.setBounds(206, 250, 665, 228);
 		tReglas.setText("El juego consiste en, elegir un pais, y por turnos, enfrentarte a otros jugadores hasta que solo quede 1.\r\n\r\nCada jugador tiene una cantidad especifica de vida y un numero especifico de misiles por turno, los misiles se usan para atacar ( que gastan 1 misil por uso) y para defender ( que gastan 2 misiles por uso)\r\n\r\nCada ronda cada jugador seleccionara a quien quiere atacar y con cuantos misiles, y cuantos misiles los dedicara a la defensa.\r\n\r\nAl final de cada ronda se hace un recuento de la vida de cada jugador, los ataques realizados en ese turno y los jugadores aun vivos.\r\n\r\nEn las siguientes paginas se va a mostrar las diferencias entre los distintos paises y sus habilidades particulares\r\n");
 		add(tReglas);
 

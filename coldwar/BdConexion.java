@@ -3,6 +3,8 @@ package coldwar;
 import java.sql.*;
 import java.util.ArrayList;
 
+import javax.swing.JTextPane;
+
 public class BdConexion {
 
 	//ATRIBUTOS 
@@ -22,32 +24,6 @@ public class BdConexion {
 	//ATRIBUTO PARA ENLAZAR CONEXION
 	private static Connection con;
 
-	//MAIN
-	/*
-	public static void main(String[] args) throws SQLException, ClassNotFoundException {
-		
-		Paises pruebaInsert = new Paises("algo", 200, 0,"Espanya", 0, 0);
-		paisesCreados.add(pruebaInsert);
-		pruebaInsert = new Paises("Nelson", 400, 0,"Lituania", 0, 0);
-		paisesCreados.add(pruebaInsert);
-		pruebaInsert = new Paises("Jose", 500, 0,"Francia", 0, 0);
-		paisesCreados.add(pruebaInsert);
-		pruebaInsert = new Paises("Friki", 100, 0,"Alemania", 0, 0);
-		paisesCreados.add(pruebaInsert);
-		pruebaInsert = new Paises("Minguito", 300, 0,"Suiza", 0, 0);
-		paisesCreados.add(pruebaInsert)
-		
-		int codigo;
-		codigo = obtenerIdpartida();
-		System.out.println("Insertando jugadores.");
-		for(int i = 0; i < paisesCreados.size(); i++) {
-			insertJugadores(codigo, paisesCreados.get(i).getNombre(), paisesCreados.get(i).getTipo(), paisesCreados.get(i).getVida(), paisesCreados.get(i).getMisiles());
-		}
-		System.out.println("¡Insertados todos los jugadores!");
-		con.close();
-		System.out.println("Cerrando conexión.");
-	}
-*/
 	static Connection conexion() throws SQLException {
 		try {
 			System.out.println("Intentado conexion a url externa...");
@@ -61,7 +37,7 @@ public class BdConexion {
 		}
 		return con;
 	}
-
+	// METODO para guardar los datos en la base de datos
 	static void guardarDatos(ArrayList <Paises> paisesCreados,String nombre,int ronda) throws SQLException, ClassNotFoundException {
 		int idpartida = 0;
 		insertPartida(nombre,ronda);
@@ -70,8 +46,8 @@ public class BdConexion {
 			tipo = paisesCreados.get(i).getTipo();
 			vida = paisesCreados.get(i).getVida();
 			misiles = paisesCreados.get(i).getMisiles();
-			System.out.println(idpartida + "AAAAAAAAAAAAAAAAAA");
 			idpartida = obtenerIdpartida();
+
 			insertJugadores(idpartida,nombre,tipo,vida,misiles);
 		}
 	}
@@ -90,18 +66,18 @@ public class BdConexion {
 	private static void insertPartida(String nombre, int ronda) throws SQLException {
 		try {
 			System.out.println("ASD");
-			String insertTabla = "INSERT INTO partida (ronda,nombre) VALUES (?,?)";
+			String insertTabla = "INSERT INTO partida (nombre,ronda) VALUES (?,?)";
 
 			PreparedStatement insert = con.prepareStatement(insertTabla);
-			insert.setInt(1, ronda);
-			insert.setString(2, nombre);
+			insert.setString(1, nombre);
+			insert.setInt(2, ronda);
 			insert.executeUpdate();
 		} catch(Exception e) {
 			System.out.println(e);
 		}	
 	}
 
-	private static void insertJugadores(int idpartida,String nombre, String tipo, int vida, int misiles) throws SQLException {
+	static void insertJugadores(int idpartida,String nombre, String tipo, int vida, int misiles) throws SQLException {
 		String insertTabla = "INSERT INTO jugadores VALUES (?,?,?,?,?)";
 		PreparedStatement insert = con.prepareStatement(insertTabla);
 
@@ -113,6 +89,58 @@ public class BdConexion {
 		insert.executeUpdate();
 	}
 
+	static ArrayList<String> cargarPartida() throws SQLException, ClassNotFoundException {
+		ArrayList <String> datosCarga = new ArrayList<String>();
+		int codigo = 0;
+		String nombre = "";
+		int ronda = 0;
+		String datos = "";
+		Statement st = con.createStatement();
+		ResultSet rs = st.executeQuery("SELECT * FROM partida ORDER BY idpartida");
+
+		while(rs.next()) {
+			codigo = rs.getInt("idpartida");
+			nombre = rs.getString("nombre");
+			ronda = rs.getInt("ronda");
+			datos = (codigo + " , " + nombre + " , " + ronda).toString();
+			datosCarga.add(datos);
+		}
+		return datosCarga;
+	}
+	static int[] cargarIdpartida() throws SQLException, ClassNotFoundException {
+		int [] codigo = new int[100];
+		int i = 0;
+		Statement st = con.createStatement();
+		ResultSet rs = st.executeQuery("SELECT idpartida FROM partida");
+
+		while(rs.next()) {
+			codigo[i] = rs.getInt("idpartida");
+			i++;
+		}
+		return codigo;
+	}
+	static ArrayList<String> cargarJugadores(int idpartida) throws SQLException, ClassNotFoundException {
+		ArrayList <String> datosCarga = new ArrayList<String>();
+		int codigo = 0;
+		String nombre = "";
+		int vida = 0;
+		String tipo = "";
+		int misiles = 0;
+		String datos = "";
+		Statement st = con.createStatement();
+		ResultSet rs = st.executeQuery("SELECT * FROM Jugadores WHERE idpartida = '" + idpartida + "' ORDER BY idpartida");
+
+		while(rs.next()) {
+			codigo = rs.getInt("idpartida");
+			nombre = rs.getString("nombre");
+			tipo = rs.getString("tipo");
+			vida = rs.getInt("vida");
+			misiles = rs.getInt("misiles");
+			datos = (codigo + "," + nombre + "," + tipo + "," + vida +  "," + misiles).toString();
+			datosCarga.add(datos);
+		}
+		return datosCarga;
+	}
 
 }
 

@@ -21,11 +21,13 @@ public class PanelResumen extends JPanel implements ActionListener{
 	ArrayList <Paises> paisesCreados = new ArrayList<Paises>() ;
 	ArrayList <String> historials = new ArrayList <String>();
 	String story=" ";
-	JTextPane texto, titulo;
 	JButton bRonda,bGuardar;
+	JLabel fondo;
+	JTextPane texto;
 	int turno = 0;
 	int contadorVidas=0;
 	String guardar =" ";
+
 	public PanelResumen(ArrayList <Paises> paisesCreados,String story) {
 
 		this.paisesCreados = paisesCreados;
@@ -34,36 +36,23 @@ public class PanelResumen extends JPanel implements ActionListener{
 		setLayout(null);
 		setBounds(0,0,1080,768);
 
-		JPanel panel = new JPanel();
-		panel.setBackground(Color.BLACK);
-		panel.setBounds(0, 0, 1080,768);
-		panel.setLayout(null);
-		add(panel);
+		bRonda = new JButton ();
+		bRonda.setIcon(new ImageIcon(PanelReglas.class.getResource("/coldwar/assets/iconos/ADELANTE.png")));
+		bRonda.setOpaque(false);
+		bRonda.setContentAreaFilled(false);
+		bRonda.setBounds(897, 587, 89, 59);
+		bRonda.setFocusable(false);
+		bRonda.setBorderPainted(false);
+		bRonda.addActionListener(this);
+		add(bRonda);
 
 		texto= new JTextPane();
 		texto.setBackground(Color.BLACK);
 		texto.setForeground(Color.WHITE);
-		texto.setBounds(231, 115, 632, 529);
-		panel.add(texto);
-
-		bRonda = new JButton("Siguiente ronda\r\n");
-		bRonda.setBounds(910, 708, 117, 23);
-		bRonda = new JButton("");
-		bRonda.setIcon(new ImageIcon(PanelResumen.class.getResource("/coldwar/assets/iconos/ADELANTE.png")));
-		bRonda.setBounds(1014, 701, 56, 45);
-		bRonda.addActionListener(this);
-		bRonda.setOpaque(false);
-		bRonda.setContentAreaFilled(false);
-		bRonda.setFocusable(false);
-		bRonda.setBorderPainted(false);
-		panel.add(bRonda);
-
-		titulo = new JTextPane();
-		titulo.setForeground(Color.RED);
-		titulo.setBackground(Color.BLACK);
-		titulo.setText("Resumen de esta ronda");
-		titulo.setBounds(479, 33, 121, 34);
-		panel.add(titulo);
+		texto.setBounds(224, 113, 632, 529);
+		texto.setEditable(false);
+		texto.setText(story);
+		add(texto);
 
 		String resumen=" ";
 
@@ -76,24 +65,38 @@ public class PanelResumen extends JPanel implements ActionListener{
 			if(paisesCreados.get(i).getVida() == 0) {
 				resumen = "\nEl pais : " + paisesCreados.get(i).getNombre() + " ha muerto."+ "\n";
 				story =story + resumen;
-			} else {
+			}else {
 				resumen = "\nEl jugador " + paisesCreados.get(i).getNombre() + " tiene " + paisesCreados.get(i).getVida()+ " de vida\n";
 				story =story + resumen;
 			}
-		}
+		}	
 
-		StyledDocument doc = texto.getStyledDocument();
+		StyledDocument doca = texto.getStyledDocument();
 		SimpleAttributeSet centrar = new SimpleAttributeSet();
 		StyleConstants.setAlignment(centrar, StyleConstants.ALIGN_CENTER);
-		doc.setParagraphAttributes(0, doc.getLength(), centrar, false);
+		doca.setParagraphAttributes(0, doca.getLength(), centrar, false);
 		texto.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 14));
 		texto.setText(story+"\n"+"\n"+"\n"+resumen);
-		texto.setText(story);
+		texto.setText(story);	
 
-		bGuardar = new JButton("Guardar");
-		bGuardar.setBounds(933, 43, 89, 23);
+		fondo = new JLabel();
+		fondo.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/coldwar/assets/fondos/FondoPanelResumen.png")));
+		fondo.setBackground(Color.WHITE);
+		fondo.setBounds(0,0,1080,768);
+		add(fondo);
+
+		bGuardar = new JButton("");
+		bGuardar.setBounds(652, 659, 344, 46);
 		bGuardar.addActionListener(this);
-		panel.add(bGuardar);
+		bGuardar.setFocusable(false);
+		bGuardar.setContentAreaFilled(false);
+		bGuardar.setOpaque(false);
+		add(bGuardar);
+
+
+
+		SimpleAttributeSet centrar1 = new SimpleAttributeSet();
+		StyleConstants.setAlignment(centrar1, StyleConstants.ALIGN_CENTER);
 
 		for(int i=0;i<paisesCreados.size();i++) {
 			if(paisesCreados.get(i).getVida()>0) {
@@ -118,7 +121,7 @@ public class PanelResumen extends JPanel implements ActionListener{
 				marco.getContentPane().add(new PanelPartida(paisesCreados,turno,story));
 				marco.setVisible(true);
 				contadorVidas=0;
-			}else if(contadorVidas<=1) {
+			}else if(contadorVidas==1 || contadorVidas == 0) {
 				System.out.println("B");
 				JFrame marco=(JFrame) SwingUtilities.getWindowAncestor(this);
 				marco.remove(this);
@@ -140,6 +143,7 @@ public class PanelResumen extends JPanel implements ActionListener{
 					System.out.println(PanelPartida.ronda);
 					BdConexion.conexion();
 					BdConexion.guardarDatos(paisesCreados,nombre,PanelPartida.ronda);
+
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -151,6 +155,7 @@ public class PanelResumen extends JPanel implements ActionListener{
 		}
 	}
 
+
 	//METODO PARA VALIDAR NOMBRES
 	public boolean validarNombres(String name) {
 		Pattern pattern = Pattern.compile("[^a-zA-Z0-9]");
@@ -159,14 +164,12 @@ public class PanelResumen extends JPanel implements ActionListener{
 		//CONTIENE SIMBOLOS
 		if(matcher.find() == true) {
 			JOptionPane.showMessageDialog(new JFrame(), "El nombre no puede contener símbolos y espacios", "ERROR",JOptionPane.ERROR_MESSAGE);
-			System.out.println("Contiene simbolos");
 			return false;
 		}
 
 		//CONTIENE NUMEROS
 		if (name.matches(".*\\d.*")) {
 			JOptionPane.showMessageDialog(new JFrame(), "El nombre no puede contener números", "ERROR",JOptionPane.ERROR_MESSAGE);
-			System.out.println("Contiene numeros");
 			return false;
 		}
 
@@ -177,5 +180,4 @@ public class PanelResumen extends JPanel implements ActionListener{
 		}
 		return true;
 	}
-
 }

@@ -1,5 +1,7 @@
 package coldwar;
 
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.io.IOException;
 
 import javax.swing.JFrame;
@@ -14,7 +16,9 @@ public class Menu extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 		setLocationRelativeTo(null);
-		
+		Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/coldwar/assets/iconos/C.png"));
+        setIconImage(icon);
+        
 		menuprin = new MenuPrincipal();
 		add(menuprin);
 	}

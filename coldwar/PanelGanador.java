@@ -11,20 +11,34 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 public class PanelGanador extends JPanel implements ActionListener {
 	ArrayList <Paises> paisesCreados = new ArrayList<Paises>() ;
 
-	JButton volverBoton;
+	JButton botonAdelante;
 	public PanelGanador(ArrayList <Paises> paisesCreados) {
 		int contaWin = 0;
 		Paises ganador= new Paises();
 		this.paisesCreados=paisesCreados;
+		
 		setBounds(0,0,1080,768);
 		setBackground(Color.BLACK);
 		setLayout(null);
+
+		botonAdelante = new JButton ();
+		botonAdelante.setIcon(new ImageIcon(PanelReglas.class.getResource("/coldwar/assets/iconos/ADELANTE.png")));
+		botonAdelante.setOpaque(false);
+		botonAdelante.setContentAreaFilled(false);
+		botonAdelante.setBounds(489, 668, 89, 59);
+		botonAdelante.setFocusable(false);
+		botonAdelante.setBorderPainted(false);
+		botonAdelante.addActionListener(this);
+		add(botonAdelante);
 
 		for(int i =0;i<paisesCreados.size();i++) {
 			if(paisesCreados.get(i).getVida()>0) {
@@ -33,35 +47,31 @@ public class PanelGanador extends JPanel implements ActionListener {
 			}
 		}
 		if(contaWin==1) {
-		JTextPane txtpnElGanadorEs = new JTextPane();
-		txtpnElGanadorEs.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 55));
-		txtpnElGanadorEs.setText("EL GANADOR ES "+ ganador.getNombre()+"\nFELICIDADES.");
-		txtpnElGanadorEs.setBounds(86, 156, 822, 185);
-		add(txtpnElGanadorEs);
-
-		volverBoton = new JButton("VOLVER AL MENU");
-		volverBoton.setBounds(437, 572, 185, 45);
-		volverBoton.addActionListener(this);
-		add(volverBoton);
-		}
-		else {
 			JTextPane txtpnElGanadorEs = new JTextPane();
-			txtpnElGanadorEs.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 55));
-			txtpnElGanadorEs.setText("Hay un empate, todos los paises estan destruidos. Ha sido una masacre. ");
-			txtpnElGanadorEs.setBounds(86, 156, 822, 185);
+			txtpnElGanadorEs.setForeground(new Color(255, 51, 0));
+			txtpnElGanadorEs.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 50));
+			txtpnElGanadorEs.setText(ganador.getNombre());
+			txtpnElGanadorEs.setBounds(394, 237, 293, 59);
+			txtpnElGanadorEs.setOpaque(false);
+			txtpnElGanadorEs.setFocusable(false);
 			add(txtpnElGanadorEs);
 
-			volverBoton = new JButton("VOLVER AL MENU");
-			volverBoton.setBounds(437, 572, 185, 45);
-			volverBoton.addActionListener(this);
-			add(volverBoton);
-			
+			JLabel recuadro = new JLabel("");
+			recuadro.setIcon(new ImageIcon(PanelReglas.class.getResource("/coldwar/assets/fondos/PanelGanador.png")));
+			recuadro.setBounds(0,0,1080,768);
+			add(recuadro);
 		}
+		else {
+			JLabel recuadro = new JLabel("");
+			recuadro.setIcon(new ImageIcon(PanelReglas.class.getResource("/coldwar/assets/fondos/PanelEmpate.png")));
+			recuadro.setBounds(0,0,1080,768);
+			add(recuadro);
+		}
+
 	}
 
 	public void actionPerformed(ActionEvent e) {
-
-		if (e.getSource() == volverBoton) {
+		if (e.getSource() == botonAdelante) {
 			JFrame marco=(JFrame) SwingUtilities.getWindowAncestor(this);
 			marco.remove(this);
 			try {
@@ -74,8 +84,6 @@ public class PanelGanador extends JPanel implements ActionListener {
 		}
 	}
 }
-
-
 
 
 

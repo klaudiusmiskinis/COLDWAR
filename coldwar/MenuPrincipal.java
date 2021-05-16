@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.swing.*;
 
 @SuppressWarnings("serial")
@@ -124,9 +126,17 @@ public class MenuPrincipal extends JPanel implements ActionListener{
 		}
 
 		//EVENTO BOTON CARGAR
-		if (e.getSource() == cargar) {
-			
-		}
+				if (e.getSource() == cargar) {
+					JFrame marco=(JFrame) SwingUtilities.getWindowAncestor(this);
+					marco.remove(this);
+					try {
+						marco.getContentPane().add(new CargaPartida());
+					} catch (ClassNotFoundException | SQLException e1) {
+						// TODO Auto-generated catch block
+						(e1).printStackTrace();
+					}
+					marco.setVisible(true);
+				}
 
 		//EVENTO BOTON SALIR
 		if (e.getSource() == salir) {
